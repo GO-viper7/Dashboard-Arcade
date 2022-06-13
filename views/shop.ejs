@@ -490,34 +490,34 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     window.onload = () => {
       console.log('FU1')
       document.getElementById('open').addEventListener('click', () => {
-        window.location.href = 'http://localhost:3000/'
+        window.location.href = '/'
      })
      document.getElementById('open1').addEventListener('click', () => {
-        window.location.href = 'http://localhost:3000/'
+        window.location.href = '/'
      })
      document.getElementById('open2').addEventListener('click', () => {
-        window.location.href = 'http://localhost:3000/'
+        window.location.href = '/'
      })
    
       document.getElementById(`cat`).addEventListener('click', () => {
          console.log('clicked')
          document.cookie = "cat=cat"
-         window.location.href = 'http://localhost:3000/'
+         window.location.href = '/'
      })
     
      
       document.getElementById(`cat1`).addEventListener('click', () => {
         console.log('clicked1')
            document.cookie = "cat=cat1"
-           window.location.href = 'http://localhost:3000/'
+           window.location.href = '/'
       })
       document.getElementById(`cat2`).addEventListener('click', () => {
           document.cookie = "cat=cat2"
-          window.location.href = 'http://localhost:3000/'
+          window.location.href = '/'
      })
      document.getElementById(`cat3`).addEventListener('click', () => {
           document.cookie = "cat=cat3"
-          window.location.href = 'http://localhost:3000/'
+          window.location.href = '/'
      })
 
 
@@ -527,22 +527,22 @@ border: 1px solid rgba(255, 255, 255, 0.11);
      document.getElementById(`mcat`).addEventListener('click', () => {
          console.log('clicked')
          document.cookie = "cat=cat"
-         window.location.href = 'http://localhost:3000/'
+         window.location.href = '/'
      })
     
      
       document.getElementById(`mcat1`).addEventListener('click', () => {
         console.log('clicked1')
            document.cookie = "cat=cat1"
-           window.location.href = 'http://localhost:3000/'
+           window.location.href = '/'
       })
       document.getElementById(`mcat2`).addEventListener('click', () => {
           document.cookie = "cat=cat2"
-          window.location.href = 'http://localhost:3000/'
+          window.location.href = '/'
      })
      document.getElementById(`mcat3`).addEventListener('click', () => {
           document.cookie = "cat=cat3"
-          window.location.href = 'http://localhost:3000/'
+          window.location.href = '/'
      })
 
 
@@ -580,7 +580,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
         }
         else if (Number(a) >= q) {
             document.getElementById('suc').style.display="block";  
-            const res =  fetch(`http://localhost:3000`, {
+            const res =  fetch(`/`, {
             method: "POST",
             headers: {
               'Accept': 'application/json',
