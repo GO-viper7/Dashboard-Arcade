@@ -18,7 +18,7 @@ const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
 	clientId: "978339805496750150",
 	clientSecret: "OdbZvWky-P8fYi_lMcbh_49Y2L_f4S0D",
-	redirectUri: "http://localhost:3000/discord",
+	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 
 const url = oauth.generateAuthUrl({
