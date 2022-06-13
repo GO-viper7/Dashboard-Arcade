@@ -62,7 +62,7 @@ var session = require('express-session');
 passport.use(new Strategy({
     consumerKey: 'ftzX3tbaEkbhhW71HtCzHCeLj',
     consumerSecret: '2KyRsGSlscIqPrwWUFy369aDLchm3sVk4JzjUXsK0IsDg1zUEW',
-    callbackURL: 'http://localhost:3000/twiter'
+    callbackURL: 'https://dashboard-77.herokuapp.com/twiter'
 }, function(token, tokenSecret, profile, callback) {
     return callback(null, profile);
 }));
