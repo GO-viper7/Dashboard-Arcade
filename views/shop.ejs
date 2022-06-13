@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <title>Dashboard</title>
+  </head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* @font-face {
+      
+      src: url(../adina-webfont.ttf);
+      font-family: Adina;
+    } */
+    @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+    body, html {
+      height: 100%;
+      margin: 0;
+      white-space: nowrap;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      font-family: 'Audiowide', cursive;
+      font-weight: 800;
+
+    }
+      .bg-image {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-size: cover;
+  background-image: url('https://cdn.discordapp.com/attachments/923590359496421406/984532182980784219/unknown.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  
+  
+}
+.cnt {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+
+}
+    #ex {
+      transition: transform .3s ease-out;
+      cursor: pointer;
+    }
+
+    .mob {
+      margin-top: 150px;
+    }
+
+      #ex:hover {
+  transform: translate(0, -8px);
+}
+
+
+      .cardy {
+        color: white;
+        font-weight: 800;
+        transition: .3s ease;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: transparent;
+        border-color: white;
+        border: 5px solid white;
+        border-top: none;
+        border-right: none;
+        border-right: 5px solid white;
+        font-family: 'Audiowide', cursive;
+      }
+      .cardy:hover {
+        
+        color: #e5f5f5;
+      }
+#cat, #cat1, #cat2, #cat3        {
+  margin-bottom: 6px; border-color:#fff;transition: 0.3s ease; width: 340px; border-style: solid; font-size: 25px; border-radius: 10px; background-color: transparent;cursor: pointer; color: aliceblue; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 2px;margin-left: 36px;
+              }
+      #cat:hover,#cat1:hover,#cat2:hover,#cat3:hover  {
+      
+           transform: translate(0, -5px);
+           border-color:aliceblue;
+           background-color: transparent;
+           color: #e5f5f5;
+      }   
+
+      #mcat, #mcat1, #mcat2, #mcat3        {
+  margin-bottom: 6px; border-color:#fff;transition: 0.3s ease; width: 340px; border-style: solid; font-size: 25px; border-radius: 10px; background-color: transparent;cursor: pointer; color: aliceblue; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 2px;margin-left: 36px;
+              }
+      #mcat:hover,#mcat1:hover,#mcat2:hover,#mcat3:hover  {
+
+          border-color:aliceblue;
+          background-color: transparent;
+          color: #e5f5f5;
+      } 
+      #fix {
+        position: fixed;
+        margin-top: 300px
+       
+      }
+      #big {
+        margin-left: 500px;
+       
+        overflow-y: scroll;
+        height: 600px;
+      
+      }
+
+      #fi {
+        position: fixed;
+        width: 100%;
+        overflow: hidden;
+ /* From https://css.glass */
+background: rgba(255, 255, 255, 0.07);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.5px);
+-webkit-backdrop-filter: blur(4.5px);
+border: 1px solid rgba(255, 255, 255, 0.11);
+      }
+
+      .disc1 {
+        border-color:#fff;display: block; width: 340px; border-style: solid; font-size: 25px; border-radius: 10px; background-color: transparent;cursor: pointer; color: #fff; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 2px;margin-left: 30px; margin-top: 70px;
+      }
+
+      .disc2 {
+        border-color:#fff;display: block; width: 340px; border-style: solid; font-size: 25px; border-radius: 10px; background-color: transparent;cursor: pointer; color: #fff; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 200px;margin-top: 10px;margin-left: 30px;
+      }
+
+      .cos {
+        font-size: 20px; padding: auto; margin-bottom: 2px;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 7px;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #808080; 
+        border-radius: 10px;
+      }
+      
+      .mobhid {
+        display: none;  
+      }
+      .laphid {
+      display: none;
+    }
+    #onlylap {
+      font-size: 37px;transition: 0.3s ease; width: 200px;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; padding-left: 21px; margin: auto; margin-right: 360px; margin-top: 3px; margin-bottom: 0px;
+    }
+  
+    #onlylap1 {
+      text-align: center;font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 100px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; margin: auto; margin-right: 40px; margin-top: 10px
+    }
+
+
+    #onlylap2 {
+      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 120px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; padding-left: 17px;margin: auto; margin-right: 40px; margin-top: 10px
+    }
+
+    #onlylap3 {
+      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 120px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; padding-left: 14px;margin: auto; margin-right: 40px; margin-top: 10px
+    }
+
+    #onlylap4 {
+      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 130px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; margin: auto;padding-right: 14px; margin-right: 40px; margin-top: 10px
+    } 
+    #onlylap5 {
+      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 100px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; margin: auto;padding-left: 17px; margin-right: 40px; margin-top: 10px
+    }
+    
+    .lappyhid {
+      display: block;
+    }
+   
+    #onlylap1:hover ,#onlylap2:hover ,#onlylap3:hover ,#onlylap4:hover ,#onlylap5:hover  {
+    
+           border-color:#101419;
+           background-color: #fff;
+           color: #101419;
+  }
+    
+   
+@media only screen and (max-width: 1250px) {
+  .mob {
+    margin-top: 0px;
+  }
+  .disc1, .disc2 {
+    margin-top: 0px
+  }
+ 
+
+  #onlylap1,#onlylap2,#onlylap3,#onlylap4,#onlylap5 {
+    background-color: transparent;
+    border-style: none;
+    margin:auto;
+    padding: auto;
+    text-align : center
+  }
+  #onlylap4 {
+    margin-left: 147px
+  }
+
+  
+  .disc1, .disc2 {
+    display: block;
+    margin-left: 20px;
+    
+
+  }
+  #fi {
+       position: relative;
+       width: 100%;
+       overflow-x: hidden;
+      }
+   #dle {
+     display: flex;
+     flex-direction: column;
+   }
+   #cat, #cat1, #cat2, #cat3 {
+     width: 250px;
+    
+   }
+   #mcat, #mcat1, #mcat2, #mcat3 {
+     width: 250px;
+    
+   }
+   #fix {
+        position: relative;
+        margin-bottom: 20px
+      }
+      #big {
+        margin-left: 0px;
+        height: 500px
+      }
+
+    #hid {
+      display: none;
+    }
+    body {
+      overflow-y: auto;
+    }
+    .mobhid {
+      display: block;
+    }
+    .laphid {
+      display: block;
+    }
+    .lappyhid {
+      display: none;
+    }
+   #gobottom {
+     margin-bottom: none
+   }
+   #onlylap {
+    font-size: 30px;
+    background-color: transparent;
+    border-style: none;
+    margin:auto;
+    margin-right: 170px;
+    padding: auto;
+    text-align : center
+   }
+}
+    
+      
+    
+  </style>
+  <body >
+    <div class="bg-image"></div>
+    <div class="cnt">
+    <div id="fi">
+    <nav class="navbar navbar-expand-lg "  >
+      <div class="container-fluid">
+        <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" style="height: 90px; margin-left: 15px; margin-top: 5px" >
+        <div>
+        <button style = "color: #fff" class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
+        </button>
+      </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a id="onlylap" class="nav-link active" aria-current="page" href="" style="" >Mempo Marketplace</a>
+            </li>
+            <li class="nav-item">
+              <a id="onlylap1" class="nav-link active" aria-current="page" href="/" style="" >Home</a>
+            </li>
+            <li class="nav-item">
+              <a id="onlylap2" class="nav-link active" aria-current="page" href="/twiter" style="" >Twitter</a>
+            </li>
+            <li class="nav-item">
+              <a id="onlylap3" class="nav-link active" aria-current="page" href="<%= url %>" style="">Discord</a>
+            </li>
+            <% if (user == '') { %>
+            <li class="nav-item">
+              <a id="onlylap4" class="nav-link active" aria-current="page" href="<%= url %>" style="">Inventory</a>
+            </li>
+            <%  } else { %>
+              <li class="nav-item">
+                <a id="onlylap4" class="nav-link active" aria-current="page" href="/inventory" style="">Inventory</a>
+              </li>
+              <%  }  %>
+            <%  var flag = 0  %>
+            <% if (user != '') { %>
+              <%  for(var j =0; j<ids.length; j++) if (ids[j].userId == id)  flag = 1 %>
+                <% if (flag == 1) { %>
+            <li class="nav-item">
+              <a id="onlylap5" class="nav-link active" aria-current="page" href="/admin/add-product" style="">Admin</a>
+            </li>
+            <%  }  %>
+            <%  }  %>
+           
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+  </div>
+  <% if (user == '') { %>
+    <div class="lappyhid" style="height: 100px"></div>
+    <%  }  %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none; height: 110px;  padding-top: 30px" id="suc">
+    Payment Success, Coins have been debited!
+    <button style="padding-top: 44px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
+  </div>
+  <div class="alert alert-dark alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px" id="stc">
+    Out of Stock!
+    <button style="padding-top: 44px"  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open2"></button>
+  </div>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px" id="dan">
+    Payment Unsuccessful, Not Enough Coins!
+    <button  style="padding-top: 44 px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1"></button>
+  </div>
+  <div class="mobhid"><br><br></div>
+  
+  <% if (user != '') { %>
+      <div style=" height: 140px" >
+        
+          
+         <div id="hid"> <br><br><br><br></div>
+         
+     
+          <div class= "disc1"  ><i class="fa-solid fa-id-badge"></i> <%= user %></div>
+          <div class= "disc2"  ><i class="fa-solid fa-coins"></i> <%= coins %> Coins </div>
+        
+          <div id="hid"> <br><br><br><br></div>
+         
+         
+      </div>
+      <%  } else { %>
+        <div class="lappyhid" ><br><br></div>
+        <%  } %>
+      <!-- <div class="laphid"><br><br></div> -->
+      <div class="d-flex" id="dle" >
+       <div class="col md 6 mt-3" id="fix">
+        
+      
+     
+           <div class="mob" >
+            <% if (user != '') { %>
+            <div class="lappyhid"><br><br><br></div>
+            <%  }  %>
+          <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
+          <div class="lappyhid">
+          <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
+          <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> CategoryOne</div>
+          <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> CategoryTwo</div>
+          <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> CategoryThree</div>
+        </div>
+       
+          
+          <!-- Button trigger modal -->
+                        
+
+                        <!-- Modal -->
+                        <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="background-color: #101518; color: #fff" >
+                              <div class="modal-header">
+                                <h1 class="modal-title" id="exampleModalLabel">Categories</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div id="mcat" ><i class="fa-solid fa-angle-right"></i> All</div>
+                                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> CategoryOne</div>
+                                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> CategoryTwo</div>
+                                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> CategoryThree</div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+        </div>
+      </div>
+    
+      <% if (user != '') { %>
+        <div class="col-md-8 col-sm-12 p-3 scroll-row" id="big" >
+          <%  } else { %>
+            
+      <div class="col-md-8 col-sm-12 p-3 scroll-row" id="big" style="height: 650px">
+           <%  }  %>
+          
+        <div class="container fluid" id="gobottom">
+          <div class="row fluid">
+            
+           <% var i =0 %>
+          <% prod.forEach(x => { i++; %>
+            <% if (user == '') { %>
+              
+            <div data-bs-toggle="modal" onclick="window.location=`<%= url %>`" data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top: 20px solid #fff; border-bottom: 45px solid transparent;" id="ex">
+              <%  } else { %>
+                <div data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top-width: 500px    ;border-top: 20px solid #fff; border-bottom: 45px solid transparent; " id="ex">
+                  <%  }  %>  
+              <img src="<%= x.url %>" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
+              <div class="cardy">
+              <div  style="text-align: center">
+                <h class="card-title" style="font-size: 30px; " id="<%= i %>nt"><%= x.name %></h>
+             
+                <div class="card-text" style="align-items: center">
+                  <div class="cos" style="font-size: 25px; " >
+                    <span id="<%= i %>ct"><%= x.cost %></span> Coins <i class="fa-solid fa-coins"></i>
+                  </div>
+                  <div class="cos" style="font-size: 15px; " >
+                    <span id="<%= i %>st"><%= x.stock %></span> Remaining
+                  </div>
+                  <i class="fa-solid fa-align-right"></i> <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px;"><%= x.category %></small>
+                </div>
+ 
+              </div>
+            </div>
+            </div>
+       
+            <% }) %>
+        
+          </div>
+        </div>
+        <% var i =0 %>
+          <% prod.forEach(k => { i++; %>
+        <div class="modal fade" id="exampleModal<%= i %>" tabindex="<%= i-2 %>" aria-labelledby="exampleModalLabel<%= i %>" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel<%= i %>" style="font-size: 25px" ><%= k.name %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" style="font-size: 17px">
+                Are you sure you want to buy? <br>
+                Item: <%= k.name %> <br>
+                Cost: <%= k.cost %> coins
+              </div>
+              <div class="modal-footer">
+                <button data-bs-dismiss="modal" type="button" class="btn btn-primary" id="<%= i %>yt"><a href="#" style="text-decoration: none; color:#e5f5f5" >Yes</a></button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c5d7c8bb5c.js" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+   <script>
+    window.onload = () => {
+      console.log('FU1')
+      document.getElementById('open').addEventListener('click', () => {
+        window.location.href = 'http://localhost:3000/'
+     })
+     document.getElementById('open1').addEventListener('click', () => {
+        window.location.href = 'http://localhost:3000/'
+     })
+     document.getElementById('open2').addEventListener('click', () => {
+        window.location.href = 'http://localhost:3000/'
+     })
+   
+      document.getElementById(`cat`).addEventListener('click', () => {
+         console.log('clicked')
+         document.cookie = "cat=cat"
+         window.location.href = 'http://localhost:3000/'
+     })
+    
+     
+      document.getElementById(`cat1`).addEventListener('click', () => {
+        console.log('clicked1')
+           document.cookie = "cat=cat1"
+           window.location.href = 'http://localhost:3000/'
+      })
+      document.getElementById(`cat2`).addEventListener('click', () => {
+          document.cookie = "cat=cat2"
+          window.location.href = 'http://localhost:3000/'
+     })
+     document.getElementById(`cat3`).addEventListener('click', () => {
+          document.cookie = "cat=cat3"
+          window.location.href = 'http://localhost:3000/'
+     })
+
+
+
+
+
+     document.getElementById(`mcat`).addEventListener('click', () => {
+         console.log('clicked')
+         document.cookie = "cat=cat"
+         window.location.href = 'http://localhost:3000/'
+     })
+    
+     
+      document.getElementById(`mcat1`).addEventListener('click', () => {
+        console.log('clicked1')
+           document.cookie = "cat=cat1"
+           window.location.href = 'http://localhost:3000/'
+      })
+      document.getElementById(`mcat2`).addEventListener('click', () => {
+          document.cookie = "cat=cat2"
+          window.location.href = 'http://localhost:3000/'
+     })
+     document.getElementById(`mcat3`).addEventListener('click', () => {
+          document.cookie = "cat=cat3"
+          window.location.href = 'http://localhost:3000/'
+     })
+
+
+     
+     
+     if (`<%- user %>` !== '') {
+      console.log(`this is user <%= user %>`)
+     
+    
+    console.log('FU2')
+    var p=0; 
+    
+    
+    
+    let a = '<%- coins %>'
+    let arry = `<%- inv %>`
+    array = arry.split(',')
+    ary = array.filter(x => x!== '')
+    console.log(ary)
+    for(var j =0; j<`<%- prod.length %>`; j++) { ( function() { 
+  
+       
+       p++;
+       var n = document.getElementById(`${p}nt`).innerText
+       //console.log(n)
+       var t = p
+       var q = Number(document.getElementById(`${p}ct`).innerText)
+       var r = Number(document.getElementById(`${p}st`).innerText)
+       
+       document.getElementById(`${p}yt`).addEventListener('click', () => {
+        ary.push(n)
+        console.log(a, q, r)
+        if (r <= 0) {
+          document.getElementById('stc').style.display="block";
+        }
+        else if (Number(a) >= q) {
+            document.getElementById('suc').style.display="block";  
+            const res =  fetch(`http://localhost:3000`, {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              "id" : t,
+              "nam" : n,
+              "cost" :  a - q,
+              "red" : true,
+              "arr" : ary
+            }),
+          }).then(res => {  
+              if (res.status !== 200) {
+                  console.log("error")
+              } else {
+                console.log("FU")
+                res.json().then(data => {
+                  console.log(data)
+                })
+              }
+            })
+        }
+  
+        else {
+          document.getElementById('dan').style.display="block";
+        }
+         
+       })
+      
+      
+        
+         
+
+
+
+
+
+
+
+
+
+     
+      })()}
+    }
+    }
+   </script>
+  </body>
+</html>
