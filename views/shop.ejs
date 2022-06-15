@@ -166,7 +166,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     }
   
     #onlylap1 {
-      text-align: center;font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 100px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; margin: auto; margin-right: 40px; margin-top: 10px
+      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 104px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto;padding-left: 17px;margin: auto; margin-right: 40px; margin-top: 10px
     }
 
 
@@ -195,9 +195,17 @@ border: 1px solid rgba(255, 255, 255, 0.11);
            background-color: #fff;
            color: #101419;
   }
+
+  .imgur {
+    height: 90px; margin-left: 15px; margin-top: 5px
+  }
     
    
 @media only screen and (max-width: 850px) {
+
+  .imgur {
+    height: 60px; margin-left: 15px; margin-top: 5px
+  }
   .mob {
     margin-top: 0px;
   }
@@ -213,13 +221,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
   #onlylap1,#onlylap2,#onlylap3,#onlylap4,#onlylap5 {
     background-color: transparent;
     border-style: none;
-    margin:auto;
+    padding-left: 25px;
+    margin-left: 0px;
     padding: auto;
-    text-align : center
+    
   }
-  #onlylap4 {
-    margin-left: 147px
-  }
+ 
 
   
   .disc1, .disc2 {
@@ -251,7 +258,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
       }
       #big {
         margin-left: 0px;
-        height: 500px
+        height: 500px;
+        overflow-x: hidden;
       }
 
     #hid {
@@ -273,12 +281,9 @@ border: 1px solid rgba(255, 255, 255, 0.11);
      margin-bottom: none
    }
    #onlylap {
-    font-size: 30px;
+    font-size: 27px;
     background-color: transparent;
     border-style: none;
-    margin:auto;
-    margin-right: 180px;
-    padding: auto;
     text-align : center
    }
 }
@@ -292,7 +297,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     <div id="fi">
     <nav class="navbar navbar-expand-lg "  >
       <div class="container-fluid">
-        <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" style="height: 90px; margin-left: 15px; margin-top: 5px" >
+        <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
         <div>
         <button style = "color: #fff" class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
