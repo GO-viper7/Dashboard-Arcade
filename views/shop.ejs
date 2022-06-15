@@ -54,7 +54,10 @@
     }
 
     .mob {
-      margin-top: 150px;
+      margin-top: 130px;
+    }
+    .bom {
+      margin-top: 50px;
     }
 
       #ex:hover {
@@ -194,10 +197,14 @@ border: 1px solid rgba(255, 255, 255, 0.11);
   }
     
    
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 850px) {
   .mob {
     margin-top: 0px;
   }
+  .bom {
+    margin-top: 0px;
+  }
+
   .disc1, .disc2 {
     margin-top: 0px
   }
@@ -363,7 +370,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
          
       </div>
       <%  } else { %>
-        <div class="lappyhid" ><br><br></div>
+        <div class="lappyhid" ><br></div>
         <%  } %>
       <!-- <div class="laphid"><br><br></div> -->
       <div class="d-flex" id="dle" >
@@ -371,10 +378,13 @@ border: 1px solid rgba(255, 255, 255, 0.11);
         
       
      
-           <div class="mob" >
+           
             <% if (user != '') { %>
+              <div class="mob" >
             <div class="lappyhid"><br><br><br></div>
-            <%  }  %>
+            <%  } else {  %>
+              <div class="bom" >
+                <% } %>
           <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
           <div class="lappyhid">
           <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
@@ -449,9 +459,52 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             </div>
        
             <% }) %>
-        
+            <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
+            
+         
+          <div class="cardy" style="border: none ">
+          <div  style="text-align: center">
+            <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
+         
+            <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
+              <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
+                <span id=""></span> Coins 
+              </div>
+              <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
+                <span id=""></span> Remaining
+              </div>
+             <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
+            </div>
+
           </div>
         </div>
+        </div>
+          </div>
+        </div>
+
+        <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
+            
+         
+          <div class="cardy" style="border: none ">
+          <div  style="text-align: center">
+            <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
+         
+            <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
+              <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
+                <span id=""></span> Coins 
+              </div>
+              <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
+                <span id=""></span> Remaining
+              </div>
+             <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
+            </div>
+
+          </div>
+        </div>
+        </div>
+          </div>
+        </div>
+
         <% var i =0 %>
           <% prod.forEach(k => { i++; %>
         <div class="modal fade" id="exampleModal<%= i %>" tabindex="<%= i-2 %>" aria-labelledby="exampleModalLabel<%= i %>" aria-hidden="true">
