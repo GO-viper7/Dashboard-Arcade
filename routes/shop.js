@@ -8,6 +8,7 @@ const adminData = require('./admin');
 const router = express.Router();
 const json = require('../test.json')
 const users = require('../users.json')
+console.log(users)
 const inv = require('../inv.json')
 var k = json
 const all = json
