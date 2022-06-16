@@ -23,7 +23,7 @@
   <body >
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="font-size: 25px">MarketPlace</a>
+        <a class="navbar-brand" href="#" style="font-size: 25px">Admin portal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,15 +33,74 @@
               <a class="nav-link active" aria-current="page" href="/" style="font-size: 20px">Home</a>
             </li>
            
+            
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/" style="font-size: 20px">Shop</a>
+              <a data-bs-toggle="modal"  data-bs-target="#exampleModal" class="nav-link active" aria-current="page" href="" style="font-size: 20px">Add Item</a>
             </li>
+            <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+        
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+          <input id="nt"type="text" placeholder="Name" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
+          <input id="ca" type="number" placeholder="Coins" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-stack-exchange"></i></span>
+          <input id="sa" type="number" placeholder="Stock" class="form-control" value="" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+          <input id="img" type="text" placeholder="https://i.imgur.com/XPdLnby.jpeg" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="form-check form-check-inline">
+          
+          <input id="categ1" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat1" checked>
+          
+          <label class="form-check-label" for="inlineRadio1">cat1</label>
+        </div>
+        <div class="form-check form-check-inline">
+         
+            <input id="categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat2">
+            
+          <label class="form-check-label" for="inlineRadio2">cat2</label>
+        </div>
+        <div class="form-check form-check-inline">
+       
+            <input id="categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat3">
            
+          <label class="form-check-label" for="inlineRadio3">cat3</label>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="add"  data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
           </ul>
          
         </div>
       </div>
     </nav>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none; height: 110px;  padding-top: 30px" id="suc">
+      Refresh Page to view changes!
+      <button style="padding-top: 44px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
+    </div>
     <div class="d-flex" >
        <div class="col-md-12  p-3 scroll-row" style="animation: bottomToTop 2s">
         <div class="container fluid">
@@ -69,12 +128,39 @@
                 </p>
                 
                 <a data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class="btn btn-primary" id="<%= i %>et">Edit Item</a>
+                <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= i %>" class="btn btn-danger" id="<%= i %>dt">Delete Item</a>
+
+
+              
+
+
               </div>
             </div>
             <% }) %>
 
             <% var i =0 %>
             <% prod.forEach(k => { i++; %>
+
+
+              <div class="modal fade" id="staticBackdrop<%= i %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="<%= i-2 %>" aria-labelledby="staticBackdropLabel<%= i %>" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Are you sure you want to delete Item : <%= k.name %> </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" id="<%= i %>delt" data-bs-dismiss="modal">Yes</button>
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+
+
           <div class="modal fade" id="exampleModal<%= i %>" tabindex="<%= i-2 %>" aria-labelledby="exampleModalLabel<%= i %>" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -146,6 +232,51 @@
     -->
     <script>
       window.onload = () => {
+
+        document.getElementById('open').addEventListener('click', () => {
+          window.location.href = '/admin/add-product'
+       })
+        var as = document.getElementById(`add`)
+        as.addEventListener('click', () => {
+         var fina
+       
+         if ( document.getElementById(`categ1`).checked == true ) {
+           fina = document.getElementById(`categ1`).value
+         }
+         if ( document.getElementById(`categ2`).checked == true ) {
+           fina = document.getElementById(`categ2`).value
+         }
+         if ( document.getElementById(`categ3`).checked == true ) {
+           fina = document.getElementById(`categ3`).value
+         }
+        
+         const res =  fetch(`/admin/add-product`, {
+             method: "POST",
+             headers: {
+               'Accept': 'application/json',
+               "Content-Type": "application/json",
+             },
+          
+             body: JSON.stringify({
+               "name"  : document.getElementById(`nt`).value,
+               "cost"  : document.getElementById(`ca`).value,
+               "stock" : document.getElementById(`sa`).value,
+               "category" : fina,
+               "add" : true,
+               "url" : document.getElementById(`img`).value
+             }),
+           }).then(res => {  
+               if (res.status !== 200) {
+                   console.log("error")
+               } else {
+                 console.log("FU")
+                 res.json().then(data => {
+                   console.log(data)
+                 })
+               }
+             })
+             document.getElementById('suc').style.display="block";
+        })
       
       for(var j =0; j<`<%-prod.length %>`; j++) {  
         (function() {
@@ -166,7 +297,7 @@
             final = document.getElementById(`${p}categ3`).value
           }
          
-          const res =  fetch(`https://dashboard-77.herokuapp.com/admin/add-product`, {
+          const res =  fetch(`/admin/add-product`, {
               method: "POST",
               headers: {
                 'Accept': 'application/json',
@@ -190,18 +321,42 @@
                   })
                 }
               })
-              window.location.href = 'https://dashboard-77.herokuapp.com/admin/add-product'
+              document.getElementById('suc').style.display="block";
+             
+          })
+
+
+
+          var qw = document.getElementById(`${p}delt`)
+         qw.addEventListener('click', () => {
+         
+         
+          const res =  fetch(`/admin/add-product`, {
+              method: "POST",
+              headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+              },
            
-  
-  
-  
-            
-  
-  
-  
-  
-  
-         })
+              body: JSON.stringify({
+                "id" : p,
+                "del" : true
+              }),
+            }).then(res => {  
+                if (res.status !== 200) {
+                    console.log("error")
+                } else {
+                  console.log("FU")
+                  res.json().then(data => {
+                    console.log(data)
+                  })
+                }
+              })
+              document.getElementById('suc').style.display="block";
+          })
+
+
+
         }())
        }
       }

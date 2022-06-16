@@ -19,7 +19,7 @@ const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
 	clientId: "978339805496750150",
 	clientSecret: "OdbZvWky-P8fYi_lMcbh_49Y2L_f4S0D",
-	redirectUri: "https://dashboard-77.herokuapp.com/discord",
+	redirectUri: "http://localhost:3000/discord",
 });
 
 const url = oauth.generateAuthUrl({
@@ -40,6 +40,8 @@ connect('mongodb+srv://GoViper:GoViperUC123@cluster.sbavr.mongodb.net/TinyArcade
 
 const profileSchema = require('../schemas/profile-schema');
 const inventorySchema = require('../schemas/inv-schema');
+const itemSchema = require('../schemas/item-schema');
+const productSchema = require('../schemas/product-schema');
 const { profile } = require('console');
 const { UserCollection } = require('disco-oauth/lib/types');
 
@@ -51,7 +53,7 @@ const { UserCollection } = require('disco-oauth/lib/types');
 
 
 router.get('/', async (req, res, next) => {
- // console.log(res.cookies.get("cat"))
+
   if (req.cookies.get('first') == undefined) {
     
     res.cookie("cat", `cat`, {httpOnly: false, overwrite: true})
@@ -84,19 +86,30 @@ router.get('/', async (req, res, next) => {
         o = data.OctaCreds
       }
       if (req.cookies.get('cat') == undefined) {
-        k = json.filter(x => x.category == x.category)
+        var result = await  productSchema.find({})
+        console.log(result)
+        k = result.filter(x => x.category == x.category)
       }
-      else k = json.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
+      else { 
+        var result = await  productSchema.find({})
+        console.log(result)
+        k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
+      }
       return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users, inv : invis})
   })
   
   }
   else {
     if (req.cookies.get('cat') == undefined) {
-      k = json.filter(x => x.category == x.category)
+      var result = await  productSchema.find({})
+      console.log(result)
+      k = result.filter(x => x.category == x.category)
     }
-    else 
-      k = json.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) ) 
+    else  {
+      var result = await  productSchema.find({})
+      console.log(result)
+      k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) ) 
+    }
     return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: ''})
   }
 
@@ -107,7 +120,7 @@ router.get('/', async (req, res, next) => {
 
 
 router.post('/', async (req, res, next) => {
-  console.log( req.body)
+ // console.log( req.body)
   let cookies = req.cookies.get('key')
   if (cookies) {
     
@@ -122,51 +135,24 @@ router.post('/', async (req, res, next) => {
         else {
           console.log(data)
         }
-    })
-    json.forEach(x => {
-        if (x.id == req.body.id) {
-          x.stock -= 1
-          
+      })
+      productSchema.findOneAndUpdate({id: req.body.id}, {stock : req.body.stock-1}, null, async (err, data) => {
+        if (err) {
+          console.log(err)
         }
-    })
-    
-
-    
-    
-    inventorySchema.findOneAndUpdate({userId: user.id}, {Inventory: req.body.arr}, null,  async (err, data) => {
-      if (data) {
-        console.log(data)
-    } 
-    if (err) {
-      console.log(err)
-    }
-    })
-     
-   
-    inv.push({user: user.id, id: req.body.id})
-
-
-
-    fs.writeFileSync(path.join(__dirname, '../inv.json'), JSON.stringify(inv, null, 2), 'utf-8', writeJSON = (err) => {
-      if(err) {
-        console.log(err.message);
-      }
-  
-    return 
-    } )
-
-
-
-    fs.writeFileSync(path.join(__dirname, '../test.json'), JSON.stringify(json, null, 2), 'utf-8', writeJSON = (err) => {
-      if(err) {
-        console.log(err.message);
-      }
-  
-    return 
-    } )
-    }
- 
+        else {
+          console.log(data)
+        }
+      })
+      await new itemSchema({
+          id: req.body.id,
+          userId: user.id,
+          name: req.body.name,
+          url: req.body.url, 
+          category: req.body.category
+      }).save()
   }
+}
 });
 
 

@@ -23,7 +23,7 @@ router.get('/discord', async  (req, res) => {
       code: code,
       scope: "identify guilds",
       grantType: "authorization_code",
-      redirectUri: "https://dashboard-77.herokuapp.com/discord",
+      redirectUri: "http://localhost:3000/discord",
     })
      
      res.cookies.set("key", data.access_token)
