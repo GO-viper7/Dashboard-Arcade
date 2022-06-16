@@ -9,14 +9,15 @@ const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
 	clientId: "978339805496750150",
 	clientSecret: "OdbZvWky-P8fYi_lMcbh_49Y2L_f4S0D",
-	redirectUri: "http://localhost:3000/discord",
+	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 
 // /admin/add-product => GET
 router.get('/add-product', async (req, res, next) => {
   let cookies = req.cookies.get('key')
-  let user = await oauth.getUser(cookies)
+  
   if (cookies) {
+    let user = await oauth.getUser(cookies)
     users.forEach(x => {
       
       if (x.userId == user.id) {
@@ -26,16 +27,20 @@ router.get('/add-product', async (req, res, next) => {
     })
   }
   else {
-  return res.redirect('/')
+    return res.redirect('/')
   }
     
 });
 
 router.post('/add-product', (req, res, next) => {
+  console.log(req.body)
   json.forEach(x => {
       if (x.id == req.body.id) {
         x.cost = Number(req.body.cost);
         x.stock = Number(req.body.stock)
+        x.name = req.body.name
+        x.category = req.body.category
+        
       }
   })
   //console.log(json)

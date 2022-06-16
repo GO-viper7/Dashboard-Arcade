@@ -70,11 +70,69 @@
                     <input type="text" readonly="true" id="<%= i %>st" style="font-size: 18px" class="form-control" value="<%= x.stock %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                   </div>
                 </p>
-                <a type="text" class="btn btn-primary" id="<%= i %>t">Save Changes</a>
-                <a  class="btn btn-danger" id="<%= i %>et">Edit Item</a>
+                
+                <a data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class="btn btn-primary" id="<%= i %>et">Edit Item</a>
               </div>
             </div>
             <% }) %>
+
+            <% var i =0 %>
+            <% prod.forEach(k => { i++; %>
+          <div class="modal fade" id="exampleModal<%= i %>" tabindex="<%= i-2 %>" aria-labelledby="exampleModalLabel<%= i %>" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel<%= i %>" style="font-size: 25px" >Edit Item : <%= k.name %></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="font-size: 17px">
+                  <form action="/admin/add-product" method="POST">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+                    <input id="<%= i %>nt"type="text" class="form-control" value="<%=k.name%>"  aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
+                    <input id="<%= i %>ca" type="number" class="form-control" value="<%=k.cost%>"  aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-stack-exchange"></i></span>
+                    <input id="<%= i %>sa" type="number" class="form-control" value="<%=k.stock%>" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <% if(k.category == 'cat1') { %>
+                    <input id="<%= i %>categ1" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat1" checked>
+                    <% } else { %>
+                      <input id="<%= i %>categ1" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat1">
+                      <% } %>
+                    <label class="form-check-label" for="inlineRadio1">cat1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <% if(k.category == 'cat2') { %>
+                      <input id="<%= i %>categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat2" checked>
+                      <% } else { %>
+                        <input id="<%= i %>categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat2">
+                        <% } %>
+                    <label class="form-check-label" for="inlineRadio2">cat2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <% if(k.category == 'cat3') { %>
+                      <input id="<%= i %>categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat3" checked>
+                      <% } else { %>
+                        <input id="<%= i %>categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat3">
+                        <% } %>
+                    <label class="form-check-label" for="inlineRadio3">cat3</label>
+                  </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                  <button data-bs-dismiss="modal" type="button" class="btn btn-success" id="<%= i %>yt"><a href="#" style="text-decoration: none; color:#e5f5f5" >Save Changes</a></button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Don't save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
           </div>
          </div>
        </div>
@@ -83,66 +141,73 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    <script src="https://kit.fontawesome.com/c5d7c8bb5c.js" crossorigin="anonymous"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-   <script>
-    window.onload = () => {
-    console.log(`<%-prod.length %>`)
-    for(var j =0; j<`<%-prod.length %>`; j++) {  
-      (function() {
-       var p = j+1
-       var d = document.getElementById(`${p}et`)
-       d.addEventListener('click', () => {
-         console.log(d.id)
-         console.log(p, document.getElementById(`${p}st`))
-         document.getElementById(`${p}st`).readOnly = false;
-         document.getElementById(`${p}ct`).readOnly = false;
-       })
+    <script>
+      window.onload = () => {
       
-       var w = document.getElementById(`${p}t`)
-       w.addEventListener('click', () => {
-        console.log(w.id)
-        const res =  fetch(`http://localhost:3000/admin/add-product`, {
-            method: "POST",
-            headers: {
-              'Accept': 'application/json',
-              "Content-Type": "application/json",
-            },
+      for(var j =0; j<`<%-prod.length %>`; j++) {  
+        (function() {
+         var p = j+1
          
-            body: JSON.stringify({
-              "id" : p,
-              "cost" :  document.getElementById(`${p}ct`).value,
-              "stock" : document.getElementById(`${p}st`).value,
-            }),
-          }).then(res => {  
-              if (res.status !== 200) {
-                  console.log("error")
-              } else {
-                console.log("FU")
-                res.json().then(data => {
-                  console.log(data)
-                })
-              }
-            })
-            window.location.href = 'http://localhost:3000/admin/add-product'
+        
+         var w = document.getElementById(`${p}yt`)
+         w.addEventListener('click', () => {
+          var final
+        
+          if ( document.getElementById(`${p}categ1`).checked == true ) {
+            final = document.getElementById(`${p}categ1`).value
+          }
+          if ( document.getElementById(`${p}categ2`).checked == true ) {
+            final = document.getElementById(`${p}categ2`).value
+          }
+          if ( document.getElementById(`${p}categ3`).checked == true ) {
+            final = document.getElementById(`${p}categ3`).value
+          }
          
-
-
-
-          
-
-
-
-
-
-       })
-      }())
-     }
-    }
-   </script>
+          const res =  fetch(`https://dashboard-77.herokuapp.com/admin/add-product`, {
+              method: "POST",
+              headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+              },
+           
+              body: JSON.stringify({
+                "id" : p,
+                "name"  : document.getElementById(`${p}nt`).value,
+                "cost"  : document.getElementById(`${p}ca`).value,
+                "stock" : document.getElementById(`${p}sa`).value,
+                "category" : final
+              }),
+            }).then(res => {  
+                if (res.status !== 200) {
+                    console.log("error")
+                } else {
+                  console.log("FU")
+                  res.json().then(data => {
+                    console.log(data)
+                  })
+                }
+              })
+              window.location.href = 'https://dashboard-77.herokuapp.com/admin/add-product'
+           
+  
+  
+  
+            
+  
+  
+  
+  
+  
+         })
+        }())
+       }
+      }
+     </script>
   </body>
 </html>
