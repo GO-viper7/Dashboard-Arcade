@@ -62,7 +62,7 @@
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
-          <input id="img" type="text" placeholder="https://i.imgur.com/XPdLnby.jpeg" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+          <input id="img" type="file" placeholder="Choose" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="form-check form-check-inline">
           
@@ -275,7 +275,9 @@
                  })
                }
              })
-             document.getElementById('suc').style.display="block";
+             setTimeout(() => {
+              window.location.href='/admin/add-product'
+            }, 1000)
         })
       
       for(var j =0; j<`<%-prod.length %>`; j++) {  
@@ -321,7 +323,9 @@
                   })
                 }
               })
-              document.getElementById('suc').style.display="block";
+              setTimeout(() => {
+                window.location.href='/admin/add-product'
+              }, 1000)
              
           })
 
@@ -352,7 +356,9 @@
                   })
                 }
               })
-              document.getElementById('suc').style.display="block";
+              setTimeout(() => {
+                window.location.href='/admin/add-product'
+              }, 1000)
           })
 
 

@@ -349,15 +349,15 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     <%  }  %>
     <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none; height: 110px;  padding-top: 30px" id="suc">
     Payment Success, Coins have been debited!
-    <button style="padding-top: 44px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
+    <button style="padding-top: 44px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
   </div>
   <div class="alert alert-dark alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px" id="stc">
     Out of Stock!
-    <button style="padding-top: 44px"  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open2"></button>
+    <button style="padding-top: 44px; display: none"  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open2"></button>
   </div>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px" id="dan">
-    Payment Unsuccessful, Not Enough Coins!
-    <button  style="padding-top: 44 px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1"></button>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="dan">
+    Not Enough Coins!
+    <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
   </div>
   <div class="mobhid"><br><br></div>
   
@@ -637,9 +637,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
         console.log(a, q, r)
         if (r <= 0) {
           document.getElementById('stc').style.display="block";
+          setTimeout(() => {
+            window.location.href='/'
+          }, 1000)
         }
         else if (Number(a) >= q) {
-            document.getElementById('suc').style.display="block";  
+            //document.getElementById('suc').style.display="block";  
             const res =  fetch(`/`, {
             method: "POST",
             headers: {
@@ -666,10 +669,16 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                 })
               }
             })
+          setTimeout(() => {
+            window.location.href='/'
+          }, 1000)
         }
   
         else {
           document.getElementById('dan').style.display="block";
+          setTimeout(() => {
+            window.location.href='/'
+          }, 1000)
         }
          
        })

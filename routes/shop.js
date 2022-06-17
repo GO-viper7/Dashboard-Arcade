@@ -87,12 +87,12 @@ router.get('/', async (req, res, next) => {
       }
       if (req.cookies.get('cat') == undefined) {
         var result = await  productSchema.find({})
-        console.log(result)
+        //console.log(result)
         k = result.filter(x => x.category == x.category)
       }
       else { 
         var result = await  productSchema.find({})
-        console.log(result)
+        //console.log(result)
         k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
       }
       return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users, inv : invis})
@@ -102,12 +102,12 @@ router.get('/', async (req, res, next) => {
   else {
     if (req.cookies.get('cat') == undefined) {
       var result = await  productSchema.find({})
-      console.log(result)
+      //console.log(result)
       k = result.filter(x => x.category == x.category)
     }
     else  {
       var result = await  productSchema.find({})
-      console.log(result)
+      //console.log(result)
       k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) ) 
     }
     return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: ''})
