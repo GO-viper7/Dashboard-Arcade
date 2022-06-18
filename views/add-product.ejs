@@ -48,46 +48,49 @@
         
       </div>
       <div class="modal-body">
+      <form action="/admin/add-product" method="post" id="forming" enctype="multipart/form-data">
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
-          <input id="nt"type="text" placeholder="Name" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+          <input name="name" id="nt"type="text" placeholder="Name" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
-          <input id="ca" type="number" placeholder="Coins" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+          <input name="cost" id="ca" type="number" placeholder="Coins" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-stack-exchange"></i></span>
-          <input id="sa" type="number" placeholder="Stock" class="form-control" value="" aria-label="Username" aria-describedby="basic-addon1">
+          <input name="stock" id="sa" type="number" placeholder="Stock" class="form-control" value="" aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
-          <input id="img" type="file" placeholder="Choose" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+          <input name="file" id="img" type="file" placeholder="Choose" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
         </div>
+        <div>
         <div class="form-check form-check-inline">
           
-          <input id="categ1" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat1" checked>
+          <input name="cat" id="categ1" class="form-check-input" type="radio" value="cat1" checked>
           
-          <label class="form-check-label" for="inlineRadio1">cat1</label>
+          <label class="form-check-label" for="categ1">cat1</label>
         </div>
         <div class="form-check form-check-inline">
          
-            <input id="categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat2">
+            <input name="cat" id="categ2" class="form-check-input" type="radio"  value="cat2">
             
-          <label class="form-check-label" for="inlineRadio2">cat2</label>
+          <label class="form-check-label" for="categ2">cat2</label>
         </div>
         <div class="form-check form-check-inline">
        
-            <input id="categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat3">
+            <input name="cat" id="categ3" class="form-check-input"  type="radio"  value="cat3">
            
-          <label class="form-check-label" for="inlineRadio3">cat3</label>
+          <label class="form-check-label" for="categ3">cat3</label>
         </div>
-
+      </div>
+      </form>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="add"  data-bs-dismiss="modal">Save changes</button>
+        <button type="submit" form="forming" class="btn btn-primary" id="add"  data-bs-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -109,7 +112,7 @@
           <% prod.forEach(x => { i++; %>
             <div class="card p-12" style="width: 18rem;  margin: auto; margin-bottom: 25px;">
               
-              <img src="<%= x.url %>" class="card-img-top" alt="..." style="height: 350px">
+              <img src="../assets/<%= x.url %>" class="card-img-top" alt="..." style="height: 350px">
               <div class="card-body">
                 <h5 class="card-title" style="font-size: 25px"><%= x.name %></h5>
              
@@ -238,46 +241,10 @@
        })
         var as = document.getElementById(`add`)
         as.addEventListener('click', () => {
-         var fina
-       
-         if ( document.getElementById(`categ1`).checked == true ) {
-           fina = document.getElementById(`categ1`).value
-         }
-         if ( document.getElementById(`categ2`).checked == true ) {
-           fina = document.getElementById(`categ2`).value
-         }
-         if ( document.getElementById(`categ3`).checked == true ) {
-           fina = document.getElementById(`categ3`).value
-         }
-        
-         const res =  fetch(`/admin/add-product`, {
-             method: "POST",
-             headers: {
-               'Accept': 'application/json',
-               "Content-Type": "application/json",
-             },
-          
-             body: JSON.stringify({
-               "name"  : document.getElementById(`nt`).value,
-               "cost"  : document.getElementById(`ca`).value,
-               "stock" : document.getElementById(`sa`).value,
-               "category" : fina,
-               "add" : true,
-               "url" : document.getElementById(`img`).value
-             }),
-           }).then(res => {  
-               if (res.status !== 200) {
-                   console.log("error")
-               } else {
-                 console.log("FU")
-                 res.json().then(data => {
-                   console.log(data)
-                 })
-               }
-             })
-             setTimeout(() => {
-              window.location.href='/admin/add-product'
-            }, 1000)
+          setTimeout(() => {
+            window.location.href='/admin/add-product'
+          }, 1000)
+             
         })
       
       for(var j =0; j<`<%-prod.length %>`; j++) {  
@@ -311,7 +278,8 @@
                 "name"  : document.getElementById(`${p}nt`).value,
                 "cost"  : document.getElementById(`${p}ca`).value,
                 "stock" : document.getElementById(`${p}sa`).value,
-                "category" : final
+                "category" : final,
+                "edit" : true
               }),
             }).then(res => {  
                 if (res.status !== 200) {
@@ -323,9 +291,9 @@
                   })
                 }
               })
-              //setTimeout(() => {
-              //  window.location.href='/admin/add-product'
-            //  }, 1000)
+              setTimeout(() => {
+                window.location.href='/admin/add-product'
+              }, 1000)
              
           })
 

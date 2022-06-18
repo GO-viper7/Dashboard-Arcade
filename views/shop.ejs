@@ -445,7 +445,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
               <%  } else { %>
                 <div data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top-width: 500px    ;border-top: 20px solid #fff; border-bottom: 45px solid transparent; " id="ex">
                   <%  }  %>  
-              <img src="<%= x.url %>" id="<%= i %>im" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
+              <img src="assets/<%= x.url %>" id="<%= i %>im" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
               <div class="cardy">
               <div  style="text-align: center">
                 <h class="card-title" style="font-size: 30px; " id="<%= i %>nt"><%= x.name %></h>
@@ -631,7 +631,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
        var q = Number(document.getElementById(`${p}ct`).innerText)
        var r = Number(document.getElementById(`${p}st`).innerText)
        var cat = document.getElementById(`${p}categ`).innerText
-       var ur = document.getElementById(`${p}im`).src
+       var ur = document.getElementById(`${p}im`).src.slice(document.getElementById(`${p}im`).src.indexOf('/assets')+8)
        document.getElementById(`${p}yt`).addEventListener('click', () => {
         ary.push(n)
         console.log(a, q, r)

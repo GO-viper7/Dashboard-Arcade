@@ -12,6 +12,48 @@ const oauth = new DiscordOauth2({
 	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 
+
+
+
+
+
+
+var multer  = require('multer');
+ 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/assets/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+file.originalname)
+    }
+  })
+ 
+  const fileFilter=(req, file, cb)=>{
+   if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/jpg' || file.mimetype ==='image/png'){
+       cb(null,true);
+   }else{
+       cb(null, false);
+   }
+ 
+  }
+ 
+var upload = multer({ 
+    storage:storage,
+    limits:{
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter:fileFilter
+ });
+ 
+
+
+
+
+
+
+
+
 // /admin/add-product => GET
 router.get('/add-product', async (req, res, next) => {
   let cookies = req.cookies.get('key')
@@ -27,6 +69,7 @@ router.get('/add-product', async (req, res, next) => {
       }
          
     })
+    //return res.redirect('/')
   }
   else {
     return res.redirect('/')
@@ -35,25 +78,8 @@ router.get('/add-product', async (req, res, next) => {
     
 });
 
-router.post('/add-product', async (req, res, next) => {
+router.post('/add-product', upload.single('file'),  async (req, res, next) => {
   console.log(req.body)
-  if (req.body.add == true) {
-    productSchema.countDocuments({}, async function (err, count){ 
-      console.log(count)
-    if (err) {
-      console.log(err)
-    }
-    await new productSchema({
-      id : Number(count)+1,
-      cost : Number(req.body.cost),
-      stock : Number(req.body.stock),
-      name : req.body.name,
-      category : req.body.category,
-      url : req.body.url
-    }).save()
-  }); 
-  return;
-  }
   if (req.body.del == true) {
     productSchema.countDocuments({}, async function (err, count){ 
       await productSchema.deleteOne({ id: req.body.id })
@@ -73,7 +99,8 @@ router.post('/add-product', async (req, res, next) => {
       });
    return;
   }
-  productSchema.findOneAndUpdate({id: req.body.id}, {
+  if ( req.body.edit == true ) {
+    productSchema.findOneAndUpdate({id: req.body.id}, {
     cost : Number(req.body.cost),
     stock : Number(req.body.stock),
     name : req.body.name,
@@ -86,6 +113,29 @@ router.post('/add-product', async (req, res, next) => {
       //console.log(data)
     }
   })
+  return 
+ }
+ console.log(req.file)
+    if ( req.file == undefined) {
+      return;
+    }
+    productSchema.countDocuments({}, async function (err, count){ 
+      console.log(count)
+    if (err) {
+      console.log(err)
+    }
+    var k ;
+    if (req.body.cat)
+    await new productSchema({
+      id : Number(count)+1,
+      cost : Number(req.body.cost),
+      stock : Number(req.body.stock),
+      name : req.body.name,
+      category : req.body.cat,
+      url : req.file.filename
+    }).save()
+  }); 
+  return;
 });
 
 // /admin/add-product => POST
