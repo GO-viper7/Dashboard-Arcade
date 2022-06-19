@@ -7,9 +7,6 @@ const itemSchema = mongoose.Schema({
     userId: {
         type: String,
     },
-    id: {
-        type: Number,
-    },
     name: {
         type: String,
     },
