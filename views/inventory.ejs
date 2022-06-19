@@ -178,7 +178,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 
 
     #onlylap2 {
-      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 100px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto; padding-left: 17px;margin: auto; margin-right: 40px; margin-top: 10px
+      font-size: 20px;border-color:#fff;transition: 0.3s ease; width: 104px; border-style: solid;  border-radius: 10px; background-color: transparent;cursor: pointer; color: white; padding: auto;padding-left: 17px;margin: auto; margin-right: 40px; margin-top: 10px
     }
 
     #onlylap3 {
@@ -202,6 +202,10 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     border-color:#101419;
     background-color: #fff;
     color: #101419;
+}
+
+#inv {
+  margin-left: 40px; margin-top: 100px; overflow-y: scroll; height: 600px; overflow-x: hidden;
 }
    
 @media only screen and (max-width: 1250px) {
@@ -297,6 +301,13 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     padding: auto;
     text-align : center
    }
+   #onlylap2 {
+    padding-left: 0px;
+   }
+
+   #inv {
+    margin-left: 10px; 
+   }
 }
     
       
@@ -336,7 +347,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
  
   <br>
   <% if (bool == true) {  %>
-    <div class="d-flex" style="margin-left: 40px; margin-top: 100px; overflow-y: scroll; height: 600px; overflow-x: hidden;">
+    <div class="d-flex" id = "inv">
       <div class="col-md-12  p-3 scroll-row" style="animation: bottomToTop 2s">
        <div class="container fluid">
          <div class="row fluid">

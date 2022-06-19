@@ -11,106 +11,162 @@
     <title>Admin</title>
   </head>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
     body{
        width:100%; 
        overflow-x: hidden;
        font-family:  serif;
        font-weight: 800;
+       font-family: 'Audiowide', cursive;
+       
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 7px;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #808080; 
+        border-radius: 10px;
+      }
+      .bg-image {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background-size: cover;
+        background-image: url('https://wallpaperaccess.com/full/2152459.jpg');
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        
+        
+      }
+      .cnt {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+      
+      }
+      #fi {
+       
+ /* From https://css.glass */
+
+      }
+
+      #big {
+        
+       
+        overflow-y: scroll;
+        height: 800px;
+      
       }
     
   </style>
   
   <body >
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="bg-image"></div>
+    <div class="cnt">
+    <div id="fi">
+    <nav class="navbar navbar-expand-lg " style="background-color: transparent;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="font-size: 25px">Admin portal</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <a class="navbar-brand" href="#" style="font-size: 25px; color: white">Admin portal</a>
+        <button style = "color: #fff" class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/" style="font-size: 20px">Home</a>
+              <a class="nav-link active" aria-current="page" href="/" style="font-size: 20px; color: white">Home</a>
             </li>
            
             
             <li class="nav-item">
-              <a data-bs-toggle="modal"  data-bs-target="#exampleModal" class="nav-link active" aria-current="page" href="" style="font-size: 20px">Add Item</a>
+              <a data-bs-toggle="modal"  data-bs-target="#exampleModal" class="nav-link active" aria-current="page" href="" style="font-size: 20px; color: white">Add Item</a>
             </li>
             <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
-        
-      </div>
-      <div class="modal-body">
-      <form action="/admin/add-product" method="post" id="forming" enctype="multipart/form-data">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
-          <input name="name" id="nt"type="text" placeholder="Name" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
-          <input name="cost" id="ca" type="number" placeholder="Coins" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-stack-exchange"></i></span>
-          <input name="stock" id="sa" type="number" placeholder="Stock" class="form-control" value="" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
-          <input name="file" id="img" type="file" placeholder="Choose" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-        <div>
-        <div class="form-check form-check-inline">
-          
-          <input name="cat" id="categ1" class="form-check-input" type="radio" value="cat1" checked>
-          
-          <label class="form-check-label" for="categ1">cat1</label>
-        </div>
-        <div class="form-check form-check-inline">
-         
-            <input name="cat" id="categ2" class="form-check-input" type="radio"  value="cat2">
-            
-          <label class="form-check-label" for="categ2">cat2</label>
-        </div>
-        <div class="form-check form-check-inline">
-       
-            <input name="cat" id="categ3" class="form-check-input"  type="radio"  value="cat3">
-           
-          <label class="form-check-label" for="categ3">cat3</label>
-        </div>
-      </div>
-      </form>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" form="forming" class="btn btn-primary" id="add"  data-bs-dismiss="modal">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
           </ul>
          
         </div>
       </div>
     </nav>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Add Item</h5>
+            
+          </div>
+          <div class="modal-body">
+          <form action="/admin/add-product" method="post" id="forming" enctype="multipart/form-data">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+              <input name="name" id="nt"type="text" placeholder="Name" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
+              <input name="cost" id="ca" type="number" placeholder="Coins" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-stack-exchange"></i></span>
+              <input name="stock" id="sa" type="number" placeholder="Stock" class="form-control" value="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+              <input name="file" id="img" type="file" placeholder="Choose" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div>
+            <div class="form-check form-check-inline">
+              
+              <input name="cat" id="categ1" class="form-check-input" type="radio" value="cat1" checked>
+              
+              <label class="form-check-label" for="categ1">cat1</label>
+            </div>
+            <div class="form-check form-check-inline">
+             
+                <input name="cat" id="categ2" class="form-check-input" type="radio"  value="cat2">
+                
+              <label class="form-check-label" for="categ2">cat2</label>
+            </div>
+            <div class="form-check form-check-inline">
+           
+                <input name="cat" id="categ3" class="form-check-input"  type="radio"  value="cat3">
+               
+              <label class="form-check-label" for="categ3">cat3</label>
+            </div>
+          </div>
+          </form>
+    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" form="forming" class="btn btn-primary" id="add"  data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
     <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none; height: 110px;  padding-top: 30px" id="suc">
       Refresh Page to view changes!
       <button style="padding-top: 44px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
     </div>
     <div class="d-flex" >
-       <div class="col-md-12  p-3 scroll-row" style="animation: bottomToTop 2s">
+      <div class="col-md-12 p-3 scroll-row" id="big" >
         <div class="container fluid">
           <div class="row fluid">
            <% var i =0 %>
           <% prod.forEach(x => { i++; %>
-            <div class="card p-12" style="width: 18rem;  margin: auto; margin-bottom: 25px;">
+            <div class="card p-0" style="width: 18rem;  margin: auto; margin-bottom: 25px;">
               
               <img src="../assets/<%= x.url %>" class="card-img-top" alt="..." style="height: 350px">
               <div class="card-body">
@@ -222,6 +278,7 @@
           </div>
          </div>
        </div>
+      </div>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
