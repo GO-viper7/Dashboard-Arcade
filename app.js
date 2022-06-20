@@ -99,8 +99,6 @@ app.get('/twitter/return', passport.authenticate('twitter', {
     res.redirect('/twiter')
 })
 
-app.use((req, res, next) => {
-    res.status(404).render( '404');
-});
+
 
 app.listen(process.env.PORT || 3000);
