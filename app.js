@@ -9,6 +9,7 @@ const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const discordRoutes = require('./routes/discord');
 const invRoutes = require('./routes/inventory')
+const config = require('./config.json')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
@@ -60,8 +61,8 @@ var Strategy = require('passport-twitter').Strategy;
 var session = require('express-session');
 
 passport.use(new Strategy({
-    consumerKey: 'ftzX3tbaEkbhhW71HtCzHCeLj',
-    consumerSecret: '2KyRsGSlscIqPrwWUFy369aDLchm3sVk4JzjUXsK0IsDg1zUEW',
+    consumerKey: config.consumer_key,
+    consumerSecret: config.consumer_secret,
     callbackURL: 'https://dashboard-77.herokuapp.com/twiter'
 }, function(token, tokenSecret, profile, callback) {
     return callback(null, profile);

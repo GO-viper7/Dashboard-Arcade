@@ -308,24 +308,24 @@ border: 1px solid rgba(255, 255, 255, 0.11);
           
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a id="onlylap" class="nav-link active" aria-current="page" href="" style="" >Mempo Marketplace</a>
+              <a id="onlylap" class="nav-link active" aria-current="page" href=""  >Mempo Marketplace</a>
             </li>
             <li class="nav-item">
-              <a id="onlylap1" class="nav-link active" aria-current="page" href="/" style="" >Home</a>
+              <a id="onlylap1" class="nav-link active" aria-current="page" href="/"  >Home</a>
             </li>
             <li class="nav-item">
-              <a id="onlylap2" class="nav-link active" aria-current="page" href="/twiter" style="" >Twitter</a>
+              <a id="onlylap2" class="nav-link active" aria-current="page" href="/twiter"  >Twitter</a>
             </li>
             <li class="nav-item">
-              <a id="onlylap3" class="nav-link active" aria-current="page" href="<%= url %>" style="">Discord</a>
+              <a id="onlylap3" class="nav-link active" aria-current="page" href="<%= url %>" >Discord</a>
             </li>
             <% if (user == '') { %>
             <li class="nav-item">
-              <a id="onlylap4" class="nav-link active" aria-current="page" href="<%= url %>" style="">Inventory</a>
+              <a id="onlylap4" class="nav-link active" aria-current="page" href="<%= url %>" >Inventory</a>
             </li>
             <%  } else { %>
               <li class="nav-item">
-                <a id="onlylap4" class="nav-link active" aria-current="page" href="/inventory" style="">Inventory</a>
+                <a id="onlylap4" class="nav-link active" aria-current="page" href="/inventory" >Inventory</a>
               </li>
               <%  }  %>
             <%  var flag = 0  %>
@@ -333,7 +333,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
               <%  for(var j =0; j<ids.length; j++) if (ids[j].userId == id)  flag = 1 %>
                 <% if (flag == 1) { %>
             <li class="nav-item">
-              <a id="onlylap5" class="nav-link active" aria-current="page" href="/admin/add-product" style="">Admin</a>
+              <a id="onlylap5" class="nav-link active" aria-current="page" href="/admin/add-product" >Admin</a>
             </li>
             <%  }  %>
             <%  }  %>

@@ -6,9 +6,10 @@ const fs = require('fs');
 const productSchema = require('../schemas/product-schema');
 const users = require('../users.json')
 const DiscordOauth2 = require("discord-oauth2");
+const config = require('../config.json')
 const oauth = new DiscordOauth2({
-	clientId: "978339805496750150",
-	clientSecret: "OdbZvWky-P8fYi_lMcbh_49Y2L_f4S0D",
+	clientId: config.clientId,
+	clientSecret: config.clientSecret,
 	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 

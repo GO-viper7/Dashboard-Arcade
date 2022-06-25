@@ -4,21 +4,17 @@ const express = require('express');
 const fs = require('fs')
 const rootDir = require('../util/path');
 const adminData = require('./admin');
-
+const config = require('../config.json')
 const router = express.Router();
-const json = require('../test.json')
 const users = require('../users.json')
 console.log(users)
-const inv = require('../inv.json')
-var k = json
-const all = json
-var q = 0
+
 
 const crypto = require('crypto')
 const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
-	clientId: "978339805496750150",
-	clientSecret: "OdbZvWky-P8fYi_lMcbh_49Y2L_f4S0D",
+	clientId: config.clientId,
+	clientSecret: config.clientSecret,
 	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 
@@ -31,7 +27,7 @@ const url = oauth.generateAuthUrl({
 
 const { connect } = require('mongoose');
 
-connect('mongodb+srv://GoViper:GoViperUC123@cluster.sbavr.mongodb.net/TinyArcade?retryWrites=true&w=majority', {
+connect(config.mongoPath, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 }).then(() => {
