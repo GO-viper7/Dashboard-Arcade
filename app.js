@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-require("dotenv").config({path: './config.env'});
+require("dotenv").config();
 const app = express();
 const cookies = require('cookies')
 const adminData = require('./routes/admin');

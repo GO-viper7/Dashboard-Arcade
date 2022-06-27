@@ -6,7 +6,7 @@ const fs = require('fs');
 const productSchema = require('../schemas/product-schema');
 const users = require('../users.json')
 const DiscordOauth2 = require("discord-oauth2");
-require("dotenv").config({path: '../config.env'});
+require("dotenv").config();
 const oauth = new DiscordOauth2({
 	clientId: process.env.clientId,
 	clientSecret: process.env.clientSecret,

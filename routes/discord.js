@@ -6,7 +6,7 @@ const crypto = require('crypto')
 const DiscordOauth2 = require("discord-oauth2");
 const Cookies = require('cookies');
 const oauth = new DiscordOauth2();
-require("dotenv").config({path: '../config.env'});
+require("dotenv").config();
 const jwt = require('jsonwebtoken')
 router.get('/discord', async  (req, res) => {
  

@@ -5,7 +5,7 @@ const router = express.Router();
 const fs = require('fs');
 const itemSchema = require('../schemas/item-schema');
 const DiscordOauth2 = require("discord-oauth2");
-require("dotenv").config({path: '../config.env'});
+require("dotenv").config();
 const oauth = new DiscordOauth2({
 	clientId: process.env.clientId,
 	clientSecret: process.env.clientSecret,
