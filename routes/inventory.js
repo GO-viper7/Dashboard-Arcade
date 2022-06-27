@@ -16,7 +16,7 @@ const oauth = new DiscordOauth2({
 router.get('/inventory', async (req, res, next) => {
   let l
   let cookies = req.cookies.get('key')
-  let user = await oauth.getUser(cookies)
+  let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
   var result = await  itemSchema.find({})
   //console.log(result)
   l = result.filter(x => x.userId == user.id )

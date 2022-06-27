@@ -25,7 +25,6 @@ const url = oauth.generateAuthUrl({
 
 
 const { connect } = require('mongoose');
-console.log(process.env.mongoPath)
 connect(process.env.mongoPath, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -56,7 +55,6 @@ router.get('/', async (req, res, next) => {
   }
   
   let cookies = req.cookies.get('key')
-  console.log(cookies)
   if (cookies) {
     let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
     var o = 0;
