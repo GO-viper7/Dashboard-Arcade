@@ -12,7 +12,7 @@ const oauth = new DiscordOauth2({
 	clientSecret: process.env.clientSecret,
 	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
-
+const jwt = require('jsonwebtoken')
 
 
 
@@ -62,7 +62,7 @@ router.get('/add-product', async (req, res, next) => {
   if (cookies) {
     var result = await  productSchema.find({})
     //console.log(result)
-    let user = await oauth.getUser(cookies)
+    let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
     users.forEach(x => {
       
       if (x.userId == user.id) {
