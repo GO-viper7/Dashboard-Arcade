@@ -6,10 +6,10 @@ const fs = require('fs');
 const productSchema = require('../schemas/product-schema');
 const users = require('../users.json')
 const DiscordOauth2 = require("discord-oauth2");
-const config = require('../config.json')
+require("dotenv").config({path: '../config.env'});
 const oauth = new DiscordOauth2({
-	clientId: config.clientId,
-	clientSecret: config.clientSecret,
+	clientId: process.env.clientId,
+	clientSecret: process.env.clientSecret,
 	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 

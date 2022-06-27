@@ -2,14 +2,14 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-require("dotenv").config();
+require("dotenv").config({path: './config.env'});
 const app = express();
 const cookies = require('cookies')
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const discordRoutes = require('./routes/discord');
 const invRoutes = require('./routes/inventory')
-const config = require('./config.json')
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
@@ -61,8 +61,8 @@ var Strategy = require('passport-twitter').Strategy;
 var session = require('express-session');
 
 passport.use(new Strategy({
-    consumerKey: config.consumer_key,
-    consumerSecret: config.consumer_secret,
+    consumerKey: process.env.consumer_key,
+    consumerSecret: process.env.consumer_secret,
     callbackURL: 'https://dashboard-77.herokuapp.com/twiter'
 }, function(token, tokenSecret, profile, callback) {
     return callback(null, profile);

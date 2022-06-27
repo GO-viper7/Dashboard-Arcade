@@ -1,20 +1,19 @@
 const path = require('path');
-
+require("dotenv").config({path: '../config.env'});
 const express = require('express');
 const fs = require('fs')
 const rootDir = require('../util/path');
 const adminData = require('./admin');
-const config = require('../config.json')
 const router = express.Router();
 const users = require('../users.json')
-console.log(users)
+const jwt = require('jsonwebtoken')
 
 
 const crypto = require('crypto')
 const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
-	clientId: config.clientId,
-	clientSecret: config.clientSecret,
+	clientId: process.env.clientId,
+	clientSecret: process.env.clientSecret,
 	redirectUri: "https://dashboard-77.herokuapp.com/discord",
 });
 
@@ -27,7 +26,7 @@ const url = oauth.generateAuthUrl({
 
 const { connect } = require('mongoose');
 
-connect(config.mongoPath, {
+connect(process.env.mongoPath, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 }).then(() => {
@@ -59,7 +58,7 @@ router.get('/', async (req, res, next) => {
   let cookies = req.cookies.get('key')
   
   if (cookies) {
-    let user = await oauth.getUser(cookies)
+    let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
     var o = 0;
     var invi = []
     const result = await inventorySchema.findOne({
