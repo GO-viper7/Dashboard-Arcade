@@ -5,7 +5,7 @@ const axios = require('axios').default;
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
 var session = require('express-session');
-require("dotenv").config({path: '../config.env'});
+require("dotenv").config();
 
 router.use('/twiter', function(req, res) {
   var final="";
