@@ -147,7 +147,7 @@ body, html {
   padding: 20px;
   text-align: center;
   align-items: center;
-
+  overflow-y: scroll;
 }
    
 
