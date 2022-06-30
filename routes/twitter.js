@@ -6,7 +6,7 @@ var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
 var session = require('express-session');
 require("dotenv").config();
-
+console.log(process.env.consumer_key)
 router.use('/twiter', function(req, res) {
   var final="";
   if (req.url.includes('oauth_token') && req.url.includes('oauth_verifier')) {

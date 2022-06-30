@@ -107,6 +107,10 @@
               <input name="name" id="nt"type="text" placeholder="Name" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1" required>
             </div>
             <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+              <input name="desc" id="desc"type="text" placeholder="Description" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
               <input name="cost" id="ca" type="number" placeholder="Coins" class="form-control" value=""  aria-label="Username" aria-describedby="basic-addon1" required>
             </div>
@@ -223,15 +227,19 @@
                   <form action="/admin/add-product" method="POST">
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
-                    <input id="<%= i %>nt"type="text" class="form-control" value="<%=k.name%>"  aria-label="Username" aria-describedby="basic-addon1">
+                    <input id="<%= i %>nt"type="text" class="form-control" value="<%=k.name%>"  aria-label="Username" aria-describedby="basic-addon1" required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-badge"></i></span>
+                    <input id="<%= i %>desc"type="text" class="form-control" value="<%=k.description%>"  aria-label="Username" aria-describedby="basic-addon1" required>
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-coins"></i></span>
-                    <input id="<%= i %>ca" type="number" class="form-control" value="<%=k.cost%>"  aria-label="Username" aria-describedby="basic-addon1">
+                    <input id="<%= i %>ca" type="number" class="form-control" value="<%=k.cost%>"  aria-label="Username" aria-describedby="basic-addon1" required>
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-stack-exchange"></i></span>
-                    <input id="<%= i %>sa" type="number" class="form-control" value="<%=k.stock%>" aria-label="Username" aria-describedby="basic-addon1">
+                    <input id="<%= i %>sa" type="number" class="form-control" value="<%=k.stock%>" aria-label="Username" aria-describedby="basic-addon1" required>
                   </div>
                   <div class="form-check form-check-inline">
                     <% if(k.category == 'cat1') { %>
@@ -415,6 +423,7 @@
                   "cost"  : document.getElementById(`${p}ca`).value,
                   "stock" : document.getElementById(`${p}sa`).value,
                   "category" : final,
+                  "description" : document.getElementById(`${p}desc`).value,
                   "edit" : true
                 }),
               }).then(res => {  

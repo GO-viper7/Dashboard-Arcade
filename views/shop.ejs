@@ -238,13 +238,21 @@
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel<%= i %>" style="font-size: 25px" ><%= k.name %></h5>
+                <h1 class="modal-title" id="exampleModalLabel<%= i %>" >
+                  <%= k.name %>
+                  
+                  
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body" style="font-size: 17px">
-                Are you sure you want to buy? <br>
+               
+                <h5 id="<%= i %>desc"> <%= k.description %> </h5> 
                 Item: <%= k.name %> <br>
-                Cost: <%= k.cost %> coins
+                Cost: <%= k.cost %> coins <br> 
+                Are you sure you want to buy? <br>
+                 
+                
               </div>
               <div class="modal-footer">
                 <button data-bs-dismiss="modal" type="button" class="btn btn-primary" id="<%= i %>yt"><a href="#" style="text-decoration: none; color:#e5f5f5" >Yes</a></button>
@@ -350,6 +358,7 @@
        //console.log(n)
        var t = p
        var q = Number(document.getElementById(`${p}ct`).innerText)
+       var des = Number(document.getElementById(`${p}desc`).innerText)
        var r = Number(document.getElementById(`${p}st`).innerText)
        var cat = document.getElementById(`${p}categ`).innerText
        var ur = document.getElementById(`${p}im`).src.slice(document.getElementById(`${p}im`).src.indexOf('/assets')+8)
@@ -373,6 +382,7 @@
             body: JSON.stringify({
               "id" : t,
               "name" : n,
+              "description" : des,
               "cost" :  a - q,
               "red" : true,
               "stock" : r,

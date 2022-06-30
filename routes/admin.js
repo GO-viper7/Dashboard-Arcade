@@ -129,6 +129,7 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
     if (req.body.cat)
     await new productSchema({
       id : Number(count)+1,
+      description : req.body.desc,
       cost : Number(req.body.cost),
       stock : Number(req.body.stock),
       name : req.body.name,
