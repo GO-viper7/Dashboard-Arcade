@@ -26,4 +26,6 @@ app.use(invRoutes);
 app.use(twitterRoutes);
 
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Running on localhost 3000')
+});
