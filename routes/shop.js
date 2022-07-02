@@ -7,7 +7,7 @@ const adminData = require('./admin');
 const router = express.Router();
 const users = require('../users.json')
 const jwt = require('jsonwebtoken')
-
+const nodeMailer = require('nodemailer')
 
 const crypto = require('crypto')
 const DiscordOauth2 = require("discord-oauth2");
@@ -118,32 +118,62 @@ router.post('/', async (req, res, next) => {
   if (cookies) {
     
     let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
+    let discordUser = user
     var o = 0;
     if ( req.body.red == true) {
       console.log('goin to red')
-      profileSchema.findOneAndUpdate({userId: user.id}, {OctaCreds : req.body.cost}, null, async (err, data) => {
-        if (err) {
-          console.log(err)
+
+
+
+      let transporter = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'nithishbanda2021@gmail.com',
+            pass: 'uivrkjacwnpzvoop'
         }
-        else {
-          console.log(data)
+    });
+    let mailOptions = {
+        from: '"GoViper" <nithishbanda2021@gmail.com>',
+        to: ['nithishreddy.b20@iiits.in'], 
+        subject: 'Purchase from Marketplace', 
+        text: req.body.body, 
+        html: `<b> ${discordUser.username}#${discordUser.discriminator} purchased ${req.body.name} worth of ${req.body.realCost} coins</b>`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
         }
-      })
-      productSchema.findOneAndUpdate({id: req.body.id}, {stock : req.body.stock-1}, null, async (err, data) => {
-        if (err) {
-          console.log(err)
-        }
-        else {
-          console.log(data)
-        }
-      })
-      await new itemSchema({
-          id: req.body.id,
-          userId: user.id,
-          name: req.body.name,
-          url: req.body.url, 
-          category: req.body.category
-      }).save()
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+
+
+
+    profileSchema.findOneAndUpdate({userId: user.id}, {OctaCreds : req.body.cost}, null, async (err, data) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(data)
+      }
+    })
+    productSchema.findOneAndUpdate({id: req.body.id}, {stock : req.body.stock-1}, null, async (err, data) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(data)
+      }
+    })
+    await new itemSchema({
+        id: req.body.id,
+        userId: user.id,
+        name: req.body.name,
+        url: req.body.url, 
+        category: req.body.category
+    }).save()
   }
 }
 });
