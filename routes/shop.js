@@ -61,7 +61,7 @@ router.get('/', async (req, res, next) => {
     res.cookie("cat", `cat`, {httpOnly: false, overwrite: true})
     res.cookies.set("first", 'permanent')
   }
-  let user
+  var user
   let cookies = req.cookies.get('key')
   if (cookies) {
     await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret) ,(err, toke) => {
