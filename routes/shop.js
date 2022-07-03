@@ -61,17 +61,13 @@ router.get('/', async (req, res, next) => {
     res.cookie("cat", `cat`, {httpOnly: false, overwrite: true})
     res.cookies.set("first", 'permanent')
   }
-  var user
+  
   let cookies = req.cookies.get('key')
-  if (cookies) {
-    await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret) ,(err, toke) => {
-      if (err) {
-        console.log(err)
-        return res.redirect('/')
-      }
-      user = toke
-
-    })
+  console.log(cookies)
+  if (cookies != undefined) {
+    try {
+      let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
+    
     var o = 0;
     var invi = []
     const result = await inventorySchema.findOne({
@@ -105,6 +101,9 @@ router.get('/', async (req, res, next) => {
       }
       return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users, inv : invis, cats: result1})
   })
+}catch (err) {
+  console.log(err)
+}
   
   }
   else {
