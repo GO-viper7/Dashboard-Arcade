@@ -61,10 +61,17 @@ router.get('/', async (req, res, next) => {
     res.cookie("cat", `cat`, {httpOnly: false, overwrite: true})
     res.cookies.set("first", 'permanent')
   }
-  
+  let user
   let cookies = req.cookies.get('key')
   if (cookies) {
-    let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
+    await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret) ,(err, toke) => {
+      if (err) {
+        console.log(err)
+        return res.redirect('/')
+      }
+      user = toke
+
+    })
     var o = 0;
     var invi = []
     const result = await inventorySchema.findOne({
