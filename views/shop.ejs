@@ -274,8 +274,10 @@
     -->
    <script>
     window.onload = () => {
-      
-     let uniqueCheck = JSON.parse(`<%- unique %>`)
+     var uniqueCheck
+     if (`<%- unique %>` != '') {
+       uniqueCheck = JSON.parse(`<%- unique %>`)
+     }
      document.getElementById('open').addEventListener('click', () => {
         window.location.href = '/'
      })

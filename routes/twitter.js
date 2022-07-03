@@ -40,7 +40,7 @@ router.use('/twiter', function(req, res) {
 passport.use(new Strategy({
   consumerKey: process.env.consumer_key,
   consumerSecret: process.env.consumer_secret,
-  callbackURL: 'https://dashboard-77.herokuapp.com/twiter'
+  callbackURL: `${process.env.websiteURL}/twiter`
 }, function(token, tokenSecret, profile, callback) {
   return callback(null, profile);
 }));

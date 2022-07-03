@@ -11,7 +11,7 @@ require("dotenv").config();
 const oauth = new DiscordOauth2({
 	clientId: process.env.clientId,
 	clientSecret: process.env.clientSecret,
-	redirectUri: "https://dashboard-77.herokuapp.com/discord",
+	redirectUri: `${process.env.websiteURL}/discord`,
 });
 const jwt = require('jsonwebtoken')
 

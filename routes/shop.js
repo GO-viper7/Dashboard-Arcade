@@ -15,7 +15,7 @@ const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
 	clientId: process.env.clientId,
 	clientSecret: process.env.clientSecret,
-	redirectUri: "https://dashboard-77.herokuapp.com/discord",
+	redirectUri: `${process.env.websiteURL}/discord`,
 });
 
 const url = oauth.generateAuthUrl({
@@ -50,6 +50,7 @@ router.get('/', async (req, res, next) => {
       flag: 1
     }).save()
   }
+  var result1 = await categorySchema.find({})
   if (req.cookies.get('first') == undefined) {
     res.cookie("cat", `cat`, {httpOnly: false, overwrite: true})
     res.cookies.set("first", 'permanent')
@@ -93,7 +94,7 @@ router.get('/', async (req, res, next) => {
       var result = await  productSchema.find({})
       k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) ) 
     }
-    return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: '', cats: result1})
+    return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: '', cats: result1, unique: ''})
   }
 });
 
@@ -121,12 +122,12 @@ router.post('/', async (req, res, next) => {
               port: 465,
               secure: true,
               auth: {
-                  user: 'nithishbanda2021@gmail.com',
-                  pass: 'uivrkjacwnpzvoop'
+                  user: process.env.mailId,
+                  pass: process.env.mailPassword
               }
           });
           let mailOptions = {
-              from: '"Marketplace" <nithishbanda2021@gmail.com>',
+              from: `"${process.env.mailAuthor}" ${process.env.mailId}`,
               to: mailList, 
               subject: 'Purchase from Marketplace', 
               text: req.body.body, 
