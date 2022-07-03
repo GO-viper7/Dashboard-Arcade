@@ -54,6 +54,28 @@
         z-index: 9999;
       
       }
+      #onlylap1 {
+        font-size: 20px;
+        border-color:#fff;
+        transition: 0.3s ease; 
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-style: solid;  
+        border-radius: 10px; 
+        background-color: transparent;
+        cursor: pointer; 
+        color: white; 
+        padding: auto;
+        transition: 0.3s all ease;
+        
+      }
+
+      #onlylap1:hover {
+        border-color:#101419;
+        background-color: #fff;
+        color: #101419;
+      }
     
 
       #big {
@@ -62,7 +84,18 @@
         overflow-y: scroll;
         height: 800px;
       
-      }</style>
+      }
+    
+      @media only screen and (max-width: 850px) {
+
+        #onlylap1 {
+          background-color: transparent;
+          border-style: none;
+          margin: auto;
+          padding: auto;
+        }
+      }
+    </style>
   
   <body >
     <div class="bg-image"></div>
@@ -77,15 +110,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/" style="font-size: 20px; color: white">Home</a>
+              <a class="nav-link active" id="onlylap1" aria-current="page" href="/" style="font-size: 20px; ">Home</a>
             </li>
            
             
             <li class="nav-item">
-              <a data-bs-toggle="modal"  data-bs-target="#exampleModal" class="nav-link active" aria-current="page" href="" style="font-size: 20px; color: white">Add Item</a>
+              <a data-bs-toggle="modal"  id="onlylap1" data-bs-target="#exampleModal" class="nav-link active" aria-current="page" href="" style="font-size: 20px;">Add Item</a>
             </li>
             <li class="nav-item">
-              <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="nav-link active" aria-current="page" href="" style="font-size: 20px; color: white">Customize Categories</a>
+              <a data-bs-toggle="modal" id="onlylap1" data-bs-target="#staticBackdrop" class="nav-link active" aria-current="page" href="" style="font-size: 20px;">Customize Categories</a>
             </li>
             <!-- Button trigger modal -->
 
@@ -156,7 +189,7 @@
           <br>
           <div class="form-check form-switch">
             <input name="premium" class="form-check-input" value="true" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Make user to buy this item only once</label>
+            <label class="form-check-label" for="flexSwitchCheckDefault">Toggle on to disable bulk purchase</label>
           </div>
           </form>
     
