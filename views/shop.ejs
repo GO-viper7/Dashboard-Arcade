@@ -1,11 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     
     <title>Dashboard</title>
@@ -106,49 +104,38 @@
       <!-- <div class="laphid"><br><br></div> -->
       <div class="d-flex" id="dle" >
        <div class="col md 6 mt-3" id="fix">
-        
-      
-     
-           
-            <% if (user != '') { %>
-              <div class="mob" >
-            <div class="lappyhid"><br><br><br></div>
-            <%  } else {  %>
-              <div class="bom" >
-                <% } %>
-          <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
-          <div class="lappyhid">
-          <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
-          <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
-          <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
-          <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
-        </div>
-       
-          
-          <!-- Button trigger modal -->
-                        
-
-                        <!-- Modal -->
-                        <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content" style="background-color: #101518; color: #fff" >
-                              <div class="modal-header">
-                                <h1 class="modal-title" id="exampleModalLabel">Categories</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <div id="mcat" ><i class="fa-solid fa-angle-right"></i> All</div>
-                                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
-                                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
-                                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+        <% if (user != '') { %>
+          <div class="mob" >
+        <div class="lappyhid"><br><br><br></div>
+        <%  } else {  %>
+          <div class="bom" >
+            <% } %>
+      <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
+      <div class="lappyhid">
+      <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
+      <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
+      <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
+      <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
+    </div>
+        <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #101518; color: #fff" >
+              <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Categories</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div id="mcat" ><i class="fa-solid fa-angle-right"></i> All</div>
+                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
+                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
+                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+         </div>
         </div>
       </div>
     
@@ -217,7 +204,7 @@
           </div>
         </div>
         </div>
-          </div>
+        </div>
         </div>
 
         <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
@@ -240,7 +227,7 @@
           </div>
         </div>
         </div>
-          </div>
+        </div>
         </div>
 
         <% var i =0 %>
@@ -288,8 +275,8 @@
    <script>
     window.onload = () => {
       
-      let uniqueCheck = JSON.parse(`<%- unique %>`)
-      document.getElementById('open').addEventListener('click', () => {
+     let uniqueCheck = JSON.parse(`<%- unique %>`)
+     document.getElementById('open').addEventListener('click', () => {
         window.location.href = '/'
      })
      document.getElementById('open1').addEventListener('click', () => {
@@ -298,148 +285,130 @@
      document.getElementById('open2').addEventListener('click', () => {
         window.location.href = '/'
      })
-   
-      document.getElementById(`cat`).addEventListener('click', () => {
-       
+     document.getElementById(`cat`).addEventListener('click', () => {
          document.cookie = "cat=cat"
          window.location.href = '/'
      })
     
      
+
+
       document.getElementById(`cat1`).addEventListener('click', () => {
-        
            document.cookie = "cat=<%- cats[0].categoryOne %>"
            window.location.href = '/'
       })
       document.getElementById(`cat2`).addEventListener('click', () => {
           document.cookie = "cat=<%- cats[0].categoryTwo %>"
           window.location.href = '/'
-     })
-     document.getElementById(`cat3`).addEventListener('click', () => {
+      })
+      document.getElementById(`cat3`).addEventListener('click', () => {
           document.cookie = "cat=<%- cats[0].categoryThree %>"
           window.location.href = '/'
-     })
+      })
+ 
 
 
 
 
-
-     document.getElementById(`mcat`).addEventListener('click', () => {
-       
+      document.getElementById(`mcat`).addEventListener('click', () => {
          document.cookie = "cat=cat"
          window.location.href = '/'
-     })
-    
-     
+      })
       document.getElementById(`mcat1`).addEventListener('click', () => {
-      
-           document.cookie = "cat=<%- cats[0].categoryOne %>"
-           window.location.href = '/'
+          document.cookie = "cat=<%- cats[0].categoryOne %>"
+          window.location.href = '/'
       })
       document.getElementById(`mcat2`).addEventListener('click', () => {
           document.cookie = "cat=<%- cats[0].categoryTwo %>"
           window.location.href = '/'
-     })
-     document.getElementById(`mcat3`).addEventListener('click', () => {
+      })
+      document.getElementById(`mcat3`).addEventListener('click', () => {
           document.cookie = "cat=<%- cats[0].categoryThree %>"
           window.location.href = '/'
-     })
+      })
 
 
      
 
      
-     if (`<%- user %>` !== '') {
+    if (`<%- user %>` !== '') {
       console.log(`This is user <%= user %>`)
-     
-    
-    var p=0; 
-    
-    
-    
-    let a = '<%- coins %>'
- 
-    for(var j =0; j<`<%- prod.length %>`; j++) { ( function() { 
-  
-       
-       p++;
-       var n = document.getElementById(`${p}nt`).innerText
-   
-       var t = p
-       var q = Number(document.getElementById(`${p}ct`).innerText)
-       var pre = document.getElementById(`${p}prem`).title
-       var des = Number(document.getElementById(`${p}desc`).innerText)
-       var r = Number(document.getElementById(`${p}st`).innerText)
-       var cat = document.getElementById(`${p}categ`).innerText
-       var ur = document.getElementById(`${p}im`).src.slice(document.getElementById(`${p}im`).src.indexOf('/assets')+8)
-       document.getElementById(`${p}yt`).addEventListener('click', () => {
-        var flag=0
-        uniqueCheck.forEach(el => {
-          if (el.id == t && el.name == n) {
-          
-            document.getElementById('premi').style.display="block";
-            setTimeout(() => {
-              window.location.href='/'
-            }, 1000)
-           flag=1
-          }
-        })
-       if (flag == 0) {
-      
-        if (r <= 0) {
-          document.getElementById('stc').style.display="block";
-          setTimeout(() => {
-            window.location.href='/'
-          }, 1000)
-        }
-        else if (Number(a) >= q) {
-            //document.getElementById('suc').style.display="block";  
-            const res =  fetch(`/`, {
-            method: "POST",
-            headers: {
-              'Accept': 'application/json',
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              "id" : t,
-              "name" : n,
-              "description" : des,
-              "cost" :  a - q,
-              "realCost" : q,
-              "red" : true,
-              "stock" : r,
-              "category" : cat,
-              "url" : ur,
-              "premium" : pre == 'Premium' ? true : false 
-            }),
-          }).then(res => {  
-              if (res.status !== 200) {
-                  console.log("error")
-              } else {
-              
-                res.json().then(data => {
-                  console.log(data)
-                })
+      var p=0; 
+      let a = '<%- coins %>'
+      for(var j =0; j<`<%- prod.length %>`; j++) { ( function() { 
+            p++;
+            var n = document.getElementById(`${p}nt`).innerText
+            var t = p
+            var q = Number(document.getElementById(`${p}ct`).innerText)
+            var pre = document.getElementById(`${p}prem`).title
+            var des = Number(document.getElementById(`${p}desc`).innerText)
+            var r = Number(document.getElementById(`${p}st`).innerText)
+            var cat = document.getElementById(`${p}categ`).innerText
+            var ur = document.getElementById(`${p}im`).src.slice(document.getElementById(`${p}im`).src.indexOf('/assets')+8)
+            document.getElementById(`${p}yt`).addEventListener('click', () => {
+              var flag=0
+              uniqueCheck.forEach(el => {
+                if (el.id == t && el.name == n) {
+                  document.getElementById('premi').style.display="block";
+                  setTimeout(() => {
+                    window.location.href='/'
+                  }, 1000)
+                flag=1
+                }
+              })
+            if (flag == 0) {
+            
+              if (r <= 0) {
+                document.getElementById('stc').style.display="block";
+                setTimeout(() => {
+                  window.location.href='/'
+                }, 1000)
               }
-            })
-          setTimeout(() => {
-            window.location.href='/'
-          }, 1000)
-        }
-  
-        else {
-          document.getElementById('dan').style.display="block";
-          setTimeout(() => {
-            window.location.href='/'
-          }, 1000)
-        }
-      }
-       })
-      
-     
+              else if (Number(a) >= q) {
+                  //document.getElementById('suc').style.display="block";  
+                  const res =  fetch(`/`, {
+                  method: "POST",
+                  headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    "id" : t,
+                    "name" : n,
+                    "description" : des,
+                    "cost" :  a - q,
+                    "realCost" : q,
+                    "red" : true,
+                    "stock" : r,
+                    "category" : cat,
+                    "url" : ur,
+                    "premium" : pre == 'Premium' ? true : false 
+                  }),
+                }).then(res => {  
+                    if (res.status !== 200) {
+                        console.log("error")
+                    } else {
+                    
+                      res.json().then(data => {
+                        console.log(data)
+                      })
+                    }
+                  })
+                setTimeout(() => {
+                  window.location.href='/'
+                }, 1000)
+              }
+              else {
+                document.getElementById('dan').style.display="block";
+                setTimeout(() => {
+                  window.location.href='/'
+                }, 1000)
+              }
+            }
+          })
       })()}
     }
-    }
+  }
    </script>
   </body>
 </html>

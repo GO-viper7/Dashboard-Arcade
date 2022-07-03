@@ -11,7 +11,6 @@ router.use('/twiter', function(req, res) {
   if (req.url.includes('oauth_token') && req.url.includes('oauth_verifier')) {
       var k = req.url;
       k = k.slice(1);
-      
       axios.get(`https://api.twitter.com/oauth/access_token${k}`)
       .then(response => {
           let w = response.data;
@@ -28,17 +27,14 @@ router.use('/twiter', function(req, res) {
               final+=miDec[u++]
               final+=miDec[u++]
               final+=org[y]
-          }
-          
-          
+          }  
   });
 }
   setTimeout(() => {
       req.url.includes('oauth_token') ? res.render('response', {tok: final}) : res.render('index')
-      
   }, 3000)
-
 })
+
 
 
 passport.use(new Strategy({
@@ -61,12 +57,8 @@ passport.deserializeUser(function(obj, callback) {
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(session({secret: 'whatever', resave: true, saveUninitialized: true}))
-
 router.use(passport.initialize())
 router.use(passport.session())
-
-// 
-
 
 
 router.get('/response', (req, res) => {

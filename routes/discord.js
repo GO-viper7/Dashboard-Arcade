@@ -8,14 +8,15 @@ const Cookies = require('cookies');
 const oauth = new DiscordOauth2();
 require("dotenv").config();
 const jwt = require('jsonwebtoken')
+
+
+
 router.get('/discord', async  (req, res) => {
- 
    let code = req.query.code;
    if( code == undefined) {
      res.send('Auth code is undefined')
    }
    else {
-  
     let data = await oauth.tokenRequest({
       clientId: process.env.clientId,
       clientSecret: process.env.clientSecret,
@@ -24,13 +25,10 @@ router.get('/discord', async  (req, res) => {
       grantType: "authorization_code",
       redirectUri: "https://dashboard-77.herokuapp.com/discord",
     })
-     
      res.cookies.set("key", jwt.sign(data.access_token, process.env.jwtSecret))
- 
      setTimeout(() => {
       res.redirect('/')
      }, 1000)
-     
    }
 })
 
