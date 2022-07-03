@@ -503,7 +503,6 @@
             if (res.status !== 200) {
                 console.log("error")
             } else {
-              console.log("FU")
               res.json().then(data => {
                 console.log(data)
               })
@@ -522,7 +521,7 @@
 
 
 
-        console.log('fkng hell twice')
+   
         document.getElementById('open').addEventListener('click', () => {
           window.location.href = '/admin/add-product'
         })
@@ -541,7 +540,7 @@
           
           var w = document.getElementById(`${p}yt`)
           w.addEventListener('click', () => {
-            console.log('fkng hell')
+     
             var final
           
             if ( document.getElementById(`${p}categ1`).checked == true ) {
@@ -574,7 +573,7 @@
                   if (res.status !== 200) {
                       console.log("error")
                   } else {
-                    console.log("FU")
+              
                     res.json().then(data => {
                       console.log(data)
                     })
@@ -588,7 +587,7 @@
       
             var qw = document.getElementById(`${p}delt`)
             qw.addEventListener('click', () => {
-            console.log('went for deleting')
+          
             const res =  fetch(`/admin/add-product`, {
                 method: "POST",
                 headers: {
@@ -604,7 +603,7 @@
                   if (res.status !== 200) {
                       console.log("error")
                   } else {
-                    console.log("FU")
+                
                     res.json().then(data => {
                       console.log(data)
                     })

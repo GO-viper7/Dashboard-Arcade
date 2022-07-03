@@ -19,7 +19,6 @@ router.get('/inventory', async (req, res, next) => {
   let cookies = req.cookies.get('key')
   let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
   var result = await  itemSchema.find({})
-  //console.log(result)
   l = result.filter(x => x.userId == user.id )
   if (l.length == 0) {
   return res.render('inventory', {bool: false});

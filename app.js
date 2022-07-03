@@ -4,7 +4,13 @@ const bodyParser = require('body-parser');
 require("dotenv").config();
 const app = express();
 const cookies = require('cookies')
-
+const { connect } = require('mongoose');
+connect(process.env.mongoPath, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+}).then(() => {
+	console.log('Database connected');
+});
 
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');

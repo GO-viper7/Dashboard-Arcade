@@ -80,6 +80,10 @@
     Not Enough Coins!
     <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
   </div>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="premi">
+    Bulk purchase is disabled for this item
+    <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
+  </div>
   <div class="mobhid"><br><br></div>
   
   <% if (user != '') { %>
@@ -283,7 +287,8 @@
     -->
    <script>
     window.onload = () => {
-      console.log('FU1')
+      
+      let uniqueCheck = JSON.parse(`<%- unique %>`)
       document.getElementById('open').addEventListener('click', () => {
         window.location.href = '/'
      })
@@ -295,14 +300,14 @@
      })
    
       document.getElementById(`cat`).addEventListener('click', () => {
-         console.log('clicked')
+       
          document.cookie = "cat=cat"
          window.location.href = '/'
      })
     
      
       document.getElementById(`cat1`).addEventListener('click', () => {
-        console.log('clicked1')
+        
            document.cookie = "cat=<%- cats[0].categoryOne %>"
            window.location.href = '/'
       })
@@ -320,14 +325,14 @@
 
 
      document.getElementById(`mcat`).addEventListener('click', () => {
-         console.log('clicked')
+       
          document.cookie = "cat=cat"
          window.location.href = '/'
      })
     
      
       document.getElementById(`mcat1`).addEventListener('click', () => {
-        console.log('clicked1')
+      
            document.cookie = "cat=<%- cats[0].categoryOne %>"
            window.location.href = '/'
       })
@@ -342,27 +347,24 @@
 
 
      
+
      
      if (`<%- user %>` !== '') {
-      console.log(`this is user <%= user %>`)
+      console.log(`This is user <%= user %>`)
      
     
-    console.log('FU2')
     var p=0; 
     
     
     
     let a = '<%- coins %>'
-    let arry = `<%- inv %>`
-    array = arry.split(',')
-    ary = array.filter(x => x!== '')
-    console.log(ary)
+ 
     for(var j =0; j<`<%- prod.length %>`; j++) { ( function() { 
   
        
        p++;
        var n = document.getElementById(`${p}nt`).innerText
-       //console.log(n)
+   
        var t = p
        var q = Number(document.getElementById(`${p}ct`).innerText)
        var pre = document.getElementById(`${p}prem`).title
@@ -371,8 +373,19 @@
        var cat = document.getElementById(`${p}categ`).innerText
        var ur = document.getElementById(`${p}im`).src.slice(document.getElementById(`${p}im`).src.indexOf('/assets')+8)
        document.getElementById(`${p}yt`).addEventListener('click', () => {
-        ary.push(n)
-        console.log(a, q, r)
+        var flag=0
+        uniqueCheck.forEach(el => {
+          if (el.id == t && el.name == n) {
+          
+            document.getElementById('premi').style.display="block";
+            setTimeout(() => {
+              window.location.href='/'
+            }, 1000)
+           flag=1
+          }
+        })
+       if (flag == 0) {
+      
         if (r <= 0) {
           document.getElementById('stc').style.display="block";
           setTimeout(() => {
@@ -395,7 +408,6 @@
               "realCost" : q,
               "red" : true,
               "stock" : r,
-              "arr" : ary,
               "category" : cat,
               "url" : ur,
               "premium" : pre == 'Premium' ? true : false 
@@ -404,7 +416,7 @@
               if (res.status !== 200) {
                   console.log("error")
               } else {
-                console.log("FU")
+              
                 res.json().then(data => {
                   console.log(data)
                 })
@@ -421,7 +433,7 @@
             window.location.href='/'
           }, 1000)
         }
-         
+      }
        })
       
      

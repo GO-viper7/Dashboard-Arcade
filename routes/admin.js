@@ -5,7 +5,7 @@ const router = express.Router();
 const fs = require('fs');
 const productSchema = require('../schemas/product-schema');
 const categorySchema = require('../schemas/category-schema');
-const users = require('../users.json')
+const users = require('../admins.json')
 const DiscordOauth2 = require("discord-oauth2");
 require("dotenv").config();
 const oauth = new DiscordOauth2({
@@ -91,7 +91,6 @@ router.get('/add-product', async (req, res, next) => {
 });
 
 router.post('/add-product', upload.single('file'),  async (req, res, next) => {
-  console.log(req.body)
   if (req.body.del == true) {
     productSchema.countDocuments({}, async function (err, count){ 
       await productSchema.deleteOne({ id: req.body.id })
@@ -104,7 +103,7 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
               console.log(err)
             }
             else {
-              console.log(data)
+              //console.log(data)
             }
           }) 
         })
@@ -132,23 +131,23 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
   await categorySchema.updateOne({categoryOne: req.body.oldCatOne}, {categoryOne: req.body.oneName})
   await categorySchema.updateOne({categoryTwo: req.body.oldCatTwo}, {categoryTwo: req.body.twoName})
   let res = await categorySchema.updateOne({categoryThree: req.body.oldCatThree}, {categoryThree: req.body.threeName})
-  console.log(res)
+
 
   await productSchema.updateMany({category: req.body.oldCatOne}, {category : req.body.oneName })
   await productSchema.updateMany({category: req.body.oldCatTwo}, {category : req.body.twoName })
   res = await productSchema.updateMany({category: req.body.oldCatThree}, {category : req.body.threeName })
-  console.log(res)
+
 
 
 return 
 
 }
- console.log(req.file)
+
     if ( req.file == undefined) {
       return;
     }
     productSchema.countDocuments({}, async function (err, count){ 
-      console.log(count)
+    
     if (err) {
       console.log(err)
     }

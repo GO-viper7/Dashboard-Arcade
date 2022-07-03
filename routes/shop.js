@@ -5,7 +5,8 @@ const fs = require('fs')
 const rootDir = require('../util/path');
 const adminData = require('./admin');
 const router = express.Router();
-const users = require('../users.json')
+const users = require('../admins.json')
+const mails = require('../mailIds.json')
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
 const categorySchema = require('../schemas/category-schema');
@@ -22,21 +23,16 @@ const url = oauth.generateAuthUrl({
 	state: crypto.randomBytes(16).toString("hex"), // Be aware that randomBytes is sync if no callback is provided
 });
 
+const mailList = []
+mails.forEach(mail => {
+  mailList.push(mail.mailId)
+})
 
-
-const { connect } = require('mongoose');
-connect(process.env.mongoPath, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-}).then(() => {
-	console.log('Database connected');
-});
 
 const profileSchema = require('../schemas/profile-schema');
 const inventorySchema = require('../schemas/inv-schema');
 const itemSchema = require('../schemas/item-schema');
 const productSchema = require('../schemas/product-schema');
-const { profile } = require('console');
 const { UserCollection } = require('disco-oauth/lib/types');
 
 
@@ -63,27 +59,16 @@ router.get('/', async (req, res, next) => {
   }
   
   let cookies = req.cookies.get('key')
-  console.log(cookies)
   if (cookies != undefined) {
     try {
+      var uniqueItems=[];
       let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
-    
+    itemSchema.find({userId: user.id, premium: true}, (err, data) => {
+       data.forEach(g => {
+          uniqueItems.push({id: g.id, name: g.name})
+       })
+    })
     var o = 0;
-    var invi = []
-    const result = await inventorySchema.findOne({
-          userId: user.id
-      })
-
-      let invis = []
-      if (result) {
-          invis = result.Inventory
-      } else {
-         
-          await new inventorySchema({
-              userId : user.id,
-              Inventory : invis
-          }).save()
-      }
     
     profileSchema.findOne({userId: user.id}, async (err, data) => {
       if (data) {
@@ -91,15 +76,15 @@ router.get('/', async (req, res, next) => {
       }
       if (req.cookies.get('cat') == undefined) {
         var result = await  productSchema.find({})
-        //console.log(result)
+      
         k = result.filter(x => x.category == x.category)
       }
       else { 
         var result = await  productSchema.find({})
-        //console.log(result)
+     
         k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
       }
-      return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users, inv : invis, cats: result1})
+      return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users,  cats: result1, unique: JSON.stringify(uniqueItems)})
   })
 }catch (err) {
   console.log(err)
@@ -109,12 +94,12 @@ router.get('/', async (req, res, next) => {
   else {
     if (req.cookies.get('cat') == undefined) {
       var result = await  productSchema.find({})
-      //console.log(result)
+    
       k = result.filter(x => x.category == x.category)
     }
     else  {
       var result = await  productSchema.find({})
-      //console.log(result)
+     
       k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) ) 
     }
     return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: '', cats: result1})
@@ -125,9 +110,8 @@ router.get('/', async (req, res, next) => {
 
 
 
-
 router.post('/', async (req, res, next) => {
-  //console.log( req.body)
+  
   let cookies = req.cookies.get('key')
   if (cookies) {
     
@@ -135,10 +119,10 @@ router.post('/', async (req, res, next) => {
     let discordUser = user
     var o = 0;
     if ( req.body.red == true) {
-      console.log('goin to red')
+     
 
-      itemSchema.countDocuments({userId: user.id, premium: true, id: req.body.id}, async (err, count) => {
-         console.log(count)
+      itemSchema.countDocuments({userId: user.id, premium: true, id: req.body.id, name: req.body.name}, async (err, count) => {
+     
          if (count > 0) {
           return res.redirect('/')
          }
@@ -153,8 +137,8 @@ router.post('/', async (req, res, next) => {
               }
           });
           let mailOptions = {
-              from: '"GoViper" <nithishbanda2021@gmail.com>',
-              to: ['nithishreddy.b20@iiits.in'], 
+              from: '"Marketplace" <nithishbanda2021@gmail.com>',
+              to: mailList, 
               subject: 'Purchase from Marketplace', 
               text: req.body.body, 
               html: `<b> ${discordUser.username}#${discordUser.discriminator} purchased ${req.body.name} worth of ${req.body.realCost} coins</b>`
