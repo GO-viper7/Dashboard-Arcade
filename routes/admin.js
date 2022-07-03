@@ -4,6 +4,7 @@ const rootDir = require('../util/path');
 const router = express.Router();
 const fs = require('fs');
 const productSchema = require('../schemas/product-schema');
+const categorySchema = require('../schemas/category-schema');
 const users = require('../users.json')
 const DiscordOauth2 = require("discord-oauth2");
 require("dotenv").config();
@@ -61,12 +62,22 @@ router.get('/add-product', async (req, res, next) => {
   
   if (cookies) {
     var result = await  productSchema.find({})
-    //console.log(result)
+    var result1 = await categorySchema.find({})
+    if (result1.length == 0) {
+      await new categorySchema({
+        categoryOne: 'cat1',
+        categoryTwo: 'cat2',
+        categoryThree: 'cat3',
+        flag: 1
+      }).save()
+    }
+    result1 = await categorySchema.find({})
+    
     let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
     users.forEach(x => {
       
       if (x.userId == user.id) {
-        return res.render('add-product', {prod: result});
+        return res.render('add-product', {prod: result, cats: result1});
       }
          
     })
@@ -116,6 +127,22 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
   })
   return 
  }
+ if ( req.body.catEdit == true ) {
+
+  await categorySchema.updateOne({categoryOne: req.body.oldCatOne}, {categoryOne: req.body.oneName})
+  await categorySchema.updateOne({categoryTwo: req.body.oldCatTwo}, {categoryTwo: req.body.twoName})
+  let res = await categorySchema.updateOne({categoryThree: req.body.oldCatThree}, {categoryThree: req.body.threeName})
+  console.log(res)
+
+  await productSchema.updateMany({category: req.body.oldCatOne}, {category : req.body.oneName })
+  await productSchema.updateMany({category: req.body.oldCatTwo}, {category : req.body.twoName })
+  res = await productSchema.updateMany({category: req.body.oldCatThree}, {category : req.body.threeName })
+  console.log(res)
+
+
+return 
+
+}
  console.log(req.file)
     if ( req.file == undefined) {
       return;
@@ -134,7 +161,8 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
       stock : Number(req.body.stock),
       name : req.body.name,
       category : req.body.cat,
-      url : req.file.filename
+      url : req.file.filename,
+      premium : req.body.premium!==undefined ? req.body.premium : false
     }).save()
   }); 
   return;

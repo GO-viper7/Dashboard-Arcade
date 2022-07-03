@@ -84,6 +84,9 @@
             <li class="nav-item">
               <a data-bs-toggle="modal"  data-bs-target="#exampleModal" class="nav-link active" aria-current="page" href="" style="font-size: 20px; color: white">Add Item</a>
             </li>
+            <li class="nav-item">
+              <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="nav-link active" aria-current="page" href="" style="font-size: 20px; color: white">Customize Categories</a>
+            </li>
             <!-- Button trigger modal -->
 
 <!-- Modal -->
@@ -93,6 +96,14 @@
         </div>
       </div>
     </nav>
+
+
+
+
+
+
+
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -125,22 +136,27 @@
             <div>
             <div class="form-check form-check-inline">
               
-              <input name="cat" id="categ1" class="form-check-input" type="radio" value="cat1" checked>
+              <input name="cat" id="categ1" class="form-check-input" type="radio" value="<%= cats[0].categoryOne %>" checked>
               
-              <label class="form-check-label" for="categ1">cat1</label>
+              <label class="form-check-label" for="categ1"><%= cats[0].categoryOne %></label>
             </div>
             <div class="form-check form-check-inline">
              
-                <input name="cat" id="categ2" class="form-check-input" type="radio"  value="cat2">
+                <input name="cat" id="categ2" class="form-check-input" type="radio"  value="<%= cats[0].categoryTwo %>">
                 
-              <label class="form-check-label" for="categ2">cat2</label>
+              <label class="form-check-label" for="categ2"><%= cats[0].categoryTwo %></label>
             </div>
             <div class="form-check form-check-inline">
            
-                <input name="cat" id="categ3" class="form-check-input"  type="radio"  value="cat3">
+                <input name="cat" id="categ3" class="form-check-input"  type="radio"  value="<%= cats[0].categoryThree %>">
                
-              <label class="form-check-label" for="categ3">cat3</label>
+              <label class="form-check-label" for="categ3"><%= cats[0].categoryThree %></label>
             </div>
+          </div>
+          <br>
+          <div class="form-check form-switch">
+            <input name="premium" class="form-check-input" value="true" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Make user to buy this item only once</label>
           </div>
           </form>
     
@@ -162,13 +178,19 @@
         <div class="container fluid">
           <div class="row fluid">
            <% var i =0 %>
+           
           <% prod.forEach(x => { i++; %>
             <div class="card p-0" style="width: 18rem;  margin: auto; margin-bottom: 25px;">
               
               <img src="../assets/<%= x.url %>" class="card-img-top" alt="..." style="height: 350px">
               <div class="card-body">
-                <h5 class="card-title" style="font-size: 25px"><%= x.name %></h5>
-             
+                <% if(x.premium == true) {  %>
+                  <i class="fa-solid fa-star" type="button" class="btn btn-secondary" data-bs-placement="top" title="Premium"></i><b class="card-title" style="font-size: 25px"><%= x.name %></b>
+              <%  } else {  %>
+                  <i class="fa-solid fa-circle" type="button" class="btn btn-secondary"  data-bs-placement="top" title="Usual"></i><b class="card-title" style="font-size: 25px"><%= x.name %></b>
+               <% } %>
+                
+                <br>
                 <bold><small style="font-size: 18px"><%= x.category %></small></bold>
                 <p class="card-text">
                   <div class="input-group input-group-sm mb-3">
@@ -208,7 +230,7 @@
                       ...
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" id="<%= i %>delt" data-bs-dismiss="modal">Yes</button>
+                      <button data-bs-dismiss="modal" type="button" class="btn btn-success" id="<%= i %>delt" >Yes</button>
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
                     </div>
                   </div>
@@ -242,28 +264,28 @@
                     <input id="<%= i %>sa" type="number" class="form-control" value="<%=k.stock%>" aria-label="Username" aria-describedby="basic-addon1" required>
                   </div>
                   <div class="form-check form-check-inline">
-                    <% if(k.category == 'cat1') { %>
-                    <input id="<%= i %>categ1" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat1" checked>
+                    <% if(k.category == cats[0].categoryOne) { %>
+                    <input id="<%= i %>categ1" class="form-check-input" type="radio" name="inlineRadioOptions"  value="<%= cats[0].categoryOne %>" checked>
                     <% } else { %>
-                      <input id="<%= i %>categ1" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat1">
+                      <input id="<%= i %>categ1" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="<%= cats[0].categoryOne %>">
                       <% } %>
-                    <label class="form-check-label" for="inlineRadio1">cat1</label>
+                    <label class="form-check-label" for="inlineRadio1"><%= cats[0].categoryOne %></label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <% if(k.category == 'cat2') { %>
-                      <input id="<%= i %>categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat2" checked>
+                    <% if(k.category == cats[0].categoryTwo) { %>
+                      <input id="<%= i %>categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="<%= cats[0].categoryTwo %>" checked>
                       <% } else { %>
-                        <input id="<%= i %>categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="cat2">
+                        <input id="<%= i %>categ2" class="form-check-input" type="radio" name="inlineRadioOptions"  value="<%= cats[0].categoryTwo %>">
                         <% } %>
-                    <label class="form-check-label" for="inlineRadio2">cat2</label>
+                    <label class="form-check-label" for="inlineRadio2"><%= cats[0].categoryTwo %></label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <% if(k.category == 'cat3') { %>
-                      <input id="<%= i %>categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat3" checked>
+                    <% if(k.category == cats[0].categoryThree) { %>
+                      <input id="<%= i %>categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="<%= cats[0].categoryThree %>" checked>
                       <% } else { %>
-                        <input id="<%= i %>categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="cat3">
+                        <input id="<%= i %>categ3" class="form-check-input"  type="radio" name="inlineRadioOptions"  value="<%= cats[0].categoryThree %>">
                         <% } %>
-                    <label class="form-check-label" for="inlineRadio3">cat3</label>
+                    <label class="form-check-label" for="inlineRadio3"><%= cats[0].categoryThree %></label>
                   </div>
                 </form>
                 </div>
@@ -275,6 +297,52 @@
             </div>
           </div>
           <% }) %>
+          
+   
+
+
+
+
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Customize Categories</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+         
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-angle-right"></i></span>
+              
+              <input  id="oneName"type="text"  class="form-control" value="<%= cats[0].categoryOne %>"  aria-label="Username" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-angle-right"></i></span>
+              <input  id="twoName"type="text" class="form-control" value="<%= cats[0].categoryTwo %>"  aria-label="Username" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-angle-right"></i></span>
+              <input  id="threeName"type="text"  class="form-control" value="<%= cats[0].categoryThree %>"  aria-label="Username" aria-describedby="basic-addon1" required>
+            </div>
+           
+          
+         
+    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button"  class="btn btn-primary" id="addCat"  >Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
 
 
             
@@ -378,6 +446,49 @@
     <script >
       const glob = Number(`<%- prod.length %>`)
       window.onload = () => {
+
+
+
+       document.getElementById('addCat').addEventListener ("click", () => {
+        const res =  fetch(`/admin/add-product`, {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+          },
+      
+          body: JSON.stringify({
+            "oneName"  : document.getElementById(`oneName`).value,
+            "twoName"  : document.getElementById(`twoName`).value,
+            "threeName"  : document.getElementById(`threeName`).value,
+            "catEdit" : true,
+            "oldCatOne" : `<%- cats[0].categoryOne %>`,
+            "oldCatTwo" : `<%- cats[0].categoryTwo %>`,
+            "oldCatThree" : `<%- cats[0].categoryThree %>`,
+          }),
+        }).then(res => {  
+            if (res.status !== 200) {
+                console.log("error")
+            } else {
+              console.log("FU")
+              res.json().then(data => {
+                console.log(data)
+              })
+            }
+          })
+          setTimeout(() => {
+            window.location.href='/admin/add-product'
+          }, 1000)
+       })
+       
+        
+    
+
+
+
+
+
+
         console.log('fkng hell twice')
         document.getElementById('open').addEventListener('click', () => {
           window.location.href = '/admin/add-product'
@@ -444,6 +555,7 @@
       
             var qw = document.getElementById(`${p}delt`)
             qw.addEventListener('click', () => {
+            console.log('went for deleting')
             const res =  fetch(`/admin/add-product`, {
                 method: "POST",
                 headers: {

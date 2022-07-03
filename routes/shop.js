@@ -8,7 +8,7 @@ const router = express.Router();
 const users = require('../users.json')
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
-
+const categorySchema = require('../schemas/category-schema');
 const crypto = require('crypto')
 const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
@@ -47,7 +47,15 @@ const { UserCollection } = require('disco-oauth/lib/types');
 
 
 router.get('/', async (req, res, next) => {
-
+  var result1 = await categorySchema.find({})
+  if (result1.length == 0) {
+    await new categorySchema({
+      categoryOne: 'cat1',
+      categoryTwo: 'cat2',
+      categoryThree: 'cat3',
+      flag: 1
+    }).save()
+  }
   if (req.cookies.get('first') == undefined) {
     
     res.cookie("cat", `cat`, {httpOnly: false, overwrite: true})
@@ -88,7 +96,7 @@ router.get('/', async (req, res, next) => {
         //console.log(result)
         k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
       }
-      return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users, inv : invis})
+      return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users, inv : invis, cats: result1})
   })
   
   }
@@ -103,7 +111,7 @@ router.get('/', async (req, res, next) => {
       //console.log(result)
       k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) ) 
     }
-    return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: ''})
+    return res.render('shop', {prod: k,  url: url, user: '', coins: '', bool: '', inv: '', cats: result1})
   }
 
 });
@@ -113,7 +121,7 @@ router.get('/', async (req, res, next) => {
 
 
 router.post('/', async (req, res, next) => {
- // console.log( req.body)
+  //console.log( req.body)
   let cookies = req.cookies.get('key')
   if (cookies) {
     
@@ -123,57 +131,64 @@ router.post('/', async (req, res, next) => {
     if ( req.body.red == true) {
       console.log('goin to red')
 
+      itemSchema.countDocuments({userId: user.id, premium: true, id: req.body.id}, async (err, count) => {
+         console.log(count)
+         if (count > 0) {
+          return res.redirect('/')
+         }
+         else {
+            let transporter = nodeMailer.createTransport({
+              host: 'smtp.gmail.com',
+              port: 465,
+              secure: true,
+              auth: {
+                  user: 'nithishbanda2021@gmail.com',
+                  pass: 'uivrkjacwnpzvoop'
+              }
+          });
+          let mailOptions = {
+              from: '"GoViper" <nithishbanda2021@gmail.com>',
+              to: ['nithishreddy.b20@iiits.in'], 
+              subject: 'Purchase from Marketplace', 
+              text: req.body.body, 
+              html: `<b> ${discordUser.username}#${discordUser.discriminator} purchased ${req.body.name} worth of ${req.body.realCost} coins</b>`
+          };
+
+          transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                  return console.log(error);
+              }
+              console.log('Message %s sent: %s', info.messageId, info.response);
+          });
 
 
-      let transporter = nodeMailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: 'nithishbanda2021@gmail.com',
-            pass: 'uivrkjacwnpzvoop'
+
+          profileSchema.findOneAndUpdate({userId: user.id}, {OctaCreds : req.body.cost}, null, async (err, data) => {
+            if (err) {
+              console.log(err)
+            }
+            else {
+              //console.log(data)
+            }
+          })
+          productSchema.findOneAndUpdate({id: req.body.id}, {stock : req.body.stock-1}, null, async (err, data) => {
+            if (err) {
+              console.log(err)
+            }
+            else {
+              //console.log(data)
+            }
+          })
+          await new itemSchema({
+              id: req.body.id,
+              userId: user.id,
+              name: req.body.name,
+              url: req.body.url, 
+              category: req.body.category,
+              premium: req.body.premium!==undefined ? req.body.premium : false
+          }).save()
         }
-    });
-    let mailOptions = {
-        from: '"GoViper" <nithishbanda2021@gmail.com>',
-        to: ['nithishreddy.b20@iiits.in'], 
-        subject: 'Purchase from Marketplace', 
-        text: req.body.body, 
-        html: `<b> ${discordUser.username}#${discordUser.discriminator} purchased ${req.body.name} worth of ${req.body.realCost} coins</b>`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message %s sent: %s', info.messageId, info.response);
-    });
-
-
-
-    profileSchema.findOneAndUpdate({userId: user.id}, {OctaCreds : req.body.cost}, null, async (err, data) => {
-      if (err) {
-        console.log(err)
-      }
-      else {
-        console.log(data)
-      }
-    })
-    productSchema.findOneAndUpdate({id: req.body.id}, {stock : req.body.stock-1}, null, async (err, data) => {
-      if (err) {
-        console.log(err)
-      }
-      else {
-        console.log(data)
-      }
-    })
-    await new itemSchema({
-        id: req.body.id,
-        userId: user.id,
-        name: req.body.name,
-        url: req.body.url, 
-        category: req.body.category
-    }).save()
+  })
   }
 }
 });

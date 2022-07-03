@@ -7,6 +7,9 @@ const itemSchema = mongoose.Schema({
     userId: {
         type: String,
     },
+    id : {
+        type: Number,
+    },
     name: {
         type: String,
     },
@@ -18,6 +21,9 @@ const itemSchema = mongoose.Schema({
     },
     description : {
         type: String,
+    },
+    premium : {
+        type: Boolean,
     }
 })
 

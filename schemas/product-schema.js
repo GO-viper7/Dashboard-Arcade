@@ -21,6 +21,9 @@ const productSchema = mongoose.Schema({
     },
     description : {
         type: String,
+    },
+    premium : {
+        type: Boolean,
     }
 })
 

@@ -115,9 +115,9 @@
           <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
           <div class="lappyhid">
           <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
-          <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> CategoryOne</div>
-          <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> CategoryTwo</div>
-          <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> CategoryThree</div>
+          <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
+          <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
+          <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
         </div>
        
           
@@ -134,9 +134,9 @@
                               </div>
                               <div class="modal-body">
                                 <div id="mcat" ><i class="fa-solid fa-angle-right"></i> All</div>
-                                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> CategoryOne</div>
-                                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> CategoryTwo</div>
-                                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> CategoryThree</div>
+                                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
+                                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
+                                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -165,11 +165,18 @@
             <div data-bs-toggle="modal" onclick="window.location=`<%= url %>`" data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top: 20px solid #fff; border-bottom: 45px solid transparent;" id="ex">
               <%  } else { %>
                 <div data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top-width: 500px    ;border-top: 20px solid #fff; border-bottom: 45px solid transparent; " id="ex">
+                
+                  
                   <%  }  %>  
               <img src="assets/<%= x.url %>" id="<%= i %>im" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
               <div class="cardy">
               <div  style="text-align: center">
-                <h class="card-title" style="font-size: 25px; " id="<%= i %>nt"><%= x.name %></h>
+                <% if (x.premium == true) { %>
+                  <i class="fa-solid fa-star" data-bs-placement="top" id="<%= i %>prem" title="Premium"></i></i>
+                  <%  }  else { %>  
+                    <i class="fa-solid fa-circle" data-bs-placement="top" id="<%= i %>prem" title="Usual"></i></i>
+                    <%  }  %>  
+                    <h class="card-title" style="font-size: 25px; " id="<%= i %>nt"><%= x.name %></h>
              
                 <div class="card-text" style="align-items: center">
                   <div class="cos" style="font-size: 25px; " >
@@ -296,15 +303,15 @@
      
       document.getElementById(`cat1`).addEventListener('click', () => {
         console.log('clicked1')
-           document.cookie = "cat=cat1"
+           document.cookie = "cat=<%- cats[0].categoryOne %>"
            window.location.href = '/'
       })
       document.getElementById(`cat2`).addEventListener('click', () => {
-          document.cookie = "cat=cat2"
+          document.cookie = "cat=<%- cats[0].categoryTwo %>"
           window.location.href = '/'
      })
      document.getElementById(`cat3`).addEventListener('click', () => {
-          document.cookie = "cat=cat3"
+          document.cookie = "cat=<%- cats[0].categoryThree %>"
           window.location.href = '/'
      })
 
@@ -321,15 +328,15 @@
      
       document.getElementById(`mcat1`).addEventListener('click', () => {
         console.log('clicked1')
-           document.cookie = "cat=cat1"
+           document.cookie = "cat=<%- cats[0].categoryOne %>"
            window.location.href = '/'
       })
       document.getElementById(`mcat2`).addEventListener('click', () => {
-          document.cookie = "cat=cat2"
+          document.cookie = "cat=<%- cats[0].categoryTwo %>"
           window.location.href = '/'
      })
      document.getElementById(`mcat3`).addEventListener('click', () => {
-          document.cookie = "cat=cat3"
+          document.cookie = "cat=<%- cats[0].categoryThree %>"
           window.location.href = '/'
      })
 
@@ -358,6 +365,7 @@
        //console.log(n)
        var t = p
        var q = Number(document.getElementById(`${p}ct`).innerText)
+       var pre = document.getElementById(`${p}prem`).title
        var des = Number(document.getElementById(`${p}desc`).innerText)
        var r = Number(document.getElementById(`${p}st`).innerText)
        var cat = document.getElementById(`${p}categ`).innerText
@@ -389,7 +397,8 @@
               "stock" : r,
               "arr" : ary,
               "category" : cat,
-              "url" : ur
+              "url" : ur,
+              "premium" : pre == 'Premium' ? true : false 
             }),
           }).then(res => {  
               if (res.status !== 200) {
