@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
       let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
       itemSchema.find({userId: user.id, premium: true}, (err, data) => {
         data.forEach(g => {
-            uniqueItems.push({id: g.id, name: g.name})
+            uniqueItems.push({name: g.name, category: g.category})
         })
       })
       var o = 0;
@@ -80,6 +80,7 @@ router.get('/', async (req, res, next) => {
         
             k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
           }
+          //console.log(uniqueItems)
           return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users,  cats: result1, unique: JSON.stringify(uniqueItems)})
       })
     }catch (err) {
@@ -106,13 +107,14 @@ router.get('/', async (req, res, next) => {
 
 
 router.post('/', async (req, res, next) => {
+  //console.log(req.body)
   let cookies = req.cookies.get('key')
   if (cookies) {
     let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
     let discordUser = user
     var o = 0;
     if ( req.body.red == true) {
-      itemSchema.countDocuments({userId: user.id, premium: true, id: req.body.id, name: req.body.name}, async (err, count) => {
+      itemSchema.countDocuments({userId: user.id, premium: true, category: req.body.category, name: req.body.name}, async (err, count) => {
          if (count > 0) {
           return res.redirect('/')
          }

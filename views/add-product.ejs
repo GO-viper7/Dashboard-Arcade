@@ -115,7 +115,14 @@
         </div>
       </div>
     </nav>
-
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="uni">
+      Category names must be unique
+      <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="uniItems">
+      Item with same name & category already exists
+      <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
+    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -174,7 +181,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" form="forming" class="btn btn-primary" id="add"  >Save changes</button>
+            <button type="submit" form="forming" class="btn btn-primary" id="add" data-bs-dismiss="modal" >Add Item</button>
           </div>
         </div>
       </div>
@@ -325,7 +332,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button"  class="btn btn-primary" id="addCat"  >Save changes</button>
+            <button type="button"  class="btn btn-primary" id="addCat" data-bs-dismiss="modal" >Save changes</button>
           </div>
         </div>
       </div>
@@ -399,9 +406,39 @@
     <script src="https://kit.fontawesome.com/c5d7c8bb5c.js" crossorigin="anonymous"></script>
     <script >
       const glob = Number(`<%- prod.length %>`)
+      let products = JSON.parse(`<%- products %>`)
       window.onload = () => {
+       document.getElementById('add').addEventListener("click", () => {
+          var finale
+            
+          if ( document.getElementById(`categ1`).checked == true ) {
+            finale = document.getElementById(`categ1`).value
+          }
+          if ( document.getElementById(`categ2`).checked == true ) {
+            finale = document.getElementById(`categ2`).value
+          }
+          if ( document.getElementById(`categ3`).checked == true ) {
+            finale = document.getElementById(`categ3`).value
+          }
+          products.forEach(product => {
+             if (product.name == document.getElementById('nt').value && product.category == finale) {
+                 console.log('duplicate found in front end')
+                  document.getElementById('uniItems').style.display="block";
+                  setTimeout(() => {
+                    window.location.href='/admin/add-product'
+                  }, 1000)
+              }
+          })
+       })
        document.getElementById('addCat').addEventListener ("click", () => {
-        const res =  fetch(`/admin/add-product`, {
+        if (document.getElementById(`oneName`).value == document.getElementById(`twoName`).value || document.getElementById(`twoName`).value == document.getElementById(`threeName`).value || document.getElementById(`oneName`).value == document.getElementById(`threeName`).value) {
+            document.getElementById('uni').style.display="block";
+            setTimeout(() => {
+              window.location.href='/admin/add-product'
+            }, 1000)
+        }
+        else {
+         const res =  fetch(`/admin/add-product`, {
           method: "POST",
           headers: {
             'Accept': 'application/json',
@@ -429,6 +466,7 @@
           setTimeout(() => {
             window.location.href='/admin/add-product'
           }, 1000)
+        }
        })
         document.getElementById('open').addEventListener('click', () => {
           window.location.href = '/admin/add-product'

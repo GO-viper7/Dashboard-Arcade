@@ -67,7 +67,7 @@ router.get('/add-product', async (req, res, next) => {
     let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
     users.forEach(x => {
       if (x.userId == user.id) {
-        return res.render('add-product', {prod: result, cats: result1});
+        return res.render('add-product', {prod: result, cats: result1, products: JSON.stringify(result)});
       } 
     })
   }
@@ -130,22 +130,29 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
   if ( req.file == undefined) {
     return;
   }
-  productSchema.countDocuments({}, async function (err, count){ 
+  productSchema.countDocuments({}, async function (err, cnt){ 
   if (err) {
     console.log(err)
   }
   var k ;
-  if (req.body.cat)
-  await new productSchema({
-    id : Number(count)+1,
-    description : req.body.desc,
-    cost : Number(req.body.cost),
-    stock : Number(req.body.stock),
-    name : req.body.name,
-    category : req.body.cat,
-    url : req.file.filename,
-    premium : req.body.premium!==undefined ? req.body.premium : false
-    }).save()
+
+  productSchema.countDocuments({name: req.body.name, category: req.body.cat}, async (err, count) => {
+     if (count == 0) {
+      await new productSchema({
+        id : Number(cnt)+1,
+        description : req.body.desc,
+        cost : Number(req.body.cost),
+        stock : Number(req.body.stock),
+        name : req.body.name,
+        category : req.body.cat,
+        url : req.file.filename,
+        premium : req.body.premium!==undefined ? req.body.premium : false
+        }).save()
+     }
+     else {
+      //console.log('duplicate item detected')
+     }
+   })
   }); 
   return;
 });
