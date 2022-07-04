@@ -66,6 +66,8 @@ body, html {
   border-right: 5px solid white;
   font-family: 'Audiowide', cursive;
 }
+
+
 .cardy:hover {
   color: #e5f5f5;
 }
@@ -326,6 +328,7 @@ body, html {
   margin-left: 15px; 
   margin-top: 5px
 }
+
 
 
 @media only screen and (max-width: 850px) {

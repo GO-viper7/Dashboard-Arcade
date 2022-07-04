@@ -106,7 +106,8 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
     cost : Number(req.body.cost),
     stock : Number(req.body.stock),
     name : req.body.name,
-    category : req.body.category
+    category : req.body.category,
+    description : req.body.description
     }, null, async (err, data) => {
     if (err) {
       console.log(err)

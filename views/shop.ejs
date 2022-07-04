@@ -171,7 +171,7 @@
                   <%  }  else { %>  
                     <i class="fa-solid fa-circle" data-bs-placement="top" id="<%= i %>prem" title="Usual"></i></i>
                     <%  }  %>  
-                    <h class="card-title" style="font-size: 25px; " id="<%= i %>nt"><%= x.name %></h>
+                    <h class="card-title" style="font-size: 25px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="<%= i %>nt"><%= x.name %></h>
              
                 <div class="card-text" style="align-items: center">
                   <div class="cos" style="font-size: 25px; " >
@@ -242,17 +242,18 @@
               <div class="modal-header">
                 <h1 class="modal-title" id="exampleModalLabel<%= i %>" >
                   <%= k.name %>
-                  
-                  
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body" style="font-size: 17px">
+              <div class="modal-body" >
                
-                <h5 id="<%= i %>desc" style="overflow-wrap: break-word;"> <%= k.description %> </h5> 
-                Item: <%= k.name %> <br>
-                Cost: <%= k.cost %> coins <br> 
-                Are you sure you want to buy? <br>
+                <p id="<%= i %>desc" style="cursor: pointer;word-wrap: break-word; text-overflow: ellipsis; overflow: hidden;"data-bs-placement="top" title="<%= k.description %> "> <%= k.description %> </p>
+                <p>
+                  Item: <%= k.name %> <br>
+                  Cost: <%= k.cost %> coins <br> 
+                  Are you sure you want to buy? <br>
+                </p>
+               
                  
                 
               </div>
