@@ -14,7 +14,24 @@
   <body >
     <div class="bg-image"></div>
     <div class="cnt">
+      <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none; height: 70px; padding-top: 10px; margin-bottom: 0px" id="suc">
+        Payment Success
+        <button style="padding-top: 44px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
+      </div>
+      <div class="alert alert-dark alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 70px; padding-top: 10px; margin-bottom: 0px" id="stc">
+        Out of Stock!
+        <button style="padding-top: 44px; display: none"  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open2"></button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 70px; padding-top: 10px; margin-bottom: 0px" id="dan">
+        Not Enough Coins!
+        <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 25px; display: none;height: 70px; padding-top: 10px; margin-bottom: 0px " id="premi">
+        Bulk purchase is disabled 
+        <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
+      </div>
     <div id="fi">
+      
     <nav class="navbar navbar-expand-lg "  >
       <div class="container-fluid">
         <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
@@ -62,27 +79,12 @@
         </div>
       </div>
     </nav>
-  
+  </div>
   <% if (user == '') { %>
     <div class="lappyhid" style="height: 100px"></div>
     <%  }  %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none; height: 110px;  padding-top: 30px" id="suc">
-    Payment Success, Coins have been debited!
-    <button style="padding-top: 44px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open"></button>
-  </div>
-  <div class="alert alert-dark alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px" id="stc">
-    Out of Stock!
-    <button style="padding-top: 44px; display: none"  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open2"></button>
-  </div>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="dan">
-    Not Enough Coins!
-    <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
-  </div>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="premi">
-    Bulk purchase is disabled for this item
-    <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
-  </div>
-</div>
+    
+
   <div class="mobhid"><br><br></div>
 
   <% if (user != '') { %>

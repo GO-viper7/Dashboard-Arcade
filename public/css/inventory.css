@@ -338,7 +338,19 @@ transform: translate(0, -8px);
   overflow-x: hidden;
 }
 
+.imgur {
+  height: 90px; 
+  margin-left: 15px; 
+  margin-top: 5px
+}
+
 @media only screen and (max-width: 1250px) {
+
+    .imgur {
+      height: 60px; 
+      margin-left: 15px; 
+      margin-top: 5px
+    }
   
     .bg-text {
       font-size: 30px;
@@ -469,6 +481,8 @@ transform: translate(0, -8px);
 
     #inv {
       margin-left: 10px; 
+      margin-top: 50px; 
+      height: 700px; 
     }
 }
 
