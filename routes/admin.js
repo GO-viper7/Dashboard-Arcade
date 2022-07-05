@@ -105,9 +105,9 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
     productSchema.findOneAndUpdate({id: req.body.id}, {
     cost : Number(req.body.cost),
     stock : Number(req.body.stock),
-    name : req.body.name,
-    category : req.body.category,
-    description : req.body.description
+    name : req.body.name.trim(),
+    category : req.body.category.trim(),
+    description : req.body.description.trim()
     }, null, async (err, data) => {
     if (err) {
       console.log(err)
@@ -119,12 +119,12 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
    return 
   }
   if ( req.body.catEdit == true ) {
-    await categorySchema.updateOne({categoryOne: req.body.oldCatOne}, {categoryOne: req.body.oneName})
-    await categorySchema.updateOne({categoryTwo: req.body.oldCatTwo}, {categoryTwo: req.body.twoName})
-    let res = await categorySchema.updateOne({categoryThree: req.body.oldCatThree}, {categoryThree: req.body.threeName})
-    await productSchema.updateMany({category: req.body.oldCatOne}, {category : req.body.oneName })
-    await productSchema.updateMany({category: req.body.oldCatTwo}, {category : req.body.twoName })
-    res = await productSchema.updateMany({category: req.body.oldCatThree}, {category : req.body.threeName })
+    await categorySchema.updateOne({categoryOne: req.body.oldCatOne}, {categoryOne: req.body.oneName.trim()})
+    await categorySchema.updateOne({categoryTwo: req.body.oldCatTwo}, {categoryTwo: req.body.twoName.trim()})
+    let res = await categorySchema.updateOne({categoryThree: req.body.oldCatThree}, {categoryThree: req.body.threeName.trim()})
+    await productSchema.updateMany({category: req.body.oldCatOne}, {category : req.body.oneName.trim() })
+    await productSchema.updateMany({category: req.body.oldCatTwo}, {category : req.body.twoName.trim() })
+    res = await productSchema.updateMany({category: req.body.oldCatThree}, {category : req.body.threeName.trim() })
     return 
   }
 
@@ -141,11 +141,11 @@ router.post('/add-product', upload.single('file'),  async (req, res, next) => {
      if (count == 0) {
       await new productSchema({
         id : Number(cnt)+1,
-        description : req.body.desc,
+        description : req.body.desc.trim(),
         cost : Number(req.body.cost),
         stock : Number(req.body.stock),
-        name : req.body.name,
-        category : req.body.cat,
+        name : req.body.name.trim(),
+        category : req.body.cat.trim(),
         url : req.file.filename,
         premium : req.body.premium!==undefined ? req.body.premium : false
         }).save()

@@ -77,10 +77,9 @@ router.get('/', async (req, res, next) => {
           }
           else { 
             var result = await  productSchema.find({})
-        
+             console.log(req.cookies.get('cat'))
             k = result.filter(x => x.category == (`${req.cookies.get('cat')}` == 'cat' ? x.category : `${req.cookies.get('cat')}`) )
           }
-          //console.log(uniqueItems)
           return res.render('shop', {prod: k, user: user.username, id : user.id, url: url, coins: o, bool: '', ids: users,  cats: result1, unique: JSON.stringify(uniqueItems)})
       })
     }catch (err) {
@@ -160,9 +159,9 @@ router.post('/', async (req, res, next) => {
           await new itemSchema({
               id: req.body.id,
               userId: user.id,
-              name: req.body.name,
+              name: req.body.name.trim(),
               url: req.body.url, 
-              category: req.body.category,
+              category: req.body.category.trim(),
               premium: req.body.premium!==undefined ? req.body.premium : false
           }).save()
         }
