@@ -1,10 +1,6 @@
-const path = require('path');
 const express = require('express');
-const rootDir = require('../util/path');
 const router = express.Router();
-const crypto = require('crypto')
 const DiscordOauth2 = require("discord-oauth2");
-const Cookies = require('cookies');
 const oauth = new DiscordOauth2();
 require("dotenv").config();
 const jwt = require('jsonwebtoken')
@@ -27,7 +23,7 @@ router.get('/discord', async  (req, res) => {
     })
      res.cookies.set("key", jwt.sign(data.access_token, process.env.jwtSecret))
      setTimeout(() => {
-      res.redirect('/')
+      res.redirect('/signin')
      }, 1000)
    }
 })

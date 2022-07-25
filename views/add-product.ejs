@@ -112,15 +112,18 @@
             <li class="nav-item">
               <a data-bs-toggle="modal" id="onlylap1" data-bs-target="#staticBackdrop" class="nav-link active" aria-current="page" href="" style="font-size: 20px;">Customize Categories</a>
             </li>
+            <li class="nav-item">
+              <a  id="onlylap1" class="nav-link active" aria-current="page" href="/admin/add-product/orders" style="font-size: 20px;">Customize Orders</a>
+            </li>
           </ul>
         </div>
-      </div>
+      </div> 
     </nav>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="uni">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 25px; display: none;padding-top: 26px; " id="uni">
       Category names must be unique
       <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
     </div>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 30px; display: none;height: 110px; padding-top: 30px; " id="uniItems">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 25px; display: none; padding-top: 26px; " id="uniItems">
       Item with same name & category already exists
       <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
     </div>
@@ -410,7 +413,7 @@
       let products = JSON.parse(`<%- products %>`)
       window.onload = () => {
        document.getElementById('add').addEventListener("click", () => {
-          var finale
+          let finale
             
           if ( document.getElementById(`categ1`).checked == true ) {
             finale = document.getElementById(`categ1`).value
@@ -421,6 +424,7 @@
           if ( document.getElementById(`categ3`).checked == true ) {
             finale = document.getElementById(`categ3`).value
           }
+          console.log(finale, document.getElementById('nt').value)
           products.forEach(product => {
              if (product.name == document.getElementById('nt').value && product.category == finale) {
                  console.log('duplicate found in front end')
@@ -488,7 +492,7 @@
           var w = document.getElementById(`${p}yt`)
           w.addEventListener('click', () => {
      
-            var final
+            let final, flag = 0
           
             if ( document.getElementById(`${p}categ1`).checked == true ) {
               final = document.getElementById(`${p}categ1`).value
@@ -499,7 +503,17 @@
             if ( document.getElementById(`${p}categ3`).checked == true ) {
               final = document.getElementById(`${p}categ3`).value
             }
-          
+          products.forEach(product => {
+             if (product.name == document.getElementById(`${p}nt`).value && product.category == final && product.id != p) {
+                 console.log('duplicate found in front end')
+                  document.getElementById('uniItems').style.display="block";
+                  setTimeout(() => {
+                    window.location.href='/admin/add-product'
+                  }, 1000)
+                  flag = 1
+              }
+          })
+          if (flag == 0) {
             const res =  fetch(`/admin/add-product`, {
                 method: "POST",
                 headers: {
@@ -520,7 +534,6 @@
                   if (res.status !== 200) {
                       console.log("error")
                   } else {
-              
                     res.json().then(data => {
                       console.log(data)
                     })
@@ -529,7 +542,7 @@
                 setTimeout(() => {
                   window.location.href='/admin/add-product'
                 }, 1000)
-              
+              }
             })
       
             var qw = document.getElementById(`${p}delt`)

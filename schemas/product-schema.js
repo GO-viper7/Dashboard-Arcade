@@ -24,6 +24,7 @@ const productSchema = mongoose.Schema({
     },
     premium : {
         type: Boolean,
+        default: false
     }
 })
 

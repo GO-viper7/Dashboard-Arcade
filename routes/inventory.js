@@ -12,21 +12,44 @@ const oauth = new DiscordOauth2({
 	clientSecret: process.env.clientSecret,
 	redirectUri: `${process.env.websiteURL}/discord`,
 });
-
+const categorySchema = require('../schemas/category-schema');
 
 router.get('/inventory', async (req, res, next) => {
+  let p
+  let cookies = req.cookies.get('key')
+  let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
+  var result = await  itemSchema.find({userId: user.id})
+  let fill = req.cookies.get('fill')
+  if (result.length == 0) {
+  return res.render('inventory', {filled: "false", prod: [], bool: false, user: '', cats: await categorySchema.find({})});
+  }
+  if (req.cookies.get('inv-cat') == undefined) {
+    k = result.filter(x => x.category == x.category)
+    p = k.filter(q => q.order == (`${req.cookies.get('fill')}` == 'false' ? false : true))
+  }
+  else  {
+    k = result.filter(x => x.category == (`${req.cookies.get('inv-cat')}` == 'cat' ? x.category : `${req.cookies.get('inv-cat')}`) )
+    p = k.filter(q => q.order == (`${req.cookies.get('fill')}` === 'false' ? false : true))
+  }
+  res.render('inventory', {filled: fill,prod: p, bool: true, user: user, cats: await categorySchema.find({})});
+});
+
+router.get('/admin/add-product/orders', async (req, res, next) => {
   let l
   let cookies = req.cookies.get('key')
   let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
-  var result = await  itemSchema.find({})
-  l = result.filter(x => x.userId == user.id )
-  if (l.length == 0) {
-  return res.render('inventory', {bool: false});
-  }
-  res.render('inventory', {prod: l, bool: true});
-});
+  let result = await itemSchema.find({})
+  res.render('orders', {prod: result, bool: true, user: user});
+})
 
 
-
+router.post('/admin/add-product/orders', async (req, res, next) => {
+  itemSchema.findOneAndUpdate({orderId: req.body.orderId}, {$set: {order: req.body.fill == "filled" ? true : false}}, function(err, doc) {
+    if(err) {
+      console.log(err.message)
+    }
+    res.redirect('/admin/add-product/orders')
+  })
+})
 
 module.exports = router;

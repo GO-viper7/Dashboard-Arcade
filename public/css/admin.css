@@ -1,53 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-    body{
-       width:100%; 
-       overflow-x: hidden;
-       font-family:  serif;
-       font-weight: 800;
-       font-family: 'Audiowide', cursive;
-       
-      }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      /* Track */
-      ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px grey; 
-        border-radius: 7px;
-      }
-      
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: #808080; 
-        border-radius: 10px;
-      }
-      .bg-image {
-        position: fixed;
-        left: 0;
-        right: 0;
-        z-index: 1;
-        background-size: cover;
-        background-image: url('https://cdn.discordapp.com/attachments/923590359496421406/984532182980784219/unknown.png');
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%;
-        
-        
-      }
-      .cnt {
-        position: fixed;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-      
-      }
+body{
+    width:100%; 
+    overflow-x: hidden;
+    font-family:  serif;
+    font-weight: 800;
+    font-family: 'Audiowide', cursive;
     
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 
-      #big {
-        
-       
-        overflow-y: scroll;
-        height: 800px;
-      
-      }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 7px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #808080; 
+    border-radius: 10px;
+  }
+  .bg-image {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-size: cover;
+    background-image: url('https://cdn.discordapp.com/attachments/923590359496421406/984532182980784219/unknown.png');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    
+    
+  }
+  .cnt {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+  
+  }
+  #onlylap1 {
+    font-size: 20px;
+    border-color:#fff;
+    transition: 0.3s ease; 
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-style: solid;  
+    border-radius: 10px; 
+    background-color: transparent;
+    cursor: pointer; 
+    color: white; 
+    padding: auto;
+    transition: 0.3s all ease;
+    
+  }
+
+  #onlylap1:hover {
+    border-color:#101419;
+    background-color: #fff;
+    color: #101419;
+  }
+
+
+  #big {
+    overflow-y: scroll;
+    height: 800px;
+  }
+    
+@media only screen and (max-width: 850px) {
+
+  #onlylap1 {
+    background-color: transparent;
+    border-style: none;
+    margin: auto;
+    padding: auto;
+  }
+  #onlylap1:hover {
+    color: #fff;
+    background-color: transparent
+  }
+}

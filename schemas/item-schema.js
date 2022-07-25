@@ -7,10 +7,16 @@ const itemSchema = mongoose.Schema({
     userId: {
         type: String,
     },
+    orderId: {
+        type: String,
+    },
     id : {
         type: Number,
     },
-    name: {
+    userName: {
+        type: String,
+    },
+    itemName: {
         type: String,
     },
     url: {
@@ -19,12 +25,43 @@ const itemSchema = mongoose.Schema({
     category : {
         type: String,
     },
+    cost : {
+        type: Number,
+    },
     description : {
         type: String,
     },
     premium : {
         type: Boolean,
-    }
+        default: false
+    },
+    order: {
+        type: Boolean,
+    },
+    wallet: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    country: {
+        type: String
+    },
+    zipCode: {
+        type: String
+    },
+    houseNumber: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    streetName: {
+        type: String
+    },
 })
 
 module.exports = mongoose.model('items', itemSchema)

@@ -212,112 +212,45 @@ body, html {
 .laphid {
   display: none;
 }
+
+#only {
+  display: flex;
+  max-width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 #onlylap {
   font-size: 37px;
   transition: 0.3s ease; 
-  width: 200px;  
   border-radius: 10px; 
   background-color: transparent;
   cursor: pointer; 
   color: white; 
-  padding: auto; 
-  padding-left: 21px; 
-  margin: auto; 
-  margin-right: 360px; 
-  margin-top: 3px; 
-  margin-bottom: 0px;
 }
 
 #onlylap1 {
   font-size: 20px;
   border-color:#fff;
   transition: 0.3s ease; 
-  width: 104px; 
+  margin: 20px 20px 20px 0px;
   border-style: solid;  
   border-radius: 10px; 
   background-color: transparent;
   cursor: pointer; 
   color: white; 
   padding: auto;
-  padding-left: 17px;
-  margin: auto; 
-  margin-right: 40px; 
-  margin-top: 10px
+  transition: 0.3s ease;
 }
 
 
-#onlylap2 {
-  font-size: 20px;
-  border-color:#fff;
-  transition: 0.3s ease; 
-  width: 120px; 
-  border-style: solid;  
-  border-radius: 10px; 
-  background-color: transparent;
-  cursor: pointer; 
-  color: white; 
-  padding: auto; 
-  padding-left: 17px;
-  margin: auto; 
-  margin-right: 40px; 
-  margin-top: 10px
-}
-
-#onlylap3 {
-  font-size: 20px;
-  border-color:#fff;
-  transition: 0.3s ease; 
-  width: 120px; 
-  border-style: solid;  
-  border-radius: 10px; 
-  background-color: transparent;
-  cursor: pointer; 
-  color: white; 
-  padding: auto; 
-  padding-left: 14px;
-  margin: auto; 
-  margin-right: 40px; 
-  margin-top: 10px
-}
-
-#onlylap4 {
-  font-size: 20px;
-  border-color:#fff;
-  transition: 0.3s ease; 
-  width: 140px; 
-  border-style: solid;  
-  border-radius: 10px; 
-  background-color: transparent;
-  cursor: pointer; 
-  color: white; 
-  padding: auto; 
-  margin: auto;
-  padding-left: 14px; 
-  margin-right: 40px; 
-  margin-top: 10px
-} 
-#onlylap5 {
-  font-size: 20px;
-  border-color:#fff;
-  transition: 0.3s ease; 
-  width: 100px; 
-  border-style: solid;  
-  border-radius: 10px; 
-  background-color: transparent;
-  cursor: pointer; 
-  color: white; 
-  padding: auto; 
-  margin: auto;
-  padding-left: 17px; 
-  margin-right: 40px; 
-  margin-top: 10px
-}
 
 .lappyhid {
   display: block;
 }
 
-#onlylap1:hover ,#onlylap2:hover ,#onlylap3:hover ,#onlylap4:hover ,#onlylap5:hover  {
+#onlylap1:hover  {
   border-color:#101419;
   background-color: #fff;
   color: #101419;
@@ -329,11 +262,30 @@ body, html {
   margin-top: 5px
 }
 
+.smobhid {
+  display: none;
+}
 
 
-@media only screen and (max-width: 850px) {
+
+@media only screen and (max-width: 1210px) {
+   .smobhid {
+     display: none;
+   }
+    #only {
+      max-width: 100%;
+    }
+    #onlylap{
+      align-self: flex-start;
+      font-size: 27px;
+      background-color: transparent;
+      border-style: none;
+      text-align : center;
+      
+    }
 
     .imgur {
+      align-self: flex-start;
       height: 60px; 
       margin-left: 15px; 
       margin-top: 5px
@@ -350,11 +302,11 @@ body, html {
     }
 
 
-    #onlylap1,#onlylap2,#onlylap3,#onlylap4,#onlylap5 {
+    #onlylap1 {
       background-color: transparent;
       border-style: none;
-      margin-left: 0px;
-      padding: auto;
+      text-align : center;
+      margin: 10px 4px 4px 11px;
     }
 
     .disc1, .disc2 {
@@ -411,12 +363,11 @@ body, html {
     #gobottom {
       margin-bottom: none
     }
-
-    #onlylap {
-      font-size: 27px;
-      background-color: transparent;
-      border-style: none;
-      text-align : center
-    }
 }
 
+
+@media only screen and (max-width: 600px) {
+   #onlylap {
+    display: none;
+   }
+}

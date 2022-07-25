@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
 
-const reqString = {
-    type: String,
-    required: true,
-}
-
 const profileSchema = mongoose.Schema({
-    guildId: reqString,
+    guildId: {
+        type: String,
+    },
     userId: {
         type: String,
     },
@@ -20,7 +17,31 @@ const profileSchema = mongoose.Schema({
     },
     twitter: {
         type: String
-    }
+    },
+    wallet: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    country: {
+        type: String
+    },
+    zipCode: {
+        type: String
+    },
+    houseNumber: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    streetName: {
+        type: String
+    },
 })
 
 module.exports = mongoose.model('profiles', profileSchema)

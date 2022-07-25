@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require("dotenv").config();
 const app = express();
+const {v4 : uuidv4} = require('uuid')
+const server = require("http").Server(app);
 const cookies = require('cookies')
 const { connect } = require('mongoose');
 connect(process.env.mongoPath, {
@@ -17,6 +19,7 @@ const shopRoutes = require('./routes/shop');
 const discordRoutes = require('./routes/discord');
 const invRoutes = require('./routes/inventory')
 const twitterRoutes = require('./routes/twitter')
+const profileRoutes = require('./routes/profile')
 
 
 app.use(bodyParser.json())
@@ -25,13 +28,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 app.use(cookies.express(["some", "random", "keys"]))
 
-app.use('/admin', adminData.routes);
-app.use(shopRoutes);
+app.use('/admin', adminData.router);
+app.use(shopRoutes.router);
 app.use(discordRoutes);
 app.use(invRoutes);
 app.use(twitterRoutes);
+app.use(profileRoutes);
 
-
-app.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log('Running on localhost 3000')
 });

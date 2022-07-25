@@ -3,37 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/inventory.css">
+    <link rel="stylesheet" href="css/inventory.css">
   </head>
   
   <body >
     <div class="bg-image"></div>
     <div class="cnt">
     <div id="fi">
+      
     <nav class="navbar navbar-expand-lg "  >
-      <div class="container-fluid">
-        <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
-        
-        <div>
-        <button style = "color: #fff" class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
-        </button>
-      </div>
+      <div class="container-fluid" id="only">
+    
+         <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
+          <button  style = "color: #fff" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
+          </button>
+          
+         
+       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item">
+              <a id="onlylap1" class="nav-link active" aria-current="page" href="/"  >Home</a>
+            </li>
           
-            <li class="nav-item">
-              <a id="onlylap1" class="nav-link active" aria-current="page" href=""  >Inventory</a>
-            </li>
-            <li class="nav-item">
-              <a id="onlylap2" class="nav-link active" aria-current="page" href="/" >Home</a>
-            </li>
-           
            
           </ul>
           
@@ -41,84 +41,178 @@
       </div>
     </nav>
   </div>
- 
-  <br>
-  <% if (bool == true) {  %>
-    <div class="d-flex" id = "inv">
-      <div class="col-md-12  p-3 scroll-row" style="animation: bottomToTop 2s">
-       <div class="container fluid">
-         <div class="row fluid">
-          <% var i =0 %>
-            <% prod.forEach(x => { i++; %>
-              
-              <div data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 280px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top-width: 500px    ;border-top: 20px solid #fff; border-bottom: 45px solid transparent; " id="ex">
-              
-            <img src="assets/<%= x.url %>" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
-            <div class="cardy">
-            <div  style="text-align: center">
-              <% if (x.premium == true) { %>
-                <i class="fa-solid fa-star" data-bs-placement="top" title="Premium"></i></i>
-                <%  }  else { %>  
-                  <i class="fa-solid fa-circle" data-bs-placement="top" title="Usual"></i></i>
-                  <%  }  %>  
-                  <h class="card-title" style="font-size: 25px; " id="<%= i %>nt"><%= x.name %></h>
-           
-              <div class="card-text" style="align-items: center">
-                
-                <i class="fa-solid fa-align-right"></i> <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px;"><%= x.category %></small>
-              </div>
+  <% if (user == '') { %>
+    <div class="lappyhid" style="height: 100px"></div>
+    <%  }  %>
+    
 
+ 
+
+  <% if (user != '') { %>
+      <div class="lappyhid" style=" height: 140px" >
+  
+      </div>
+      <%  } else { %>
+        <div class="lappyhid" ><br></div>
+        <%  } %>
+      <!-- <div class="laphid"><br><br></div> -->
+      <div class="d-flex" id="dle" >
+       <div class="col md 6 mt-3" id="fix">
+        <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Orders</h2>
+     
+        
+        <div id="cat4"> 
+          <div class="form-check form-switch">
+            <% if(filled === "true") { %>
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Filled </label>
+              <%} else { %>
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Un-Filled </label>
+            <% } %>
+          </div>
+        </div>
+    
+          <br>
+      <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
+      <div class="lappyhid">
+      <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
+      <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
+      <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
+      <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
+    </div>
+        <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #101518; color: #fff" >
+              <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Categories</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div id="mcat" ><i class="fa-solid fa-angle-right"></i> All</div>
+                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
+                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
+                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
-          </div>
-         
-              <% }) %>
-              <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
-            
-         
-                <div class="cardy" style="border: none ">
-                <div  style="text-align: center">
-                  <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
-               
-                  <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
-                    <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
-                      <span id=""></span> 
-                    </div>
-                    <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
-                      <span id=""></span> 
-                    </div>
-                   <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
-                  </div>
-      
-                </div>
-              </div>
-              </div>
-                </div>
-              </div>
          </div>
         </div>
       </div>
-   </div>
-   <% } else { %>
-  
-    <div class="bg-text">
     
-      <h1 >You have no items yet</h1>
-      
-    </div>
-    <% }  %>
-    </div>
-        
+      <% if (user != '') { %>
+        <div class="col-md-8 col-sm-12 p-3 scroll-row" id="big" >
+          <%  } else { %>
+            
+      <div class="col-md-8 col-sm-12 p-3 scroll-row" id="big" style="height: 650px">
+           <%  }  %>
+          
+        <div class="container fluid" id="gobottom">
+          <div class="row fluid">
+            
+           <% var i =0 %>
+          <% prod.forEach(x => { i++; %>
+            <% if (user == '') { %>
+              
+            <div data-bs-toggle="modal" onclick="window.location=`<%= url %>`" data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top: 20px solid #fff; border-bottom: 45px solid transparent;" id="ex">
+              <%  } else { %>
+                <div data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top-width: 500px    ;border-top: 20px solid #fff; border-bottom: 45px solid transparent; " id="ex">
+                
+                  
+                  <%  }  %>  
+              <img src="assets/<%= x.url %>" id="<%= i %>im" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
+              <div class="cardy">
+              <div  style="text-align: center">
+                <% if (x.premium == true) { %>
+                  <i class="fa-solid fa-star" data-bs-placement="top" id="<%= i %>prem" title="Premium"></i></i>
+                  <%  }  else { %>  
+                    <i class="fa-solid fa-circle" data-bs-placement="top" id="<%= i %>prem" title="Usual"></i></i>
+                    <%  }  %>  
+                    <h class="card-title" style="font-size: 25px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="<%= i %>nt"><%= x.itemName %></h>
+             
+                <div class="card-text" style="align-items: center">
+                  <i class="fa-solid fa-align-right"></i> <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px;" id="<%= i %>categ"><%= x.category %></small>
+                </div>
+ 
+              </div>
+            </div>
+            </div>
+       
+            <% }) %>
+            <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
+            
+         
+          <div class="cardy" style="border: none ">
+          <div  style="text-align: center">
+            <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
+         
+            <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
+              <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
+                <span id=""></span> 
+              </div>
+              <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
+                <span id=""></span> 
+              </div>
+             <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
+            </div>
+
           </div>
         </div>
-       
-       
+        </div>
+        </div>
+        </div>
+
+        <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
+            
+         
+          <div class="cardy" style="border: none ">
+          <div  style="text-align: center">
+            <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
+         
+            <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
+              <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
+                <span id=""></span> 
+              </div>
+              <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
+                <span id=""></span> 
+              </div>
+             <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
+            </div>
+
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
     </div>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/c5d7c8bb5c.js" crossorigin="anonymous"></script>
-   <script>
-   
-   </script>
+    <script>
+      const swich = document.querySelector('#flexSwitchCheckDefault');
+      swich.addEventListener('change', function() {
+          document.cookie=`fill=${this.checked}`;
+          window.location.href = '/inventory'
+      });
+      document.getElementById(`cat`).addEventListener('click', () => {
+        document.cookie = "inv-cat=cat"
+        window.location.href = '/inventory'
+    })
+      document.getElementById(`cat1`).addEventListener('click', () => {
+        document.cookie = "inv-cat=<%- cats[0].categoryOne %>"
+        window.location.href = '/inventory'
+      })
+      document.getElementById(`cat2`).addEventListener('click', () => {
+          document.cookie = "inv-cat=<%- cats[0].categoryTwo %>"
+          window.location.href = '/inventory'
+      })
+      document.getElementById(`cat3`).addEventListener('click', () => {
+          document.cookie = "inv-cat=<%- cats[0].categoryThree %>"
+          window.location.href = '/inventory'
+      })
+    </script>
   </body>
 </html>

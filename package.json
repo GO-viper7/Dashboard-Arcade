@@ -19,6 +19,7 @@
     "axiom": "^0.1.6",
     "axios": "^0.27.2",
     "body-parser": "^1.18.3",
+    "chalk": "^4.1.2",
     "cookies": "^0.8.0",
     "crypto": "^1.0.1",
     "disco-oauth": "^5.1.1",
@@ -34,6 +35,7 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.7.6",
     "passport": "^0.6.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "sessionstorage-for-nodejs": "^1.0.2"
   }
 }

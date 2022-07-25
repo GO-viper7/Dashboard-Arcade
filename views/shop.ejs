@@ -30,38 +30,53 @@
         Bulk purchase is disabled 
         <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
       </div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center; font-size: 25px; display: none;height: 70px; padding-top: 10px; margin-bottom: 0px " id="prof">
+        Fill Shipping Details 
+        <button  style="padding-top: 44 px; display: none" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="open1" ></button>
+      </div>
     <div id="fi">
       
     <nav class="navbar navbar-expand-lg "  >
-      <div class="container-fluid">
-        <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
-        <div>
-        <button style = "color: #fff" class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
-        </button>
-      </div>
+      <div class="container-fluid" id="only">
+    
+         <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
+         <div>
+          <a id="onlylap" class="nav-link active" aria-current="page" href=""  >Mempo Marketplace</a>
+         </div>
+          <button  style = "color: #fff" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
+          </button>
+          
+        
+       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a id="onlylap" class="nav-link active" aria-current="page" href=""  >Mempo Marketplace</a>
+            <li class="smobhid">
+              <a id="onlylap" class="nav-link active"  aria-current="page" href=""  >Mempo Marketplace</a>
             </li>
             <li class="nav-item">
               <a id="onlylap1" class="nav-link active" aria-current="page" href="/"  >Home</a>
             </li>
             <li class="nav-item">
-              <a id="onlylap2" class="nav-link active" aria-current="page" href="/twiter"  >Twitter</a>
-            </li>
-            <li class="nav-item">
-              <a id="onlylap3" class="nav-link active" aria-current="page" href="<%= url %>" >Discord</a>
+              <a id="onlylap1" class="nav-link active" aria-current="page" href="/twiter"  >Twitter</a>
             </li>
             <% if (user == '') { %>
-            <li class="nav-item">
-              <a id="onlylap4" class="nav-link active" aria-current="page" href="<%= url %>" >Inventory</a>
-            </li>
+              <li class="nav-item">
+                <a id="onlylap1" class="nav-link active" aria-current="page" href="<%= url %>" >Inventory</a>
+              </li>
+              <li class="nav-item">
+                <a id="onlylap1" class="nav-link active" aria-current="page" href="<%= url %>" >Signin</a>
+              </li>
             <%  } else { %>
               <li class="nav-item">
-                <a id="onlylap4" class="nav-link active" aria-current="page" href="/inventory" >Inventory</a>
+                <a id="onlylap1" class="nav-link active" aria-current="page" href="/inventory" >Inventory</a>
+                <li class="nav-item">
+                  <a id="onlylap1" class="nav-link active" aria-current="page" href="/profile" >Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a id="onlylap1" class="nav-link active" aria-current="page" href="/logout" >Logout</a>
+                </li> 
               </li>
               <%  }  %>
             <%  var flag = 0  %>
@@ -69,8 +84,9 @@
               <%  for(var j =0; j<ids.length; j++) if (ids[j].userId == id)  flag = 1 %>
                 <% if (flag == 1) { %>
             <li class="nav-item">
-              <a id="onlylap5" class="nav-link active" aria-current="page" href="/admin/add-product" >Admin</a>
+              <a id="onlylap1" class="nav-link active" aria-current="page" href="/admin/add-product" >Admin</a>
             </li>
+           
             <%  }  %>
             <%  }  %>
            
@@ -275,6 +291,9 @@
      if (`<%- unique %>` != '') {
        uniqueCheck = JSON.parse(`<%- unique %>`)
      }
+     if (`<%- prof %>` != '') {
+      profCheck = JSON.parse(`<%- prof %>`)
+     }
      document.getElementById('open').addEventListener('click', () => {
         window.location.href = '/'
      })
@@ -351,7 +370,7 @@
                   document.getElementById('premi').style.display="block";
                   setTimeout(() => {
                     window.location.href='/'
-                  }, 500)
+                  }, 1000)
                   flag=1
                 }
               })
@@ -361,9 +380,12 @@
                 document.getElementById('stc').style.display="block";
                 setTimeout(() => {
                   window.location.href='/'
-                }, 500)
+                }, 1000)
               }
               else if (Number(a) >= q) {
+                if(cat != "Whitelists" && profCheck.name && profCheck.gender && profCheck.country && profCheck.zipCode && profCheck.houseNumber && profCheck.city && profCheck.streetName) {
+
+                
                   document.getElementById('suc').style.display="block";  
                   const res =  fetch(`/`, {
                   method: "POST",
@@ -393,15 +415,22 @@
                       })
                     }
                   })
+                }
+                else {
+                  document.getElementById('prof').style.display="block";
+                  setTimeout(() => {
+                    window.location.href='/'
+                  }, 1000)
+                }
                 setTimeout(() => {
                   window.location.href='/'
-                }, 500)
+                }, 1000)
               }
               else {
                 document.getElementById('dan').style.display="block";
                 setTimeout(() => {
                   window.location.href='/'
-                }, 500)
+                }, 1000)
               }
             }
           })
