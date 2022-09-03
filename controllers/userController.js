@@ -73,7 +73,7 @@ const getProfile = async (req, res, next) => {
   let cookies = req.cookies.get('key')
   let result = await categorySchema.find({})
   if (cookies == undefined) {
-    return res.status(200).render('shop', {prod: req.products, prof: '',  url: process.env.discordURI, user: '', coins: '', bool: '', inv: '', cats: result, unique: ''})
+    return res.status(200).render('shop', {prod: req.products, prof: '',  url: process.env.discordURI, user: '', coins: '', bool: '', inv: '', cats: result, unique: '', products: ''})
   }
   else {
     next()
@@ -102,7 +102,7 @@ const getVerified = async (req, res, next) => {
           return res.redirect('/logout')
         }
         else {
-          return res.render('shop', {prod: req.products, user: user.username, id : user.id, url: process.env.discordURI, coins: data.OctaCreds, prof: JSON.stringify(data),  bool: '', ids: users,  cats: result, unique: JSON.stringify(uniquePremItems)})
+          return res.render('shop', {prod: req.products, user: user, id : user.id, url: process.env.discordURI, coins: data.OctaCreds, prof: JSON.stringify(data),  bool: '', ids: users,  cats: result, unique: JSON.stringify(uniquePremItems), products: JSON.stringify(req.products)})
         }
       })
     }catch (err) {
@@ -120,6 +120,7 @@ const getVerified = async (req, res, next) => {
 const checkUnique = async (req, res, next) => {
   try {
     if ( req.body.red == true) {
+      console.log("went to red")
       let user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
       itemSchema.countDocuments({userId: user.id, premium: true, category: req.body.category, itemName: req.body.name}, async (err, count) => {
         if (err) {
@@ -173,6 +174,7 @@ const sendMail = async (req, res, next) => {
 
 const buyProduct = async (req, res, next) => {
   try {
+    console.log('went to buy')
     let user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
     profileSchema.findOneAndUpdate({userId: user.id}, {OctaCreds : req.body.cost}, null, async (err, data) => {
       if (err) {

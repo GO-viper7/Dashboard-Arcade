@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root{
+    --sidebar: #1C213E;
+    --text: #A2A5BF;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    box-sizing: border-box;
+}
+
+p{
+    font-weight: 500;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+body{
+    background-color: #1C213E;
+    width: 100%;
+}
+
+.active {
+    color: white !important;
+    fill: white !important;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 17% 83%;
+}
+
+.left-menu{
+    background: var(--sidebar);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-left: -45px;
+}
+
+.right-menu{
+    background: #242A4B;
+    border-top-left-radius: 50px;
+}
+
+.left-menu .name {
+    color: var(--text);
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-top: 40px;
+    letter-spacing: 2px;
+}
+
+.switch{
+    margin-top: 20px;
+    width: fit-content;
+    background:  #8392FF;
+    color: white;
+    border-radius: 30px;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #1C213E;
+    position: absolute;
+    margin-top: 340px;
+    box-shadow: 0px 5px 10px #8392FF;
+}
+
+.left-menu .nav{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: start;
+    justify-content: center;
+    width: fit-content;
+}
+
+.left-menu .nav a{
+    color: #9098D8;
+    font-size: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    font-weight: 500;
+    transition: all 350ms ease;
+}
+
+.left-menu .nav a:hover, .left-menu .nav a:hover svg{
+    color: #fff;
+    fill: #fff;
+}
+
+.left-menu .nav a svg{
+    fill: #9098D8;
+    margin-right: 10px;
+    transition: all 350ms ease;
+}
+
+.admin-buttons{
+    flex-direction: column;
+    margin-left: 30px;
+    align-items: center;
+    display: none;
+    
+}
+
+.admin-buttons button {
+        margin-top: 20px;
+        width: 140px;
+        background:#8392FF;
+        color: #1C213E;
+        border-radius: 30px;
+        border: none;
+        display: flex;
+        padding: 5px 15px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.97rem;
+        align-items: center;
+        box-shadow: 0px 5px 7px #8392FF;
+}
+
+.admin-buttons button svg {
+    width: 30px;
+    margin-right: 3px;
+    fill: #1C213E;
+}
+
+.admin-buttons button:nth-child(2){
+    font-size: .9rem;
+    text-align: center;
+    width: 130px;
+    height: 40px;
+    word-spacing: 0px;
+    display: block;
+}
+
+.admin-buttons button p:nth-child(2){
+    margin-top: -9px;
+}
+
+.admin-buttons button:nth-child(3){
+    font-size: .9rem;
+    text-align: center;
+    width: 130px;
+    height: 40px;
+    word-spacing: 0px;
+    display: block;
+}
+
+.panels{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    z-index: 13;
+}
+
+.customizeBox, .addItemBox {
+    background: #eaecf7;
+    flex-direction: column;
+    padding: 30px 50px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    margin-right: 50px;
+    display: none;
+}
+
+
+.customizeBox .info p, .addItemBox .info p {
+    color: #1c213e;
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+
+.customizeBox .info p:nth-child(2){
+    margin-top: -15px;
+}
+
+.customizeBox div:nth-child(2){
+    margin-top: 20px;
+}
+
+.customizeBox input {
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    width: 280px;
+    margin-top: 19px;
+    height: 38px;
+    color: #1c213e;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 5px 15px;
+    outline: none;
+}
+
+.buyPanel input, .selectCat {
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    width: 280px;
+    margin-top: 10px;
+    height: 38px;
+    color: #1c213e;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 5px 15px;
+    outline: none;
+}
+
+
+.buyPanel, .addItemBox {
+    background: #eaecf7;
+    flex-direction: column;
+    padding: 30px 50px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    margin-right: 50px;
+    display: none;
+}
+
+
+.buyPanel .info p, .addItemBox .info p {
+    color: #1c213e;
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+
+.buyPanel .info p:nth-child(2){
+    margin-top: -15px;
+}
+
+.buyPanel div:nth-child(2){
+    margin-top: 20px;
+}
+
+
+.confirmBtn, .confirmBtnItem {
+    margin-top: 25px;
+    outline: none;
+    color: white;
+    background: #2c3681;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 5px;
+    border: none;
+}
+
+.addItemBox input[type=text], #selectCategory {
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    width: 280px;
+    margin-top: 10px;
+    height: 38px;
+    color: #1c213e;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 5px 15px;
+    outline: none;
+}
+
+.addItemBox input::placeholder
+{
+    color: #1c213e;
+}
+
+.addItemBox .info p {
+    margin-bottom: 15px;
+}
+
+.addItemBox input[type=checkbox]{
+    margin-top: 15px;
+}
+
+.toggle label {
+    color: #1C213E;
+    font-weight: 500;
+}
+
+.attachImage {
+    margin-top: 5px;
+    outline: none;
+    color: #2c3681;
+    background: #aab4ff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 5px;
+    border: none;
+}
+
+.confirmBtnItem{
+    margin-top: 15PX;
+}
+
+.close {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    position: absolute;
+    margin-top: -15px;
+    margin-left: -35px;
+}
+
+.hamburger {
+    fill: white;
+    margin: 10px 15px;
+    cursor: pointer;
+    position: absolute;
+    display: none;
+}
+
+.closeMenu, .openMenu {
+    width: 40px;
+    height: 40px;
+}
+
+.closeMenu{
+    position: absolute;
+    left: 145px;
+    transition: all 350ms linear;
+    top: -50px;
+    z-index: 15;
+}
+
+.addon{
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+    display: none;
+}
+
+
+/* navbar */
+
+@media only screen and (max-width: 1070px){
+
+    .hamburger {
+        display: block;
+    }
+
+    .rightMenuPadding {
+        padding-top: 0px !important;
+    }
+
+    .topPartInventory{
+        border-top-left-radius: 230px;
+    }
+
+    .left-menu {
+        display: flex;
+        width: 250px;
+        position: absolute;
+        left: -500px;
+        top: 0;
+        transition: all 400ms linear;
+        z-index: 14;
+        border-bottom-right-radius: 50px;
+    }
+
+    .wrapper{
+        display: grid;
+        grid-template-columns: 100%;
+    }
+
+    .right-menu{
+        border-top-left-radius: 230px;
+        padding-top: 60px;
+    }
+
+    .top-right {
+        display: none;
+    }
+    
+    
+    .homeTopPart {
+        grid-template-columns: 1fr;
+        padding-right: 20px;
+    }
+}
+
+
+/* panels */
+
+@media only screen and (max-width: 910px){
+    .panels{
+        position: absolute;
+        top: 500px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        z-index: 15;
+        flex-direction: column;
+        width: fit-content;
+    }
+
+    .addItemBox{
+        margin-top: 50px;
+    }
+
+    .customizeBox, .addItemBox {
+        margin-right: 0px;
+    }
+    
+}
+
+@media only screen and (max-width: 500px){
+    .buyPanel {
+        width: 95%;
+    }
+
+    .buyButtons {
+        margin-left: 30px;
+        margin-top: 30px;
+        padding-right: 20px;
+        display: flex;
+    }
+
+    .panels {
+        width: 95%;
+    }
+    .customizeBox, .addItemBox {
+        width: 100%;
+    }
+
+    
+    .customizeBox input, .addItemBox input[type=text], #selectCategory {
+        width: 100%;
+    }
+
+
+    .icons {
+        display: none;
+    }
+}

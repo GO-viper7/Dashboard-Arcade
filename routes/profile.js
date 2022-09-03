@@ -14,20 +14,10 @@ const oauth = new DiscordOauth2({
 
 
 
-router.get('/signin', async (req, res, next) => {
+router.get('/settings', async (req, res, next) => {
   try {
     const user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
-    profileSchema.countDocuments({userId: user.id}, async function (err, cnt){ 
-      if (err) {
-        console.log(err)
-      }
-      if(cnt == 0) {
-        res.render('signin')
-      }
-      else {
-        res.redirect('/')
-      }
-    })
+    res.render('settings', {user: user, profile: await profileSchema.findOne({userId: user.id})})
   }catch(err) {
     console.log(err)
     return res.redirect('/logout')
@@ -57,7 +47,7 @@ router.get('/profile', async (req, res, next) => {
       });
     }
     else {
-      res.redirect('/signin')
+      res.redirect('/settings')
     }
   }catch(error) {
     console.log(error)
@@ -99,7 +89,7 @@ router.post('/profile', async (req, res, next) => {
 
 
 
-router.post('/signin', async (req, res, next) => {
+router.post('/settings', async (req, res, next) => {
   try {
     const user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
     profileSchema.countDocuments({userId: user.id}, async function (err, cnt){ 

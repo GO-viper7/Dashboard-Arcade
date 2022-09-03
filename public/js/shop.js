@@ -1,51 +1,95 @@
-window.onload = () => {
- 
-  document.getElementById('open').addEventListener('click', () => {
-      window.location.href = '/'
-  })
-  document.getElementById('open1').addEventListener('click', () => {
-      window.location.href = '/'
-  })
-  document.getElementById('open2').addEventListener('click', () => {
-      window.location.href = '/'
-  })
 
-  document.getElementById(`cat`).addEventListener('click', () => {
-      document.cookie = "cat=cat"
-      window.location.href = '/'
-  })
+// admin mode switch (mainly for preview)
 
+let btn = document.querySelector(".switch");
 
-  document.getElementById(`cat1`).addEventListener('click', () => {
-        document.cookie = "cat=cat1"
-        window.location.href = '/'
+btn.addEventListener('click', () => {
+    document.getElementById("mode").innerHTML = "Admin Mode";
+    let wrapper = document.querySelector(".admin-buttons");
+    wrapper.style.display = "flex";
+    btn.style.display = "none";
+
+    let claimText = document.querySelectorAll(".claim");
+    let itemButtons = document.querySelectorAll(".itemButtons");
+
+    claimText.forEach(element => {
+        element.style.display = "none"
+    });
+
+    itemButtons.forEach(element => {
+        element.style.display = "flex";
     })
-  document.getElementById(`cat2`).addEventListener('click', () => {
-        document.cookie = "cat=cat2"
-        window.location.href = '/'
-  })
-  document.getElementById(`cat3`).addEventListener('click', () => {
-        document.cookie = "cat=cat3"
-        window.location.href = '/'
-  })
+})
+
+// customize panel and addItem box
+
+let customizeBtn = document.querySelector(".customize");
+let box = document.querySelector(".customizeBox");
+let statusCustomize = false;
+
+customizeBtn.addEventListener('click', () => {
+    statusCustomize = !statusCustomize;
+
+    if(statusCustomize){
+        box.style.display = "flex";
+    }else {
+        box.style.display = "none";
+    }
+})
+
+let addItemBtn = document.querySelector(".addItem");
+let statusAddItem = false;
+let boxAddItem = document.querySelector(".addItemBox");
+
+addItemBtn.addEventListener('click', () => {
+    statusAddItem = !statusAddItem;
+
+    if(statusAddItem){
+        boxAddItem.style.display = "flex";
+
+    }else {
+        boxAddItem.style.display = "none";
+    }
+})
+
+// close panels from X
+
+let closeCustomize = document.querySelector(".closeCustomize")
+let closeAddItem= document.querySelector(".closeAddItem")
+
+closeCustomize.addEventListener('click', () => {
+    box.style.display = "none";
+    statusCustomize = false;
+})
+closeAddItem.addEventListener('click', () => {
+    boxAddItem.style.display = "none";
+    statusAddItem = false;
+})
+
+// buy panel
+let bg = document.querySelector(".addon");
 
 
-  document.getElementById(`mcat`).addEventListener('click', () => {
-      document.cookie = "cat=cat"
-      window.location.href = '/'
-  })
 
-  
-  document.getElementById(`mcat1`).addEventListener('click', () => {
-        document.cookie = "cat=cat1"
-        window.location.href = '/'
-    })
-  document.getElementById(`mcat2`).addEventListener('click', () => {
-        document.cookie = "cat=cat2"
-        window.location.href = '/'
-  })
-  document.getElementById(`mcat3`).addEventListener('click', () => {
-        document.cookie = "cat=cat3"
-        window.location.href = '/'
-  })
-}
+// navbar 
+
+let closeMenu = document.querySelector(".closeMenu");
+let openMenu = document.querySelector(".openMenu");
+let navbar = document.querySelector(".left-menu")
+
+openMenu.addEventListener("click", () => {
+    navbar.style.left = "0";
+    closeMenu.style.top = "-10px"
+    bg.style.display = "block";
+
+})
+closeMenu.addEventListener("click", () => {
+    navbar.style.left = "-500px";
+    closeMenu.style.top = "-50px";
+    bg.style.display = "none";
+
+})
+
+
+
+

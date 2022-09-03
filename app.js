@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 app.use(cookies.express(["some", "random", "keys"]))
 
-app.use('/admin', adminData.router);
+app.use(adminData.router);
 app.use(shopRoutes.router);
 app.use(discordRoutes);
 app.use(invRoutes);
@@ -38,3 +38,10 @@ app.use(profileRoutes);
 server.listen(process.env.PORT || 3000, () => {
   console.log('Running on localhost 3000')
 });
+
+
+
+// Things to do : settings post, orders-> [...] [onClick] [status click mail]
+
+// Backend Adjust, unique alert and profile alert
+

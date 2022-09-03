@@ -1,218 +1,237 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Limbo Inventory</title>
+    <link rel="stylesheet" href="/css/inventory.css">
+    <!-- <link rel="stylesheet" href="/css/shop.css"> -->
     
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="stylesheet" href="/css/global.css">
+
   </head>
-  
-  <body >
-    <div class="bg-image"></div>
-    <div class="cnt">
-    <div id="fi">
-      
-    <nav class="navbar navbar-expand-lg "  >
-      <div class="container-fluid" id="only">
-    
-         <img src="https://cdn.discordapp.com/attachments/946793823730794588/984508739073740820/unknown.png" alt="" class="imgur"  >
-          <button  style = "color: #fff" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon "><i class="fa-solid fa-bars" style="font-size:28px;"></i></span>
-          </button>
-          
-         
-       
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            
-            <li class="nav-item">
-              <a id="onlylap1" class="nav-link active" aria-current="page" href="/"  >Home</a>
-            </li>
-          
-           
-          </ul>
-          
-        </div>
-      </div>
-    </nav>
-  </div>
-  <% if (user == '') { %>
-    <div class="lappyhid" style="height: 100px"></div>
-    <%  }  %>
-    
+  <body>
 
- 
+    <!-- hamburger -->
 
-  <% if (user != '') { %>
-      <div class="lappyhid" style=" height: 140px" >
-  
-      </div>
-      <%  } else { %>
-        <div class="lappyhid" ><br></div>
-        <%  } %>
-      <!-- <div class="laphid"><br><br></div> -->
-      <div class="d-flex" id="dle" >
-       <div class="col md 6 mt-3" id="fix">
-        <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Orders</h2>
-     
-        
-        <div id="cat4"> 
-          <div class="form-check form-switch">
-            <% if(filled === "true") { %>
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
-              <label class="form-check-label" for="flexSwitchCheckDefault">Filled </label>
-              <%} else { %>
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Un-Filled </label>
-            <% } %>
-          </div>
-        </div>
-    
-          <br>
-      <h2 class="ms-4" style="font-weight: 900; color: #e5f5f5;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-align-right"></i> Categories</h2>
-      <div class="lappyhid">
-      <div id="cat" ><i class="fa-solid fa-angle-right"></i> All</div>
-      <div id="cat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
-      <div id="cat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
-      <div id="cat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
+    <div class="hamburger">
+        <svg clip-rule="evenodd" class="openMenu" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11 16.745c0-.414.336-.75.75-.75h9.5c.414 0 .75.336.75.75s-.336.75-.75.75h-9.5c-.414 0-.75-.336-.75-.75zm-9-5c0-.414.336-.75.75-.75h18.5c.414 0 .75.336.75.75s-.336.75-.75.75h-18.5c-.414 0-.75-.336-.75-.75zm4-5c0-.414.336-.75.75-.75h14.5c.414 0 .75.336.75.75s-.336.75-.75.75h-14.5c-.414 0-.75-.336-.75-.75z" fill-rule="nonzero"/></svg>
+        <svg clip-rule="evenodd" class="closeMenu" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/></svg>
     </div>
-        <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="background-color: #101518; color: #fff" >
-              <div class="modal-header">
-                <h1 class="modal-title" id="exampleModalLabel">Categories</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div id="mcat" ><i class="fa-solid fa-angle-right"></i> All</div>
-                <div id="mcat1"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryOne %></div>
-                <div id="mcat2"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryTwo %></div>
-                <div id="mcat3"  ><i class="fa-solid fa-angle-right"></i> <%- cats[0].categoryThree %></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-         </div>
-        </div>
-      </div>
-    
-      <% if (user != '') { %>
-        <div class="col-md-8 col-sm-12 p-3 scroll-row" id="big" >
-          <%  } else { %>
-            
-      <div class="col-md-8 col-sm-12 p-3 scroll-row" id="big" style="height: 650px">
-           <%  }  %>
-          
-        <div class="container fluid" id="gobottom">
-          <div class="row fluid">
-            
-           <% var i =0 %>
-          <% prod.forEach(x => { i++; %>
-            <% if (user == '') { %>
-              
-            <div data-bs-toggle="modal" onclick="window.location=`<%= url %>`" data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top: 20px solid #fff; border-bottom: 45px solid transparent;" id="ex">
-              <%  } else { %>
-                <div data-bs-toggle="modal"  data-bs-target="#exampleModal<%= i %>" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid #fff;border-top-width: 500px    ;border-top: 20px solid #fff; border-bottom: 45px solid transparent; " id="ex">
-                
-                  
-                  <%  }  %>  
-              <img src="assets/<%= x.url %>" id="<%= i %>im" class="card-img-top" alt="..." style="height: 170px; width: 100%;  border-top-right-radius: 10px; border-top: 5px solid white; border-left: 5px solid white; border-right: 5px solid white;">
-              <div class="cardy">
-              <div  style="text-align: center">
-                <% if (x.premium == true) { %>
-                  <i class="fa-solid fa-star" data-bs-placement="top" id="<%= i %>prem" title="Premium"></i></i>
-                  <%  }  else { %>  
-                    <i class="fa-solid fa-circle" data-bs-placement="top" id="<%= i %>prem" title="Usual"></i></i>
-                    <%  }  %>  
-                    <h class="card-title" style="font-size: 25px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="<%= i %>nt"><%= x.itemName %></h>
-             
-                <div class="card-text" style="align-items: center">
-                  <i class="fa-solid fa-align-right"></i> <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px;" id="<%= i %>categ"><%= x.category %></small>
+
+    <!-- addon, this makes the background darker when a panel is open-->
+    <div class="addon"></div>
+
+   
+
+    <div class="wrapper">
+        <div class="left-menu">
+            <div class="externalWrapper">
+                <p class="name">LIMBO</p>
+                <div class="nav">
+                    <a href="/">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg> 
+                        Home
+                    </a>
+                    <a href="/inventory" class="active">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="active" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.305-15l-3.432 12h-10.428l-2.937-7h11.162l-1.412 5h2.078l1.977-7h-16.813l4.615 11h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
+                        Inventory
+                    </a>
+                    <a href="/settings">
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 8.666c-1.838 0-3.333 1.496-3.333 3.334s1.495 3.333 3.333 3.333 3.333-1.495 3.333-3.333-1.495-3.334-3.333-3.334m0 7.667c-2.39 0-4.333-1.943-4.333-4.333s1.943-4.334 4.333-4.334 4.333 1.944 4.333 4.334c0 2.39-1.943 4.333-4.333 4.333m-1.193 6.667h2.386c.379-1.104.668-2.451 2.107-3.05 1.496-.617 2.666.196 3.635.672l1.686-1.688c-.508-1.047-1.266-2.199-.669-3.641.567-1.369 1.739-1.663 3.048-2.099v-2.388c-1.235-.421-2.471-.708-3.047-2.098-.572-1.38.057-2.395.669-3.643l-1.687-1.686c-1.117.547-2.221 1.257-3.642.668-1.374-.571-1.656-1.734-2.1-3.047h-2.386c-.424 1.231-.704 2.468-2.099 3.046-.365.153-.718.226-1.077.226-.843 0-1.539-.392-2.566-.893l-1.687 1.686c.574 1.175 1.251 2.237.669 3.643-.571 1.375-1.734 1.654-3.047 2.098v2.388c1.226.418 2.468.705 3.047 2.098.581 1.403-.075 2.432-.669 3.643l1.687 1.687c1.45-.725 2.355-1.204 3.642-.669 1.378.572 1.655 1.738 2.1 3.047m3.094 1h-3.803c-.681-1.918-.785-2.713-1.773-3.123-1.005-.419-1.731.132-3.466.952l-2.689-2.689c.873-1.837 1.367-2.465.953-3.465-.412-.991-1.192-1.087-3.123-1.773v-3.804c1.906-.678 2.712-.782 3.123-1.773.411-.991-.071-1.613-.953-3.466l2.689-2.688c1.741.828 2.466 1.365 3.465.953.992-.412 1.082-1.185 1.775-3.124h3.802c.682 1.918.788 2.714 1.774 3.123 1.001.416 1.709-.119 3.467-.952l2.687 2.688c-.878 1.847-1.361 2.477-.952 3.465.411.992 1.192 1.087 3.123 1.774v3.805c-1.906.677-2.713.782-3.124 1.773-.403.975.044 1.561.954 3.464l-2.688 2.689c-1.728-.82-2.467-1.37-3.456-.955-.988.41-1.08 1.146-1.785 3.126"/></svg>
+                        Settings
+                    </a>
+                    
+
                 </div>
- 
-              </div>
-            </div>
-            </div>
-       
-            <% }) %>
-            <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
-            
-         
-          <div class="cardy" style="border: none ">
-          <div  style="text-align: center">
-            <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
-         
-            <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
-              <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
-                <span id=""></span> 
-              </div>
-              <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
-                <span id=""></span> 
-              </div>
-             <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
             </div>
 
+           
+        </div>
+        <div class="right-menu rightMenuPadding">
+           <div class="top-part topPartInventory">
+                <div class="icons">
+                    <a href="/inventory/inventory.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.305-15l-3.432 12h-10.428l-2.937-7h11.162l-1.412 5h2.078l1.977-7h-16.813l4.615 11h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
+                    </a>
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M1 20v-2.946c1.993-.656 2.575-2.158 3.668-6.077.897-3.218 1.891-6.784 4.873-8.023-.027-.147-.041-.299-.041-.454 0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5c0 .156-.014.309-.042.458 2.987 1.244 3.984 4.813 4.884 8.033 1.103 3.95 1.697 5.423 3.658 6.062v2.947h-7c0 2.208-1.792 4-4 4s-4-1.792-4-4h-7zm14 0h-6c0 1.656 1.344 3 3 3s3-1.344 3-3zm-13-1h20v-1.241c-2.062-.918-2.82-3.633-3.621-6.498-1.066-3.814-2.167-7.758-6.379-7.761-4.21 0-5.308 3.937-6.369 7.745-.8 2.872-1.559 5.593-3.631 6.514v1.241zm11.492-16.345l.008-.155c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5l.008.152c.455-.099.949-.152 1.487-.152.542 0 1.039.054 1.497.155z"/></svg>
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" class="img-profile"/>
+                    </a>
+                </div>
+                <div class="account">
+                    <div class="pfp">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png"/>
+                    </div>
+                    <div>
+                        <p style="margin-top: 20px; font-size: 30px">Profile</p>
+                        <h1><%= user.username %>.eth</h1>
+                        <div class="details">
+                            <p><%= profile.OctaCreds %> coins</p>
+                            <p>@<%= profile.twitterName %></p>
+                            <p><%= user.username %>#<%= user.discriminator %></p>
+                            <p><%= profile.wallet %></p>
+                            <p><%= profile.country %></p>
+                            <p><%= profile.zipCode %></p>
+                            <p><%= profile.streetName %>/<%= profile.city %>/<%= profile.houseNumber %></p>
+                            <p><%= profile.gender %></p>
+                        </div>
+                    </div>
+                </div>
           </div>
-        </div>
-        </div>
-        </div>
-        </div>
+          <div class="rows">
+            <div class="container">
+              <p class="detail"><%= cats[0].categoryOne %>:</p>
+              <div class="rows-wrapper">
 
-        <div data-bs-toggle=""  data-bs-target="" class=" p-3 me-3" style="width: 18rem; height: 353px;  margin-bottom: 35px; border-radius: 10px;  border-left: 20px solid transparent;border-top-width: 500px    ;border-top: 20px solid transparent; border-bottom: 45px solid transparent; border-bottom: none;" id="ex">
-            
-         
-          <div class="cardy" style="border: none ">
-          <div  style="text-align: center">
-            <h class="card-title" style="font-size: 30px; color: transparent; background-color: transparent;" id=""></h>
-         
-            <div class="card-text" style="align-items: center; color: transparent; background-color: transparent;">
-              <div class="cos" style="font-size: 25px; color: transparent; background-color: transparent;" >
-                <span id=""></span> 
-              </div>
-              <div class="cos" style="font-size: 15px; color: transparent; background-color: transparent;" >
-                <span id=""></span> 
-              </div>
-             <small  style="font-size: 18px;  margin-top: 10px; margin-right: 160px; color: transparent; background-color: transparent;"></small>
-            </div>
 
+                  <!-- one column, one image-->
+
+
+
+
+          <% var i =0 %>
+          <% prod.forEach(x => { i++; %>
+            <% if(x.category == cats[0].categoryOne ) { %>
+              <div class="buyPanel" id="panel<%= i %>">
+                  <div class="innerPanel">
+                      <p id="name<%= i%>"><%= x.itemName %></p>
+                      
+                      <div class="panelBar"></div>
+          
+                      <p id="description<%= i%>"><%= x.description %></p>
+                      <p >Category: <span id="category<%= i%>"><%= x.category%></span></p>
+                      <div class="panelBar"></div>
+                      <div class="buyButtons">
+                        <button class="buttons no" id="rej<%= i%>">close</button>
+                    </div>
+                  </div>
+              </div>
+
+              
+              <div class="homePageColumn">
+                  <% if (user == '') { %>
+                      <a href="<%= url %>">
+                          <div id="card<%= i%>">
+                              <img id="imageTag<%= i%>" class="wl-image" src="assets/<%= x.url %>"/>
+                          </div>
+                         
+                      </a>
+                      <%  } else { %>
+                          <div id="card<%= i%>">
+                              <img id="imageTag<%= i%>" class="wl-image" src="assets/<%= x.url %>"/>
+                          </div>
+                         
+                      <%  }  %>  
+              </div>
+              <% } %>
+          <% }) %>
+
+              </div>
           </div>
-        </div>
-        </div>
-        </div>
+
+          <div class="container">
+              <p class="detail"><%= cats[0].categoryTwo %>:</p>
+              <div class="rows-wrapper">
+          <% var i =0 %>
+          <% prod.forEach(x => { i++; %>
+            <% if(x.category == cats[0].categoryTwo ){ %>
+              <div class="buyPanel" id="panel<%= i %>">
+                  <div class="innerPanel">
+                      <p id="name<%= i%>"><%= x.itemName %></p>
+                      
+                      <div class="panelBar"></div>
+          
+                      <p id="description<%= i%>"><%= x.description %></p>
+                      <p >Category: <span id="category<%= i%>"><%= x.category%></span></p>
+                      <div class="panelBar"></div>
+                      <div class="buyButtons">
+                        <button class="buttons no" id="rej<%= i%>">close</button>
+                    </div>
+                  </div>
+              </div>
+              <div class="homePageColumn">
+                  <% if (user == '') { %>
+                      <a href="<%= url %>">
+                        <div id="card<%= i%>">
+                         <img id="imageTag<%= i%>" class="wl-image" src="assets/<%= x.url %>"/>
+                        </div>
+                      </a>
+                      <%  } else { %>
+                          <div id="card<%= i%>">
+                          <img id="imageTag<%= i%>" class="wl-image" src="assets/<%= x.url %>"/>
+                          </div>
+                          <%  }  %>  
+              </div>
+              <% } %>
+          <% }) %>
+              
+              </div>
+          </div>
+
+          <div class="container">
+              <p class="detail"><%= cats[0].categoryThree %>:</p>
+              <div class="rows-wrapper">
+                  <% var i =0 %>
+          <% prod.forEach(x => { i++; %>
+            <% if(x.category == cats[0].categoryThree ) { %>
+              <div class="buyPanel" id="panel<%= i %>">
+                  <div class="innerPanel">
+                      <p id="name<%= i%>"><%= x.itemName %></p>
+                      
+                      <div class="panelBar"></div>
+          
+                      <p id="description<%= i%>"><%= x.description %></p>
+                      <p >Category: <span id="category<%= i%>"><%= x.category%></span></p>
+          
+                      <div class="panelBar"></div>
+                      <div class="buyButtons">
+                        <button class="buttons no" id="rej<%= i%>">close</button>
+                    </div>
+                  </div>
+              </div>  
+              <div class="homePageColumn">
+                  <% if (user == '') { %>
+                      <a href="<%= url %>">
+                         <div id="card<%= i%>">
+                          <img id="imageTag<%= i%>" class="wl-image" src="assets/<%= x.url %>"/>
+                         </div>
+                      </a>
+                      <%  } else { %>
+                          <div id="card<%= i%>">
+                          <img id="imageTag<%= i%>" class="wl-image" src="assets/<%= x.url %>"/>
+                          </div>
+                          <%  }  %>  
+              </div>
+              <% } %>
+          <% }) %>
+
+                 
+
+              </div>
+          </div>
+          </div>
         </div>
     </div>
-  </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/c5d7c8bb5c.js" crossorigin="anonymous"></script>
+
+    <script src="/js/shop.js"></script>
     <script>
-      const swich = document.querySelector('#flexSwitchCheckDefault');
-      swich.addEventListener('change', function() {
-          document.cookie=`fill=${this.checked}`;
-          window.location.href = '/inventory'
-      });
-      document.getElementById(`cat`).addEventListener('click', () => {
-        document.cookie = "inv-cat=cat"
-        window.location.href = '/inventory'
-    })
-      document.getElementById(`cat1`).addEventListener('click', () => {
-        document.cookie = "inv-cat=<%- cats[0].categoryOne %>"
-        window.location.href = '/inventory'
-      })
-      document.getElementById(`cat2`).addEventListener('click', () => {
-          document.cookie = "inv-cat=<%- cats[0].categoryTwo %>"
-          window.location.href = '/inventory'
-      })
-      document.getElementById(`cat3`).addEventListener('click', () => {
-          document.cookie = "inv-cat=<%- cats[0].categoryThree %>"
-          window.location.href = '/inventory'
-      })
+      const backg = document.querySelector(".addon");
+        let p = 0
+        for(var j =0; j<`<%- prod.length %>`; j++) { ( function() { 
+            p++;
+            var t = p
+            console.log(p)
+            document.getElementById("card"+t).addEventListener("click", () => {
+                document.getElementById("panel"+t).style.display = "flex";
+                backg.style.display = "block";
+            })
+            document.getElementById("rej"+t).addEventListener("click", () => {
+                document.getElementById("panel"+t).style.display = "none";
+                backg.style.display = "none";
+            })
+      })()}
     </script>
   </body>
 </html>

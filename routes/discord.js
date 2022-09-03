@@ -23,7 +23,7 @@ router.get('/discord', async  (req, res) => {
     })
      res.cookies.set("key", jwt.sign(data.access_token, process.env.jwtSecret))
      setTimeout(() => {
-      res.redirect('/signin')
+      res.redirect('/settings')
      }, 1000)
    }
 })

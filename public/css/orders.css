@@ -1,0 +1,288 @@
+
+.externalWrapper {
+    border-bottom: 0.1px solid #9098d82a;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.icons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #1C213E;
+    padding: 14px 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.icons svg {
+    fill: #fff;
+    margin: 0 7px;
+}
+
+.img-profile {
+    border-radius: 50%;
+    width: 26px;
+    margin-left: 7px;
+}
+
+.right-menu {
+    background: #242A4B;
+    border-top-left-radius: 50px;
+    padding: 80px 70px;
+    padding-bottom: 0px;
+}
+
+.orders h1 {
+    color: #9098D8;
+    font-size: 2.3rem;
+}
+
+.orders .info{
+    color: #9098D8;
+    font-size: 1.3rem;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.orders-menu{
+    font-size: 1.25rem;
+    display: flex;
+    color: white;
+    margin-top: 25px;
+}
+
+.orders-menu p {
+    cursor: pointer;
+    margin-right: 40px;;
+}
+
+.table{
+    margin-top: 30px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 130px 190px 200px 130px 130px 130px 130px 100px;
+}
+
+.header div{
+    color: #9098D8;
+    font-weight: 600;
+}
+
+.header div:nth-child(4){
+    margin-left: -30px;
+}
+
+.row{
+    display: grid;
+    background: #444967;
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin-left: -15px;
+    margin-bottom: 35px;
+    margin-top: 35px;
+    grid-template-columns: 130px 190px 170px 130px 130px 130px 130px 100px;
+}
+
+.statusCheckbox{
+    width: 22px;
+    height: 22px;
+    margin-left: 40px;
+}
+
+.row-name{
+    display: flex;
+    margin-left: -10px;
+}
+
+.row-name img{
+    margin-right: 5px;
+}
+
+.row div {
+    color: #fff;
+    font-weight: 600;
+    text-align: start;
+}
+
+.table .bar{
+    width: 100%;
+    height: 1px;
+    background: #9098d849;
+    margin-left: -5px;
+    margin-top: 10px;
+}
+
+.table .bar::after{
+    content: "";
+    width: 35px;
+    height: 3px;
+    background: #8997ff;
+    position: absolute;
+    margin-top: -1.5px;
+    margin-left: 95px;
+    box-shadow: 0px 1px 5px #8392FF;
+}
+
+.activeOrder{
+    color: white; text-decoration: underline;
+}
+
+@media only screen and (max-width: 1500px){
+    .row-name img{
+        display: none;
+    }
+
+    .header {
+        grid-template-columns: 130px 160px 150px 80px 100px 130px 100px 100px;
+    }
+
+    .row{
+        grid-template-columns: 130px 160px 140px 70px 110px 130px 80px 100px;
+        align-items: center;
+    }
+    
+}
+
+@media only screen and (max-width: 1280px){
+
+    .header {
+        grid-template-columns: 100px 130px 175px 80px 100px 130px 100px 100px;
+    }
+
+    .row{
+        grid-template-columns: 100px 130px 170px 70px 110px 130px 80px 100px;
+    }
+
+    .right-menu {
+        padding: 80px 40px;
+        padding-bottom: 10px;
+    }
+
+    .orders-menu{
+        font-size: 1.1rem;
+    }
+
+    .orders h1 {
+        font-size: 2rem;
+    }
+    
+    .orders .info{
+        font-size: 1.1rem;
+    }
+
+    .header div{
+        font-size: 0.97rem;
+    }
+
+    .row div {
+        font-size: 0.95rem;
+    }
+    
+}
+
+@media only screen and (max-width: 1160px){
+
+    .header {
+        grid-template-columns: 100px 130px 145px 80px 100px 130px 100px 100px;
+    }
+
+    .row{
+        grid-template-columns: 100px 130px 135px 70px 110px 130px 80px 100px;
+    }
+}
+
+@media only screen and (max-width: 1125px){
+
+    .header {
+        grid-template-columns: 100px 115px 120px 50px 90px 100px 70px 100px;
+    }
+
+    .row{
+        grid-template-columns: 100px 110px 115px 60px 90px 100px 40px 100px;
+    }
+
+    .header div{
+        font-size: 0.85rem;
+    }
+
+    .row div {
+        font-size: 0.85rem;
+    }
+    
+}
+
+.infoMobile {
+    display: none;
+}
+
+/* responsive */
+
+@media only screen and (max-width: 1070px){
+    .right-menu{
+        padding-top: 120px !important;
+    }
+}
+
+@media only screen and (max-width: 790px){
+    .header {
+        display: none;
+    }
+
+    .row{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .row div{
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+
+    .row div {
+        word-break: break-all;
+        width: fit-content;
+    }
+
+    .row div p {
+        word-break: break-all;
+    }
+
+    .row-name{
+        margin-left: 0px;
+        word-break: normal;
+    }
+
+    .statusCheckbox{
+        margin-left: 10px;
+        position: relative;
+        top: 5px;
+    }
+
+    .infoMobile{
+        display: inline-block;
+        word-break: keep-all;
+    }
+
+    .infoMobile{
+        color: #c7ceff
+    }
+    
+}
+
+
+@media only screen and (max-width: 470px){
+    .orders-menu{
+        flex-direction: column;
+    }
+
+    .orders-menu p{
+        margin-right: 0px;
+    }
+}

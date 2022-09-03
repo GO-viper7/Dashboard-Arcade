@@ -18,10 +18,16 @@ const profileSchema = mongoose.Schema({
     twitter: {
         type: String
     },
+    twitterName: {
+        type: String
+    },
     wallet: {
         type: String
     },
-    name: {
+    fname: {
+        type: String
+    },
+    lname: {
         type: String
     },
     gender: {

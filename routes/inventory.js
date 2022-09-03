@@ -13,6 +13,7 @@ const oauth = new DiscordOauth2({
 	redirectUri: `${process.env.websiteURL}/discord`,
 });
 const categorySchema = require('../schemas/category-schema');
+const profileSchema = require('../schemas/profile-schema')
 
 router.get('/inventory', async (req, res, next) => {
   let p
@@ -31,10 +32,10 @@ router.get('/inventory', async (req, res, next) => {
     k = result.filter(x => x.category == (`${req.cookies.get('inv-cat')}` == 'cat' ? x.category : `${req.cookies.get('inv-cat')}`) )
     p = k.filter(q => q.order == (`${req.cookies.get('fill')}` === 'false' ? false : true))
   }
-  res.render('inventory', {filled: fill,prod: p, bool: true, user: user, cats: await categorySchema.find({})});
+  res.render('inventory', {profile: await profileSchema.findOne({userId: user.id}), filled: fill,prod: p, bool: true, user: user, cats: await categorySchema.find({})});
 });
 
-router.get('/admin/add-product/orders', async (req, res, next) => {
+router.get('/admin/orders', async (req, res, next) => {
   let l
   let cookies = req.cookies.get('key')
   let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
@@ -43,7 +44,7 @@ router.get('/admin/add-product/orders', async (req, res, next) => {
 })
 
 
-router.post('/admin/add-product/orders', async (req, res, next) => {
+router.post('/admin/orders', async (req, res, next) => {
   itemSchema.findOneAndUpdate({orderId: req.body.orderId}, {$set: {order: req.body.fill == "filled" ? true : false}}, function(err, doc) {
     if(err) {
       console.log(err.message)
