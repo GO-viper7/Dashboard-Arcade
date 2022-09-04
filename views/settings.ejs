@@ -78,7 +78,7 @@
     <div class="wrapper">
         <div class="left-menu">
             <div class="externalWrapper">
-                <p class="name">LIMBO</p>
+                <a href="/" class="name" style="cursor: pointer">LIMBO</a>
                 <div class="nav">
                     <a href="/">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg> 
@@ -127,6 +127,7 @@
            <h1>Profile Settings</h1>
 
            <div class="grid">
+            
                 <div class="left-settings">
                     <div>
                         <label for="username">Username</label>
@@ -134,15 +135,10 @@
                     </div>
                     <div>
                         <label for="wallet">Wallet Address</label>
-                        <input type="text" placeholder="Enter/Change your Wallet Address" id="wallet"/>
-                    </div>
-                    <div>
-                        <label for="username">Social Connections</label>
-                        <input type="text" placeholder="Enter Twitter Handle" id="twitter"/>
-                        <input type="text" placeholder="Enter Discord Handle" id="discord" value="<%= user.username %>#<%= user.discriminator %>" disabled/>
+                        <input type="text" name="wallet" placeholder="Enter/Change your Wallet Address" id="wallet"/>
                     </div>
     
-                    <button>Submit</button>
+                    <button type="submit" id='sub'>Submit</button>
                 </div>
                 <div class="right-settings">
                     <div class="profile-image">
@@ -151,19 +147,54 @@
                     </div>
 
                     <p>Profile Information</p>
-                    <input type="text" placeholder="First and Last Name" value="<%= profile.name %>"> 
-                    <input type="text" placeholder="Country" value="<%= profile.country %>">
-                    <input type="text" placeholder="Postel/Zip Code" value="<%= profile.zipCode %>">
-                    <input type="text" placeholder="City" value="<%= profile.city %>">
-                    <input type="text" placeholder="Street Name" value="<%= profile.streetName %>">
-                    <input type="text" placeholder="House Number" value="<%= profile.houseNumber %>">
-                    <input type="text" placeholder="Gender" value="<%= profile.gender %>">
+                    <input type="text" id= "fullname" placeholder="First and Last Name" value="<%= profile.name %>"> 
+                    <input type="text" id= "country" placeholder="Country" value="<%= profile.country %>">
+                    <input type="text" id= "zip" placeholder="Postel/Zip Code" value="<%= profile.zipCode %>">
+                    <input type="text" id= "city" placeholder="City" value="<%= profile.city %>">
+                    <input type="text" id= "street" placeholder="Street Name" value="<%= profile.streetName %>">
+                    <input type="text" id= "house" placeholder="House Number" value="<%= profile.houseNumber %>">
+                    <input type="text" id= "gender" placeholder="Gender" value="<%= profile.gender %>">
 
                 </div>
+          
            </div>
         </div>
     </div>
+    <script>
+     document.getElementById('sub').addEventListener('click', () => {
 
-    <script src="/js/shop.js"></script>
+        const res =  fetch(`/settings`, {
+            method: "POST",
+            headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+                wallet: document.getElementById('wallet').value,
+                name: document.getElementById('fullname').value,
+                gender: document.getElementById('gender').value,
+                country: document.getElementById('country').value,
+                zip: document.getElementById('zip').value,
+                house: document.getElementById('house').value,
+                city: document.getElementById('city').value,
+                street: document.getElementById('street').value,
+            }),
+
+        }).then(res => {  
+            if (res.status !== 200) {
+                console.log("error")
+            } else {
+            
+                res.json().then(data => {
+                console.log(data)
+                
+                })
+            }
+        })
+        window.location = '/settings'
+     })          
+       
+    </script>
   </body>
 </html>

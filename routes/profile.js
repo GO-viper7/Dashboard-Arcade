@@ -59,8 +59,9 @@ router.get('/profile', async (req, res, next) => {
 
 
 
-router.post('/profile', async (req, res, next) => {
+router.post('/settings', async (req, res, next) => {
   try {
+    console.log(req.body)
     const user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
     profileSchema.findOneAndUpdate({userId: user.id}, {
       wallet: req.body.wallet,
@@ -79,64 +80,12 @@ router.post('/profile', async (req, res, next) => {
         //console.log(data)
       }
     })
-    res.redirect('/profile')
+    res.redirect('/settings')
   }catch(error) {
     console.log(error)
     res.redirect('/logout')
   }
 })
-
-
-
-
-router.post('/settings', async (req, res, next) => {
-  try {
-    const user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
-    profileSchema.countDocuments({userId: user.id}, async function (err, cnt){ 
-      if (err) {
-        console.log(err)
-      }
-      if(cnt == 0) {
-        await new profileSchema({
-          userId: user.id,
-          octaCreds: 0,
-          wallet: req.body.wallet,
-          name: req.body.name,
-          gender: req.body.gender,
-          country: req.body.country,
-          zipCode: req.body.zip,
-          houseNumber: req.body.house,
-          city: req.body.city,
-          streetName: req.body.street,
-        }).save()
-      }
-      else {
-        profileSchema.findOneAndUpdate({userId: user.id}, {
-          wallet: req.body.wallet,
-          name: req.body.name,
-          gender: req.body.gender,
-          country: req.body.country,
-          zipCode: req.body.zip,
-          houseNumber: req.body.house,
-          city: req.body.city,
-          streetName: req.body.street,
-        }, null, async (err, data) => {
-          if (err) {
-            console.log(err)
-          }
-          else {
-            //console.log(data)
-          }
-         })
-      }
-    })
-    res.redirect('/')
-  }catch(error) {
-    console.log(error)
-    res.redirect('/logout')
-  }
-})
-
 
 
 

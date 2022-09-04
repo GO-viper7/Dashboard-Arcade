@@ -1,6 +1,6 @@
 $(function() {
 	
-	var images = ['https://cdn.discordapp.com/attachments/946793823730794588/979766152320401428/unknown-12.png'];
+	var images = [''];
 
    $('#container').append('<style>#container, .acceptContainer:before, #logoContainer:before {background: url(' + images[Math.floor(Math.random() * images.length)] + ') center fixed }');
 

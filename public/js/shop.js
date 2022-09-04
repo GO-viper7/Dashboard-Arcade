@@ -4,21 +4,40 @@
 let btn = document.querySelector(".switch");
 
 btn.addEventListener('click', () => {
-    document.getElementById("mode").innerHTML = "Admin Mode";
-    let wrapper = document.querySelector(".admin-buttons");
-    wrapper.style.display = "flex";
-    btn.style.display = "none";
+    if(btn.innerHTML == 'Admin Mode'){
+            
+        document.getElementById("mode").innerHTML = "Admin Mode";
+        let wrapper = document.querySelector(".admin-buttons");
+        wrapper.style.display = "flex";
+        btn.innerHTML = 'User Mode'
 
-    let claimText = document.querySelectorAll(".claim");
-    let itemButtons = document.querySelectorAll(".itemButtons");
+        let claimText = document.querySelectorAll(".claim");
+        let itemButtons = document.querySelectorAll(".itemButtons");
 
-    claimText.forEach(element => {
-        element.style.display = "none"
-    });
+        claimText.forEach(element => {
+            element.style.display = "none"
+        });
 
-    itemButtons.forEach(element => {
-        element.style.display = "flex";
-    })
+        itemButtons.forEach(element => {
+            element.style.display = "flex";
+        })
+    }else {
+        document.getElementById("mode").innerHTML = "User Mode";
+        let wrapper = document.querySelector(".admin-buttons");
+        wrapper.style.display = "none";
+        btn.innerHTML = 'Admin Mode'
+
+        let claimText = document.querySelectorAll(".claim");
+        let itemButtons = document.querySelectorAll(".itemButtons");
+
+        claimText.forEach(element => {
+            element.style.display = "flex"
+        });
+
+        itemButtons.forEach(element => {
+            element.style.display = "none";
+        })
+    }
 })
 
 // customize panel and addItem box
@@ -89,7 +108,5 @@ closeMenu.addEventListener("click", () => {
     bg.style.display = "none";
 
 })
-
-
 
 

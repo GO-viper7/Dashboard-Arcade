@@ -24,12 +24,10 @@ const profileSchema = mongoose.Schema({
     wallet: {
         type: String
     },
-    fname: {
+    name: {
         type: String
     },
-    lname: {
-        type: String
-    },
+
     gender: {
         type: String
     },

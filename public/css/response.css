@@ -7,6 +7,7 @@ body, html {
   overflow-y: hidden;
   font-family: 'Audiowide', cursive;
   font-weight: 800;
+  background-color: #6e6565;
 }
 
 
@@ -16,7 +17,7 @@ body, html {
   right: 0;
   z-index: 1;
   background-size: cover;
-  background-image: url('https://cdn.discordapp.com/attachments/946793823730794588/979766152320401428/unknown-12.png');
+  background-color:rgba(0,0,0, 0.4);
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
@@ -121,8 +122,7 @@ body, html {
 }
 
 
-::-webkit-scrollbar-thumb {
-  background: #c35eb7; 
+::-webkit-scrollbar-thumb { 
   border-radius: 10px;
 }
 
@@ -139,7 +139,6 @@ body, html {
   background-color: rgba(0,0,0, 0.4); 
   color: white;
   font-weight: bold;
-  border: 3px solid #c35eb7;
   margin-top: 60px;
   margin-left: 140px;
   z-index: 2;
@@ -154,7 +153,6 @@ body, html {
 
 #gen {
   transition: 0.3s ease; 
-  border-color:#c35eb7;
   transition: 0.3s ease; 
   width: 340px; 
   border-style: solid; 
@@ -162,7 +160,6 @@ body, html {
   border-radius: 10px; 
   background-color: transparent;
   cursor: pointer; 
-  color: #c35eb7; 
   padding-left: 15px; 
   padding-top: 10px; 
   padding-bottom: 10px; 
@@ -171,17 +168,15 @@ body, html {
 }
 
 #gen:hover {
-  background-color: #c35eb7;
   color: #fff;
 }
 
 #disp {
-  display: none; font-size: 25px; color: #c35eb7;
+  display: none; font-size: 25px;
 }
 
 #home {
   transition: 0.3s ease; 
-  border-color:#c35eb7;
   transition: 0.3s ease; 
   width: 340px; 
   border-style: solid; 
@@ -189,7 +184,6 @@ body, html {
   border-radius: 10px;
   background-color: transparent;
   cursor: pointer; 
-  color: #c35eb7; 
   padding-left: 15px; 
   padding-top: 10px; 
   padding-bottom: 10px; 
@@ -198,7 +192,6 @@ body, html {
 }
 
 #home:hover {
-  background-color: #c35eb7;
   color: #fff;
 }
 
