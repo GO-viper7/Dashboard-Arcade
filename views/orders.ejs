@@ -97,7 +97,16 @@
                  
                 </div>
             </div>
-
+             <div class="externalWrapper" >
+                <div class="nav" style="margin-top: 0px">
+                    <% if (title == 'Pending Orders') { %>
+                        <a href="/admin/orders/fulfil" class="name" style="cursor: pointer">Fulfilled Orders</a>
+                    <% } else { %>
+                        <a href="/admin/orders" class="name" style="cursor: pointer">Pending Orders</a>
+                    <% } %>
+                </div>
+                
+             </div>
             <div class="admin-buttons">
                 <button class="addItem">
                     <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11 11h-7.25c-.414 0-.75.336-.75.75s.336.75.75.75h7.25v7.25c0 .414.336.75.75.75s.75-.336.75-.75v-7.25h7.25c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-7.25v-7.25c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" fill-rule="nonzero"/></svg>
@@ -128,7 +137,7 @@
 
             <div class="orders">
                 <h1>Orders</h1>
-                <p class="info">All pending orders can be found here</p>
+                <p class="info">All <%= title %> can be found here</p>
                 <!-- <div class="orders-menu">
                     <p class="activeOrder">Whitelists: </p>
                     <p>Physicals: </p>
@@ -151,19 +160,46 @@
                     <% var i =0 %>
                     <% prod.forEach(x => { i++; %>
                             <div class="row">
-                                <div><span class="infoMobile">Order #: </span>orderId</div>
+                                <div><span class="infoMobile">Order #: </span><p id="orderID<%= i %>"> <%= x.orderId %> </p></div>
                                 <div class="row-name">
                                     <span class="infoMobile">Name: </span>
-                                    <img src="https://cdn.discordapp.com/avatars/<%= x.userId %>/<%= user.avatar %>.png" class="img-profile"/>
-                                    <p><%= x.userName %></p>
+                                    <img src="https://cdn.discordapp.com/avatars/<%= x.userId %>/<%= x.userAvatar %>.png" class="img-profile"/>
+                                    <% if(x.userName.length > 12) { %>
+                                        <p><%= x.userName.slice(0,12) %>...</p>
+                                    <% } else { %>
+                                        <p><%= x.userName %></p>  
+                                    <% } %>
+                                    
                                 </div>
-                                <div><span class="infoMobile">Product: </span><%= x.itemName %></div>
-                                <div><span class="infoMobile">Amount: </span><%= x.cost %></div>
-                                <div><span class="infoMobile">Date: </span>22.11.2022</div>
-                                <div><span class="infoMobile">Address: </span><%= x.wallet %></div>
+                                <div><span class="infoMobile">Product: </span>
+                                    <% if(x.itemName.length > 12) { %>
+                                        <p><%= x.itemName.slice(0,12) %>...</p>
+                                    <% } else { %>
+                                        <p><%= x.itemName %></p>  
+                                    <% } %>
+                                </div>
+                                <div><span class="infoMobile">Amount: </span>
+                                    <% if(x.cost.length > 12) { %>
+                                        <p><%= x.cost.slice(0,12) %>...</p>
+                                    <% } else { %>
+                                        <p><%= x.cost %></p>  
+                                    <% } %>
+                                </div>
+                                <div><span class="infoMobile">Date: </span><%= x.date %></div>
+                                <div><span class="infoMobile">Address: </span>
+                                    <% if(x.wallet.length > 12) { %>
+                                        <p style="cursor: pointer"><%= x.wallet.slice(0,12) %>...</p>
+                                    <% } else { %>
+                                        <p style="cursor: pointer"><%= x.wallet %></p>  
+                                    <% } %>
+                                </div>
                                 <div>
                                     <span class="infoMobile">Status: </span>
-                                    <input type="checkbox" class="statusCheckbox"/>
+                                    <% if (title == 'Pending Orders' ) { %>
+                                        <input type="checkbox" class="statusCheckbox" id="myCheckbox<%= i %>"/>
+                                    <% } else { %>
+                                        <input type="checkbox" class="statusCheckbox" id="myCheckbox<%= i %>" checked/>
+                                    <% } %> 
                                 </div>
                             </div>
 
@@ -175,6 +211,62 @@
         </div>
     </div>
 
-    <script src="/js/shop.js"></script>
+    <script>
+        p = 0;
+        for(var j =0; j<`<%- prod.length %>`; j++) { ( function() { 
+            p++;
+            var t = p
+            const checkbox = document.getElementById(`myCheckbox${t}`)
+            checkbox.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+                const res =  fetch(`/admin/orders`, {
+                    method: "POST",
+                    headers: {
+                      'Accept': 'application/json',
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      "orderId" : document.getElementById(`orderID${t}`).innerHTML.trim(), 
+                        "status" : "true"
+                    }),
+                  }).then(res => {  
+                      if (res.status !== 200) {
+                          console.log("error")
+                      } else {
+                        
+                        res.json().then(data => {
+                          console.log(data)
+                        })
+                      }
+                    })
+                    setTimeout(function(){ location.reload(); }, 1000);
+            } else {
+                const res =  fetch(`/admin/orders`, {
+                    method: "POST",
+                    headers: {
+                      'Accept': 'application/json',
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      "orderId" : document.getElementById(`orderID${t}`).innerHTML.trim(), 
+                      "status" : "false"
+                    }),
+                  }).then(res => {  
+                      if (res.status !== 200) {
+                          console.log("error")
+                      } else {
+                        
+                        res.json().then(data => {
+                          console.log(data)
+                        })
+                      }
+                    })
+                    setTimeout(function(){ location.reload(); }, 1000);
+            }
+            })
+       
+        })()}
+        
+    </script>
   </body>
 </html>

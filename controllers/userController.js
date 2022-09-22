@@ -8,6 +8,7 @@ const mails = require('../mailIds.json')
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
 const categorySchema = require('../schemas/category-schema');
+const notificationSchema = require('../schemas/notification-schema')
 const DiscordOauth2 = require("discord-oauth2");
 const oauth = new DiscordOauth2({
 	clientId: process.env.clientId,
@@ -73,7 +74,7 @@ const getProfile = async (req, res, next) => {
   let cookies = req.cookies.get('key')
   let result = await categorySchema.find({})
   if (cookies == undefined) {
-    return res.status(200).render('shop', {prod: req.products, prof: '',  url: process.env.discordURI, user: '', coins: '', bool: '', inv: '', cats: result, unique: '', products: ''})
+    return res.status(200).render('shop', {prod: req.products, prof: '',  url: process.env.discordURI, user: '', coins: '', bool: '', inv: '', cats: result, unique: '', products: '',notifs: []})
   }
   else {
     next()
@@ -102,7 +103,10 @@ const getVerified = async (req, res, next) => {
           return res.redirect('/logout')
         }
         else {
-          return res.render('shop', {prod: req.products, user: user, id : user.id, url: process.env.discordURI, coins: data.OctaCreds, prof: JSON.stringify(data),  bool: '', ids: users,  cats: result, unique: JSON.stringify(uniquePremItems), products: JSON.stringify(req.products)})
+          const notifRes = await notificationSchema.find({userId: user.id})
+          let notif = notifRes.reverse()                                                   
+          console.log(notif)
+          return res.render('shop', {prod: req.products, user: user, id : user.id, url: process.env.discordURI, coins: data.OctaCreds, prof: JSON.stringify(data),  bool: '', ids: users,  cats: result, unique: JSON.stringify(uniquePremItems), products: JSON.stringify(req.products), notifs: notif})
         }
       })
     }catch (err) {
@@ -187,9 +191,11 @@ const buyProduct = async (req, res, next) => {
       }
     })
     let arr = await profileSchema.findOne({userId: user.id})
+    const date = new Date()
     await new itemSchema({
         id: req.body.id,
         userId: user.id,
+        date: `test`,
         orderId: crypto.randomBytes(10).toString("hex"),
         userName: `${user.username}#${user.discriminator}`,
         cost: req.body.cost,

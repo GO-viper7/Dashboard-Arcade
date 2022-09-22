@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const profileSchema = require('../schemas/profile-schema');
+const notificationSchema = require('../schemas/notification-schema');
 const DiscordOauth2 = require("discord-oauth2");
 require("dotenv").config();
 const jwt = require('jsonwebtoken')
@@ -17,7 +18,9 @@ const oauth = new DiscordOauth2({
 router.get('/settings', async (req, res, next) => {
   try {
     const user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
-    res.render('settings', {user: user, profile: await profileSchema.findOne({userId: user.id})})
+    const notifRes = await notificationSchema.find({userId: user.id})
+    let notif = notifRes.reverse()
+    res.render('settings', {user: user, profile: await profileSchema.findOne({userId: user.id}), notifs: notif})
   }catch(err) {
     console.log(err)
     return res.redirect('/logout')

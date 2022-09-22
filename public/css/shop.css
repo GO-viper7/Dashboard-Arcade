@@ -104,8 +104,10 @@
 }
 
 .rows {
-    margin-top: 20px;
-    padding-bottom: 100px;
+   width: 100%;
+   overflow: auto;
+   grid-column-end: 3;
+   grid-column-start: 1;
 }
 
 .detail{
@@ -140,7 +142,20 @@
 
 .rows-wrapper::-webkit-scrollbar-thumb{
     background: #7182FF;
-    border-radius: 30px;}
+    border-radius: 30px;
+}
+
+.innerPanel::-webkit-scrollbar {
+    background: var(--sidebar);
+    border-radius: 30px;
+    height: 5px;
+    width: 5px;
+}
+
+.innerPanel::-webkit-scrollbar-thumb{
+    background: #7182FF;
+    border-radius: 30px;
+}
 
 
 .homePageColumn{

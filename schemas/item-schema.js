@@ -7,11 +7,17 @@ const itemSchema = mongoose.Schema({
     userId: {
         type: String,
     },
+    userAvatar: {
+        type: String
+    },
     orderId: {
         type: String,
     },
     id : {
         type: Number,
+    },
+    date: {
+        type: String,
     },
     userName: {
         type: String,
@@ -37,6 +43,7 @@ const itemSchema = mongoose.Schema({
     },
     order: {
         type: Boolean,
+        default: false
     },
     wallet: {
         type: String

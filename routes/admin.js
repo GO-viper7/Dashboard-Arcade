@@ -77,7 +77,7 @@ router.post('/', upload.single('file'),  async (req, res, next) => {
         }
         else {
           try {
-            console.log('went to buy')
+            console.log('went to fk')
             let user = await oauth.getUser(jwt.verify(req.cookies.get('key'), process.env.jwtSecret))
             profileSchema.findOneAndUpdate({userId: user.id}, {OctaCreds : req.body.cost}, null, async (err, data) => {
               if (err) {
@@ -90,10 +90,17 @@ router.post('/', upload.single('file'),  async (req, res, next) => {
               }
             })
             let arr = await profileSchema.findOne({userId: user.id})
+            const date = new Date()
+            let hexId = crypto.randomBytes(4).toString("hex")
+            // while(itemSchema.findOne({orderId: hexId}) != undefined) {
+            //   hexId = crypto.randomBytes(4).toString("hex")
+            // } 
             await new itemSchema({
                 id: req.body.id,
                 userId: user.id,
-                orderId: crypto.randomBytes(10).toString("hex"),
+                userAvatar: user.avatar,
+                orderId: hexId,
+                date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
                 userName: `${user.username}#${user.discriminator}`,
                 cost: req.body.cost,
                 itemName: req.body.name.trim(),

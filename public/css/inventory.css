@@ -125,7 +125,8 @@
 
 .wl-image{
     border-radius: 10px;
-    width: 100%;
+    width: 200px;
+    height: 200px;
 }
 
 .claim {
@@ -143,6 +144,17 @@
     border-radius: 30px;
 }
 
+.innerPanel::-webkit-scrollbar {
+    background: var(--sidebar);
+    border-radius: 30px;
+    height: 5px;
+    width: 5px;
+}
+
+.innerPanel::-webkit-scrollbar-thumb{
+    background: #7182FF;
+    border-radius: 30px;
+}
 
 
 /* responsive profile details */
@@ -172,7 +184,8 @@
 
 .wl-image{
     border-radius: 10px;
-    width: 100%;
+    width: 200px;
+    height: 200px;
 }
 
 

@@ -13,7 +13,8 @@ const oauth = new DiscordOauth2({
 	redirectUri: `${process.env.websiteURL}/discord`,
 });
 const categorySchema = require('../schemas/category-schema');
-const profileSchema = require('../schemas/profile-schema')
+const profileSchema = require('../schemas/profile-schema');
+const notificationSchema = require('../schemas/notification-schema')
 
 router.get('/inventory', async (req, res, next) => {
   let p
@@ -25,32 +26,72 @@ router.get('/inventory', async (req, res, next) => {
   return res.render('inventory', {filled: "false", prod: [], bool: false, user: '', cats: await categorySchema.find({})});
   }
   if (req.cookies.get('inv-cat') == undefined) {
-    k = result.filter(x => x.category == x.category)
-    p = k.filter(q => q.order == (`${req.cookies.get('fill')}` == 'false' ? false : true))
+    k = result
+    p = k
   }
   else  {
-    k = result.filter(x => x.category == (`${req.cookies.get('inv-cat')}` == 'cat' ? x.category : `${req.cookies.get('inv-cat')}`) )
-    p = k.filter(q => q.order == (`${req.cookies.get('fill')}` === 'false' ? false : true))
+    k = result
+    p = k
   }
-  res.render('inventory', {profile: await profileSchema.findOne({userId: user.id}), filled: fill,prod: p, bool: true, user: user, cats: await categorySchema.find({})});
+  const notifRes = await notificationSchema.find({userId: user.id})
+  let notif = notifRes.reverse()
+  res.render('inventory', {profile: await profileSchema.findOne({userId: user.id}), filled: fill,prod: p, bool: true, user: user, cats: await categorySchema.find({}), notifs: notif});
 });
 
 router.get('/admin/orders', async (req, res, next) => {
   let l
   let cookies = req.cookies.get('key')
   let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
-  let result = await itemSchema.find({})
-  res.render('orders', {prod: result, bool: true, user: user});
+  let result = await itemSchema.find({order: false})
+  let revRes = result.reverse()
+  res.render('orders', {prod: revRes, bool: true, user: user, title: 'Pending Orders'});
+})
+
+router.get('/admin/orders/fulfil', async (req, res, next) => {
+  let l
+  let cookies = req.cookies.get('key')
+  let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
+  let result = await itemSchema.find({order: true})
+  let revRes = result.reverse()
+  res.render('orders', {prod: revRes, bool: true, user: user, title: 'FulFilled Orders'});
 })
 
 
 router.post('/admin/orders', async (req, res, next) => {
-  itemSchema.findOneAndUpdate({orderId: req.body.orderId}, {$set: {order: req.body.fill == "filled" ? true : false}}, function(err, doc) {
-    if(err) {
-      console.log(err.message)
-    }
-    res.redirect('/admin/add-product/orders')
-  })
+  let cookies = req.cookies.get('key')
+  let user = await oauth.getUser(jwt.verify(cookies, process.env.jwtSecret))
+  let result  = await itemSchema.findOne({orderId: req.body.orderId})
+  if(req.body.status == "true") {
+    await new notificationSchema({
+        userId: user.id,
+        notification: `Your order for ${result.itemName} under ${result.category} has been fulfilled`,
+        time: Date.now()
+    }).save()
+    itemSchema.findOne({orderId: `${req.body.orderId}`}, async (err, doc) => {
+      if (err) throw err;
+      if (doc) {
+        console.log(doc)
+        doc.order = true
+        doc.save()
+      }
+    })
+  }
+  else if (req.body.status == "false") {  
+    await new notificationSchema({
+        userId: user.id,
+        notification: `Your order for ${result.itemName} under ${result.category} has been queued for pending`,
+        time: Date.now()
+    }).save()
+    itemSchema.findOne({orderId: `${req.body.orderId}`}, async (err, doc) => {
+      if (err) throw err;
+      if (doc) {
+        console.log(doc)
+        doc.order = false
+        doc.save()
+      }
+    })
+  }
+
 })
 
 module.exports = router;
