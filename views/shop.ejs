@@ -622,7 +622,7 @@
           document.getElementById("notifPanel").style.display = "none"
         })
         const backg = document.querySelector(".addon");
-        var uniqueCheck
+        var uniqueCheck, profCheck
         let a = '<%- coins %>'
         if (`<%- unique %>` != '') {
         uniqueCheck = JSON.parse(`<%- unique %>`)
@@ -689,14 +689,13 @@
                 document.getElementById('alertS').style.display = "block"
                 document.getElementById('alertS').innerText = "Out Of Stock!"
                 setTimeout(() => {
-                  window.location.href='/'
+                  document.getElementById("panel"+t).style.display = "block";
+                  backg.style.display = "block";
+                  document.getElementById('alertS').style.display = "none"
                 }, 1000) 
               }
               else if (Number(a) >= q) {
-                
-               // if(cat != "Whitelists" && profCheck.name && profCheck.gender && profCheck.country && profCheck.zipCode && profCheck.houseNumber && profCheck.city && profCheck.streetName) {
-                  //document.getElementById('suc').style.display="block";
-                if (1) {
+                if (profCheck.name && profCheck.gender && profCheck.country && profCheck.zipCode && profCheck.houseNumber && profCheck.city && profCheck.streetName) {
                   const glob = Number(`<%- prod.length %>`)
                   let products = JSON.parse(`<%- products %>`)
                   let prodFlag = 0
@@ -708,7 +707,9 @@
                           document.getElementById('alertS').style.display = "block"
                           document.getElementById('alertS').innerText = "Bulk purchase disabled!"
                           setTimeout(() => {
-                            window.location.href='/'
+                            document.getElementById("panel"+t).style.display = "block";
+                            backg.style.display = "block";
+                            document.getElementById('alertS').style.display = "none"
                           }, 1000)
                           prodFlag = 1
                       }
@@ -752,11 +753,14 @@
                   }
                 }
                 else {
-                  //document.getElementById('prof').style.display="block";
-                  
+                  document.getElementById("panel"+t).style.display = "none";
+                  backg.style.display = "none";
+                  document.getElementById('alertS').style.display = "block"
+                  document.getElementById('alertS').innerText = "Profile Incomplete!"
                   setTimeout(() => {
-                    window.location.href='/'
-                    console.log("Profile not complete")
+                    document.getElementById("panel"+t).style.display = "block";
+                    backg.style.display = "block";
+                    document.getElementById('alertS').style.display = "none"
                   }, 1000)
                 }
               }
@@ -768,7 +772,9 @@
                 document.getElementById('alertS').style.display = "block"
                 document.getElementById('alertS').innerText = "Not Enough Coins!"
                 setTimeout(() => {
-                  window.location.href='/'
+                  document.getElementById("panel"+t).style.display = "block";
+                  backg.style.display = "block";
+                  document.getElementById('alertS').style.display = "none"
                 }, 1000)    
               }
             }
