@@ -18,6 +18,68 @@
     border-bottom-left-radius: 20px;
 }
 
+
+.buyPanel {
+    background: #eaecf7;
+    padding: 30px 0px;
+    border-radius: 20px;
+    text-align: start;
+    display: none; /* */
+    flex-direction: column;
+    margin-right: 50px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #1c213e;
+    font-size: 1.05rem;
+    z-index: 10;
+
+}
+
+.buyPanel p{
+padding: 0px 30px;
+}
+
+.buyPanel p:nth-child(1){
+font-size: 1.6rem;
+}
+
+.buyPanel p:nth-child(3){
+margin-top: 20px;
+margin-bottom: 15px;
+font-size: .95rem;
+}
+
+.buyPanel p:nth-child(7){
+margin-top: 20px;
+margin-bottom: 15px;
+}
+
+.buyPanel p span{
+color: #8392FF;
+}
+
+.buyButtons {
+margin-left: 350px;
+margin-top: 30px;
+padding-right: 20px;
+display: flex;
+}
+
+.buyButtons button{
+border: none;
+color: white;
+font-size: 1.1rem;
+background: #8392FF;
+border-radius: 5px;
+padding: 4px 10px;
+cursor: pointer;
+}
+
+.buyButtons button:nth-child(1){
+margin-right: 7px;
+}
 .icons svg {
     fill: #fff;
     margin: 0 7px;

@@ -695,7 +695,7 @@
                 }, 1000) 
               }
               else if (Number(a) >= q) {
-                if (profCheck.name && profCheck.gender && profCheck.country && profCheck.zipCode && profCheck.houseNumber && profCheck.city && profCheck.streetName) {
+                if (profCheck.wallet && profCheck.name && profCheck.gender && profCheck.country && profCheck.zipCode && profCheck.houseNumber && profCheck.city && profCheck.streetName) {
                   const glob = Number(`<%- prod.length %>`)
                   let products = JSON.parse(`<%- products %>`)
                   let prodFlag = 0
@@ -756,7 +756,7 @@
                   document.getElementById("panel"+t).style.display = "none";
                   backg.style.display = "none";
                   document.getElementById('alertS').style.display = "block"
-                  document.getElementById('alertS').innerText = "Profile Incomplete!"
+                  document.getElementById('alertS').innerText = "Wallet Address Incomplete!"
                   setTimeout(() => {
                     document.getElementById("panel"+t).style.display = "block";
                     backg.style.display = "block";
