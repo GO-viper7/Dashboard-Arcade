@@ -33,7 +33,6 @@ body{
 
 .wrapper{
     display: grid;
-    grid-template-columns: 17% 83%;
 }
 
 .left-menu{
@@ -42,11 +41,16 @@ body{
     display: flex;
     flex-direction: column;
     margin-left: -45px;
+    position: fixed; 
+    width: 290px
 }
 
 .right-menu{
     background: #242A4B;
     border-top-left-radius: 50px;
+    width: 83%; 
+    position: absolute; 
+    right: 0;
 }
 
 .left-menu .name {
@@ -386,6 +390,8 @@ body{
     .right-menu{
         border-top-left-radius: 230px;
         padding-top: 60px;
+        right: unset; 
+        width: 100%
     }
 
     .top-right {

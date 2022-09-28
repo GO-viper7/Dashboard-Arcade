@@ -225,7 +225,11 @@
                         <div class="details">
                             <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" class="pfp"/>
                             <p class="name"><%= user.username %></p>
-                            <p class="username"><%= user.username %>.eth</p>
+                            <% if(wallet.length > 24) { %> 
+                              <p class="username"><%= wallet.slice(0,24) %>...</p>
+                            <% } else { %>
+                                <p class="username"><%= wallet %></p>  
+                            <% } %>
 
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAJVJREFUaEPt0sEJACEQxVDtv7XpSXsIBESy9/lg3u6ZOeuDb/eQxxQTeQxkJZKIVKBfSwqLZxPB6aTDRKSweDYRnE46TEQKi2cTwemkw0SksHg2EZxOOkxECotnE8HppMNEpLB4NhGcTjpMRAqLZxPB6aTDRKSweDYRnE46TEQKi2cTwemkw0SksHg2EZxOOkxECotnL3w1qYmHx+xqAAAAAElFTkSuQmCC" class="coin-image"/>
                             <p class="coins"><%= coins %> Coins</p>
@@ -756,7 +760,7 @@
                   document.getElementById("panel"+t).style.display = "none";
                   backg.style.display = "none";
                   document.getElementById('alertS').style.display = "block"
-                  document.getElementById('alertS').innerText = "Wallet Address Incomplete!"
+                  document.getElementById('alertS').innerText = "Wallet-Address/Profile Incomplete!"
                   setTimeout(() => {
                     document.getElementById("panel"+t).style.display = "block";
                     backg.style.display = "block";

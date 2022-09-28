@@ -41,7 +41,3 @@ server.listen(process.env.PORT || 3000, () => {
 
 
 
-// Things to do : settings post, orders-> [...] [onClick] [status click mail]
-
-// Backend Adjust, unique alert and profile alert
-
