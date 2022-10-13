@@ -104,8 +104,12 @@ const getVerified = async (req, res, next) => {
         }
         else {
           const notifRes = await notificationSchema.find({userId: user.id})
-          let notif = notifRes.reverse()                                                   
-          return res.render('shop', {wallet: data.wallet, prod: req.products, user: user, id : user.id, url: process.env.discordURI, coins: data.OctaCreds, prof: JSON.stringify(data),  bool: '', ids: users,  cats: result, unique: JSON.stringify(uniquePremItems), products: JSON.stringify(req.products), notifs: notif})
+          let notif = notifRes.reverse()  
+          let wallet = data.wallet!=undefined ? data.wallet : 0 
+          if(wallet.length > 24) { 
+              wallet =  wallet.slice(0,24) + '...'
+          }                                         
+          return res.render('shop', {wallet: wallet, prod: req.products, user: user, id : user.id, url: process.env.discordURI, coins: data.OctaCreds, prof: JSON.stringify(data),  bool: '', ids: users,  cats: result, unique: JSON.stringify(uniquePremItems), products: JSON.stringify(req.products), notifs: notif})
         }
       })
     }catch (err) {
