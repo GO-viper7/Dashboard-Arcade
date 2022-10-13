@@ -105,7 +105,7 @@ const getVerified = async (req, res, next) => {
         else {
           const notifRes = await notificationSchema.find({userId: user.id})
           let notif = notifRes.reverse()  
-          let wallet = data.wallet!=undefined ? data.wallet : 0 
+          let wallet = data.wallet!=undefined ? data.wallet : '' 
           if(wallet.length > 24) { 
               wallet =  wallet.slice(0,24) + '...'
           }                                         
